@@ -74,7 +74,7 @@ development machine that lacks the EB toolchain.
 
 ## Esri Community
 
-Post: add the Esri Community link here after the first publish.
+Post: https://community.esri.com/t5/experience-builder-custom-widgets/add-map-amp-edit-data-etl-widget/ba-p/1709186
 
 ## Credits and license
 

@@ -92,7 +92,8 @@ inside the widget folder.
 ## Feedback
 
 Please open an issue on the GitHub repository, or reply on the Esri Community
-post for this widget.
+post for this widget:
+https://community.esri.com/t5/experience-builder-custom-widgets/add-map-amp-edit-data-etl-widget/ba-p/1709186
 
 ## Credits and license
 
