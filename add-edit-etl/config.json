@@ -1,0 +1,14 @@
+{
+  "disableAddBySearch": false,
+  "disableAddByUrl": false,
+  "disableAddByFile": false,
+  "enableReviewEdit": true,
+  "allowRuntimeMapping": true,
+  "allowExpressions": true,
+  "loadChunkSize": 200,
+  "defaultMapping": {
+    "rules": [],
+    "geometry": { "mode": "passthrough", "sourceWkid": 4326 },
+    "conflictResolution": "lastWins"
+  }
+}

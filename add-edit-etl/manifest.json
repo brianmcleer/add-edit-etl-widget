@@ -1,0 +1,29 @@
+{
+  "name": "add-edit-etl",
+  "label": "Add, Map & Edit Data",
+  "type": "widget",
+  "dependency": [
+    "jimu-arcgis"
+  ],
+  "version": "1.20.0",
+  "exbVersion": "1.20.0",
+  "author": "Brian McLeer, City of Grand Junction, CO",
+  "description": "Add data, map its schema onto an editable target layer (1:1, M:1, 1:M, M:M), load the records, then optionally edit them.",
+  "copyright": "Original work copyright Esri; modifications copyright City of Grand Junction, CO",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "defaultSize": {
+    "width": 520,
+    "height": 560
+  },
+  "publishMessages": [
+    "DATA_SOURCES_CHANGE"
+  ],
+  "properties": {
+    "canConsumeDataAction": true,
+    "coverLayoutBackground": true,
+    "needHiddenState": true
+  },
+  "translatedLocales": [
+    "en"
+  ]
+}

@@ -1,0 +1,16 @@
+# Never publish dependencies or build output
+node_modules/
+dist/
+
+# Editor and OS cruft
+.vs/
+*.user
+*.suo
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Tests are not needed in the published widget
+tests/

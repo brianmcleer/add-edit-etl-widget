@@ -1,0 +1,28 @@
+Add, Map & Edit Data (add-edit-etl)
+Copyright 2026 City of Grand Junction, CO
+
+This widget is a derivative work for ArcGIS Experience Builder. It combines and
+extends two stock (out of the box) widgets originally developed by Esri, by the
+Esri R&D Center Beijing:
+
+  1. the "Add Data" widget
+  2. the "Edit" widget
+
+Those original works are published by Esri under the Apache License, Version 2.0.
+Portions of their source are included (vendored) in this widget under
+src/vendor/add-data/ and src/vendor/edit/, substantially as published, and those
+portions remain under that same license. One supporting asset,
+src/vendor/icon.svg, was added so that an internal image import still resolves
+after the files were relocated into this widget. The new merged workflow and all
+other added code live outside src/vendor/.
+
+All new code, including the ETL field-mapping engine, the merged add, map, load,
+and edit workflow, the mapping import and export, and the settings panel, is
+Copyright 2026 City of Grand Junction, CO, and is also licensed under the Apache
+License, Version 2.0.
+
+ArcGIS and Experience Builder are trademarks of Esri. This widget is not produced
+or endorsed by Esri. The Esri name and marks are used only to describe the origin
+of the original work, as permitted under Section 6 of the Apache License.
+
+See the LICENSE file for the full license text.
