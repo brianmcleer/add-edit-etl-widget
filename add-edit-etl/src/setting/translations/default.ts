@@ -67,6 +67,8 @@ export default {
   displayVertices: 'Display vertices while editing',
   zoomScale: 'Zoom scale (1: …, 0 = fit)',
   zoomToSelected: 'Zoom to selected feature',
+  targetMultiHint: 'Add one or more editable layers. When more than one is set, the user picks which to load into.',
+  allowSymbology: 'Allow changing symbology',
   editExisting: 'Start in edit mode',
   rulesCount: '{count} rules',
   removeRule: 'Remove rule',

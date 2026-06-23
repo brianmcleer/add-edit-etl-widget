@@ -7,9 +7,9 @@
   ],
   "version": "1.20.0",
   "exbVersion": "1.20.0",
-  "author": "Brian McLeer, City of Grand Junction, CO",
+  "author": "Merged from Esri OOTB Add Data + Edit",
   "description": "Add data, map its schema onto an editable target layer (1:1, M:1, 1:M, M:M), load the records, then optionally edit them.",
-  "copyright": "Original work copyright Esri; modifications copyright City of Grand Junction, CO",
+  "copyright": "",
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
   "defaultSize": {
     "width": 520,

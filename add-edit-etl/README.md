@@ -1,108 +1,123 @@
-# Add, Map & Edit Data
+# Add → Map → Edit (ETL) — merged Experience Builder widget
 
-A custom ArcGIS Experience Builder widget for the City of Grand Junction, CO. It
-joins Esri's stock Add Data and Edit widgets into one guided workflow and inserts
-a field-mapping step between them, so a user can bring in data, line its fields
-up with an editable target layer, load the records, and edit them on the map.
+A single ArcGIS Experience Builder **Developer Edition 1.20** widget that merges
+the OOTB **Add Data** and **Edit** widgets and inserts a real field-mapping ETL
+step between them.
 
-This is a derivative work. It combines and extends two out of the box Esri
-widgets. See "Credits and license" below.
+```
+ ┌──────────┐      ┌──────────────────────┐      ┌─────────────────────────┐
+ │ ADD DATA │  →   │  ETL: field mapping   │  →   │  LOAD into target layer │
+ │ (source) │      │  source → target      │      │  (applyEdits addFeatures│
+ │          │      │  1:1 M:1 1:M M:M       │      │   + optional edit form) │
+ └──────────┘      └──────────────────────┘      └─────────────────────────┘
+```
 
-## Workflow
+The runtime user adds data (file / URL / ArcGIS content), maps the **source
+schema** onto the **target schema** of the editable layer the app author
+configured, and loads the records. Optionally they then edit the loaded
+records in the OOTB Edit feature form.
 
-The widget walks the user through four numbered steps:
+## Where things live
 
-1. Add data. Bring in a source from a file, a URL, or ArcGIS content, using the
-   stock Add Data experience.
-2. Map fields. Match the source schema onto the target layer's schema. The
-   mapping supports one to one, many to one, one to many, and many to many
-   relationships, with transforms such as direct copy, concatenate, split,
-   coalesce, numeric reductions, constants, and expressions. A configuration can
-   be exported to XML and imported again later, so repetitive loads do not have
-   to be rebuilt by hand.
-3. Load. Validate the mapping, preview the first transformed record, then write
-   the records into the target layer in batches, with a progress readout.
-4. Edit. Edit the loaded records on the map using the stock Edit tools,
-   including attribute forms and geometry editing.
+```
+add-edit-etl/
+├─ manifest.json              widget manifest (jimu-arcgis dep, DATA_SOURCES_CHANGE)
+├─ config.json                default config
+├─ icon.svg
+└─ src/
+   ├─ config.ts               merged Config (Add Data toggles + target layer + ETL options)
+   ├─ version-manager.ts
+   ├─ runtime/
+   │  ├─ widget.tsx           ★ the 3-step wizard orchestrator
+   │  ├─ etl/                 ★ THE NEW ETL LAYER (framework-free + glue)
+   │  │  ├─ types.ts          mapping data model (rules, cardinality, geometry)
+   │  │  ├─ transform-engine.ts  executes 1:1 / M:1 / 1:M / M:M + coercion + validation
+   │  │  ├─ schema.ts         read source/target schemas, auto-match, read records
+   │  │  ├─ geometry.ts       passthrough / reproject / build point from X-Y
+   │  │  └─ apply.ts          chunked applyEdits(addFeatures) into target + refresh
+   │  ├─ components/
+   │  │  ├─ mapping-panel.tsx ★ runtime rule editor (per-rule cardinality + transform)
+   │  │  └─ load-panel.tsx    validate → preview → run → report
+   │  └─ translations/default.ts
+   ├─ setting/
+   │  ├─ setting.tsx          author picks the target editable layer + toggles
+   │  └─ translations/default.ts
+   ├─ tests/
+   │  └─ transform-engine.test.ts   cardinality unit tests (all pass)
+   └─ vendor/                 ★ the two OOTB widgets' src, vendored unchanged
+      ├─ add-data/            reused: AddDataPopper, DataList, createDataSourcesByDataOptions
+      └─ edit/                reused: applyEdits/updateDataSourceAfterEdit, FeatureForm, constructConfig
+```
 
-## Features
+The two OOTB `src` trees are vendored **verbatim** under `src/vendor/` (each is
+self-contained — its internal imports only reference itself plus jimu packages),
+so the merge does not fork or rewrite Esri's code. The wizard imports the exact
+pieces it needs from them. Unused vendored files are harmless dead weight and
+can be pruned later.
 
-- One guided widget in place of two separate ones, plus the mapping step that
-  normally has to happen outside Experience Builder.
-- Field mapping across one to one, many to one, one to many, and many to many,
-  with type coercion and validation.
-- Mapping import and export as XML for reusable, repeatable workflows.
-- Optional add of the target layer to the linked map, with zoom to the loaded
-  features and zoom to a feature when it is selected during editing.
-- A configurable zoom scale, so zoom to actually changes scale rather than only
-  panning.
-- A full set of Edit options surfaced in the settings panel, including create,
-  update, delete, geometry update, snapping, and the advanced editing tools.
-- Keyboard accessible controls and screen reader labels throughout.
+## The ETL model (the part you asked about)
 
-## Requirements
+Every mapping is a list of **rules**. A rule reads `sourceFields[]` and writes
+`targetFields[]`; its `mode` decides how. This covers all four cardinalities:
 
-- ArcGIS Experience Builder Developer Edition 1.19 or 1.20, which run React 19.
-- EB 1.18 and earlier run React 18 and are not supported.
+| Cardinality | Modes | Example |
+|---|---|---|
+| **1:1** | `direct`, `expression`, `constant` | `fname → FIRST` |
+| **M:1** | `concat`, `coalesce`, `sum`/`avg`/`min`/`max`, `expression` | `first + last → FULLNAME` |
+| **1:M** | `splitDelimiter`, `splitRegex`, `duplicate` | `"Denver, CO" → CITY + STATE` |
+| **M:M** | `expression` (one expression per target) | `fn, ln → FULLNAME, COMBO` |
 
-## Install
+`M:M` is the general case: one rule, N target outputs, each computed by its own
+expression over the shared M source inputs. The named modes exist so a non-coder
+can build the common shapes without writing an expression.
 
-1. Download the release zip and extract it.
-2. Place the `add-edit-etl` folder into your Experience Builder install so that
-   its `manifest.json` sits directly inside
-   `client/your-extensions/widgets/add-edit-etl/`. The `manifest.json` must be
-   one level deep, never nested a second level deep such as
-   `widgets/add-edit-etl/add-edit-etl/`. Nesting is the most common reason a
-   widget does not register.
-3. From the `client` folder, run `npm install`. Experience Builder installs the
-   widget's dependencies automatically for widgets in `your-extensions`, so there
-   are no per-dependency commands to run.
-4. Restart the client, then add the widget to an experience.
+On top of the rules: **type coercion** to the target field's esri type (int /
+double / date-epoch / string with length truncation), **null/required-field
+validation**, **last-wins / first-wins** conflict resolution when two rules
+target the same field, and **geometry** handling (reuse source geometry with
+on-the-fly reprojection, build a point from X/Y fields, or none for tables).
 
-## Settings
+Expressions use `$.FIELD` for source values plus a small `helpers` library
+(`helpers.upper`, `helpers.join`, `helpers.coalesce`, `helpers.toNumber`, …).
+They run only in the user's own browser. If you don't want runtime users typing
+expressions, turn off **Allow expression transforms** in settings.
 
-Open the widget's settings panel to:
+## Install (EB Developer Edition 1.20)
 
-- Pick the editable target layer the data will load into.
-- Pick the linked map widget, if you want loaded or selected features shown and
-  zoomed to.
-- Set the zoom scale and turn zoom to selected feature on or off.
-- Turn the individual Edit permissions, snapping options, and editing tools on or
-  off.
+1. Copy the `add-edit-etl/` folder into
+   `client/your-extensions/widgets/add-edit-etl/`.
+2. Restart the dev server (`npm start` in `client/`).
+3. In your app, drop the **Add, Map & Edit (ETL)** widget onto a page (inside a
+   Controller or on its own), and connect a Map widget if you want geometry
+   passthrough/editing.
+4. In the widget **settings**, pick the **target editable feature layer** (this
+   defines the target schema), and set the Add Data / mapping toggles.
 
-## Troubleshooting: "add-edit-etl is duplicated"
+At runtime: **Add data → choose which added layer is the source → Map fields
+(auto-match seeds 1:1 rules; refine cardinalities) → Validate / Preview / Load →
+(optional) Edit loaded records.**
 
-If `npm start` in the `client` folder reports that the widget name is duplicated,
-a second copy is registered somewhere. A single, correctly placed copy cannot
-duplicate itself. Check, in this order:
+## What is verified vs what needs a live EB build
 
-1. A nested folder, `widgets\add-edit-etl\add-edit-etl`. The `manifest.json` must
-   sit directly inside the widget folder, not a second level deep. This is the
-   usual cause when a zip is extracted into a folder that already has the
-   widget's name.
-2. A leftover folder from an earlier build or version, including any `-copy`
-   folder.
-3. A stale compiled build in `client\dist\widgets`. Stop the client server,
-   delete the matching folder under `dist\widgets`, then start again.
+- **Verified here:** the framework-free ETL engine (transform + coercion +
+  validation) — `tests/transform-engine.test.ts`, 18 assertions across all four
+  cardinalities, all passing.
+- **Needs your EB 1.20 environment to build/run** (this sandbox has no jimu SDK
+  or Esri JSAPI, so it can't be compiled here). When you build, sanity-check
+  these integration seams against your installed `jimu-core` typings, since
+  minor API drift between 1.20 patch builds is the most likely source of
+  compile fixes:
+  - `DataSourceComponent`, `DataSourceSelector` prop names.
+  - `ds.query({ page, pageSize })` paging shape in `schema.ts` /
+    `load-panel.ts` — adjust if your build expects `{ start, num }`.
+  - `loadArcGISJSAPIModules(['esri/geometry/projection', …])` —
+    if your JSAPI is 4.30+ you may prefer the `operators/projectOperator`.
+  - The review step builds an attribute-only Edit config via the vendored
+    `constructConfig`; the OOTB feature form lists all records, not only the
+    just-loaded ones (the loaded objectIds are returned in the load result if
+    you want to add a filter).
 
-If removing one copy makes the widget disappear from the Entrypoint list, the
-copy that remains is nested too deep. Move it so the `manifest.json` is directly
-inside the widget folder.
+## License
 
-## Feedback
-
-Please open an issue on the GitHub repository, or reply on the Esri Community
-post for this widget:
-https://community.esri.com/t5/experience-builder-custom-widgets/add-map-amp-edit-data-etl-widget/ba-p/1709186
-
-## Credits and license
-
-This widget is a derivative work based on Esri's ArcGIS Experience Builder
-Add Data and Edit widgets, both by the Esri R&D Center Beijing, which Esri
-publishes under the Apache License, Version 2.0. It has been combined, modified,
-and extended by the City of Grand Junction, CO.
-
-Licensed under Apache-2.0. See the LICENSE file for the full terms and the NOTICE
-file for attribution. Original work copyright Esri; modifications copyright City
-of Grand Junction, CO. This software is free to use, modify, and redistribute
-under those terms.
+Inherits Apache-2.0 from the OOTB widgets (`vendor/`). New ETL code is provided
+under the same terms.

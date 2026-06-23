@@ -20,8 +20,12 @@ export interface Config {
   displayedItemTypeCategories?: ItemTypeCategory[]
 
   // ----- Target (Edit side) -----
-  /** The editable target layer the merged records are appended to. */
+  /** The editable target layer the merged records are appended to.
+   *  Retained for backward compatibility with single-target configs. */
   targetUseDataSource?: UseDataSource
+  /** One or more editable target layers. At runtime the user picks which one to
+   *  load into. When set, this takes precedence over targetUseDataSource. */
+  targetUseDataSources?: UseDataSource[]
   /** Allow the runtime user to edit appended features in a feature form after load. */
   enableReviewEdit?: boolean
   /** Open directly on the Edit step (edit existing data; skip add/map/load). */
@@ -34,6 +38,8 @@ export interface Config {
   zoomScale?: number
   /** Zoom to a feature when it is selected during editing. */
   zoomToSelected?: boolean
+  /** Let the runtime user change the target layer's symbology on the map. */
+  allowSymbology?: boolean
 
   // ----- Editing options (parity with OOTB Edit) -----
   /** Permit adding new features. */

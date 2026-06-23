@@ -26,6 +26,7 @@ import EditorComponent from '../vendor/edit/runtime/components/editor-component'
 // --- ETL ---
 import MappingPanel from './components/mapping-panel'
 import LoadPanel from './components/load-panel'
+import SymbologyPanel from './components/symbology-panel'
 import { readSourceSchema, readTargetSchema, editableTargetFields, autoMatch, emptyMappingConfig } from './etl/schema'
 import type { FieldMappingConfig, Schema, SchemaField } from './etl/types'
 
@@ -45,11 +46,13 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   const [multiDataOptions, setMultiDataOptions] = useState<DataOptions[]>([])
   const [sourceDsId, setSourceDsId] = useState<string>(null)
   const [sourceDs, setSourceDs] = useState<FeatureLayerDataSource>(null)
-  const [targetDs, setTargetDs] = useState<FeatureLayerDataSource>(null)
+  const [targetDsMap, setTargetDsMap] = useState<Record<string, FeatureLayerDataSource>>({})
+  const [selectedTargetId, setSelectedTargetId] = useState<string>('')
   const [targetLayer, setTargetLayer] = useState<any>(null)
   const [jimuMapView, setJimuMapView] = useState<JimuMapView>(null)
   const [mapping, setMapping] = useState<FieldMappingConfig>(() => config.defaultMapping?.asMutable?.({ deep: true }) || emptyMappingConfig())
   const [canEditFeature, setCanEditFeature] = useState(false)
+  const [editorRefresh, setEditorRefresh] = useState(0)
 
   // ----- Add Data config for the vendored popper -----
   const addDataConfig = useMemo(() => Immutable({
@@ -92,6 +95,40 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
 
   useEffect(() => { getPrivilege().then(setCanEditFeature).catch(() => setCanEditFeature(false)) }, [])
 
+  // ----- Targets: one or more configured layers; the user picks one to load into -----
+  const configuredTargets = useMemo(() => {
+    if (config.targetUseDataSources && config.targetUseDataSources.length) return config.targetUseDataSources
+    return config.targetUseDataSource ? Immutable([config.targetUseDataSource]) : Immutable([])
+  }, [config])
+
+  const targetDs = selectedTargetId ? (targetDsMap[selectedTargetId] || null) : null
+
+  // default the selection to the first configured target, and recover if the
+  // current selection is no longer configured (author changed the settings)
+  useEffect(() => {
+    const ids = configuredTargets.map(t => t.dataSourceId)
+    if ((!selectedTargetId || !ids.includes(selectedTargetId)) && ids.length) {
+      setSelectedTargetId(ids[0])
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [configuredTargets])
+
+  const onTargetCreated = useCallback((dsId: string, ds: DataSource) => {
+    setTargetDsMap(prev => ({ ...prev, [dsId]: ds as FeatureLayerDataSource }))
+  }, [])
+
+  const targetLabel = useCallback((dsId: string) => {
+    return targetDsMap[dsId]?.getLabel?.() || dsId
+  }, [targetDsMap])
+
+  // changing the target changes the target schema, so clear the rules; the
+  // auto-match effect re-seeds them against the newly selected target
+  const onSelectTarget = useCallback((dsId: string) => {
+    if (dsId === selectedTargetId) return
+    setSelectedTargetId(dsId)
+    setMapping(m => ({ ...m, rules: [] }))
+  }, [selectedTargetId])
+
   // Resolve the actual JSAPI FeatureLayer from the target data source (async).
   // A data source that is only configured (not added to a map view) has no
   // synchronous `.layer`, so we materialize it the way the Edit widget does.
@@ -127,6 +164,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   // ---- Map integration (optional; only when a Map widget is linked) ----
   const useGeometryEditor = !!mapWidgetId && config.enableGeometryEdit !== false
   const showOnMap = !!mapWidgetId && config.showOnMap !== false
+  const allowSymbology = !!mapWidgetId && config.allowSymbology !== false
 
   const handleActiveViewChange = useCallback((view: JimuMapView) => {
     setJimuMapView(view && !view.isDestroyed?.() ? view : null)
@@ -225,7 +263,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
     return { editConfig, useDataSources }
   }, [targetDs, targetLayer, useGeometryEditor, config])
 
-  const hasTarget = !!config.targetUseDataSource?.dataSourceId
+  const hasTarget = configuredTargets.length > 0
   const canGoMap = !!sourceDs && !!targetDs
   const editReady = !!editInfo
   const allowMapping = config.allowRuntimeMapping !== false
@@ -242,14 +280,15 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
 
   return (
     <Paper className='widget-add-edit-etl jimu-widget' css={style} ref={rootRef} shape='none'>
-      {hasTarget && (
+      {configuredTargets.map((uds) => (
         <DataSourceComponent
-          useDataSource={config.targetUseDataSource}
-          onDataSourceCreated={(ds: DataSource) => setTargetDs(ds as FeatureLayerDataSource)}
-          onCreateDataSourceFailed={() => setTargetDs(null)}
-          onSelectionChange={zoomToSelection}
+          key={uds.dataSourceId}
+          useDataSource={uds}
+          onDataSourceCreated={(ds: DataSource) => onTargetCreated(uds.dataSourceId, ds)}
+          onCreateDataSourceFailed={() => onTargetCreated(uds.dataSourceId, null)}
+          onSelectionChange={uds.dataSourceId === selectedTargetId ? zoomToSelection : undefined}
         />
-      )}
+      ))}
 
       {mapWidgetId && (
         <JimuMapViewComponent useMapWidgetId={mapWidgetId} onActiveViewChange={handleActiveViewChange} />
@@ -305,9 +344,8 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
             {/* edit-only shortcut */}
             {hasTarget && (
               <div className='edit-shortcut mt-3'>
-                <hr />
-                <Button type='link' size='sm' disabled={!editReady} onClick={goEdit}>{translate('editExisting')} →</Button>
-                <p className='hint sm'>{translate('editExistingHint')}</p>
+                <Button type='link' size='default' className='edit-shortcut-link' disabled={!editReady} onClick={goEdit}>{translate('editExisting')} →</Button>
+                <p className='hint sm m-0'>{translate('editExistingHint')}</p>
               </div>
             )}
           </div>
@@ -315,6 +353,14 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
 
         {step === 'map' && sourceSchema && targetSchema && (
           <div className='p-3 scroll'>
+            {configuredTargets.length > 1 && (
+              <div className='target-pick mb-3'>
+                <label htmlFor={`${id}-target-pick`} className='blk-label'>{translate('loadInto')}</label>
+                <Select id={`${id}-target-pick`} size='sm' aria-label={translate('loadInto')} value={selectedTargetId} onChange={(e) => onSelectTarget(e.target.value)}>
+                  {configuredTargets.map(t => <Option key={t.dataSourceId} value={t.dataSourceId}>{targetLabel(t.dataSourceId)}</Option>)}
+                </Select>
+              </div>
+            )}
             {allowMapping
               ? <MappingPanel sourceSchema={sourceSchema} targetSchema={targetSchema} targetFields={targetFields} value={mapping} allowExpressions={config.allowExpressions !== false} onChange={setMapping} />
               : <Alert type='info' open withIcon text='Mapping is fixed by the app author.' />}
@@ -344,8 +390,10 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
           editInfo
             ? (
               <div className='edit-body'>
+                {allowSymbology && jimuMapView && <SymbologyPanel jimuMapView={jimuMapView} defaultLayer={targetLayer} translate={translate} onApplied={() => setEditorRefresh(v => v + 1)} />}
                 {useGeometryEditor
                   ? <EditorComponent
+                      key={`editor-${editorRefresh}`}
                       id={id}
                       visible={step === 'edit'}
                       config={editInfo.editConfig as any}
@@ -395,6 +443,7 @@ const style = css`
   .hint { color: var(--sys-color-surface-paper-hint); font-size: 0.8125rem; }
   .hint.sm { font-size: 0.75rem; margin-top: 2px; }
   .src-pick { display: block; font-size: 0.75rem; color: var(--sys-color-surface-paper-hint); }
-  .edit-shortcut hr { border: none; border-top: 1px solid var(--sys-color-divider-secondary); margin: 0 0 8px; }
+  .edit-shortcut { padding: 10px 12px; border: 1px solid var(--sys-color-divider-secondary); border-left: 3px solid var(--sys-color-primary-main); border-radius: 4px; background: var(--sys-color-surface-background); }
+  .edit-shortcut .edit-shortcut-link { font-weight: 600; padding-left: 0; }
   .edit-body { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
 `

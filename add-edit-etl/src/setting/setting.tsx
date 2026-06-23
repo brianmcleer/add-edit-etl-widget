@@ -29,27 +29,32 @@ const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
   }
 
   const onTargetChange = (uds: UseDataSource[]) => {
-    const target = uds?.[0]
+    const list = uds || []
     onSettingChange({
       id,
-      useDataSources: uds as any,
-      config: (config as any).set('targetUseDataSource', target ? Immutable(target) : undefined)
+      useDataSources: list as any,
+      config: (config as any)
+        .set('targetUseDataSources', list.length ? Immutable(list) : undefined)
+        .set('targetUseDataSource', list[0] ? Immutable(list[0]) : undefined)
     })
   }
 
   return (
     <div css={style} className='widget-setting-add-edit-etl'>
       <SettingSection title={translate('target')}>
-        <SettingRow>
+        <SettingRow flow='wrap'>
           <DataSourceSelector
             types={supportedTypes}
             useDataSources={useDataSources}
             mustUseDataSource
             onChange={onTargetChange}
             widgetId={id}
-            isMultiple={false}
+            isMultiple
             hideAddDataButton={false}
           />
+        </SettingRow>
+        <SettingRow flow='wrap'>
+          <div className='hint'>{translate('targetMultiHint')}</div>
         </SettingRow>
         <SettingRow tag='label' label={translate('reviewEdit')}>
           <Switch checked={config.enableReviewEdit !== false} onChange={(e) => set('enableReviewEdit', e.target.checked)} />
@@ -68,6 +73,9 @@ const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
         </SettingRow>
         <SettingRow tag='label' label={translate('zoomToSelected')}>
           <Switch checked={config.zoomToSelected !== false} onChange={(e) => set('zoomToSelected', e.target.checked)} />
+        </SettingRow>
+        <SettingRow tag='label' label={translate('allowSymbology')}>
+          <Switch checked={config.allowSymbology !== false} onChange={(e) => set('allowSymbology', e.target.checked)} />
         </SettingRow>
         <SettingRow flow='wrap' label={translate('zoomScale')}>
           <NumericInput size='sm' min={0} max={500000000} step={500} value={config.zoomScale || 0} aria-label={translate('zoomScale')} onChange={(v) => set('zoomScale', v)} />
