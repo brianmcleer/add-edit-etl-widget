@@ -59,6 +59,11 @@ export interface LoadOptions {
   chunkSize?: number
   gdbVersion?: string
   onProgress?: (done: number, total: number) => void
+  /** insert (default) | update | upsert, with the target key field to match on. */
+  mode?: 'insert' | 'update' | 'upsert'
+  keyField?: string
+  /** whether the key field is a string type (for SQL quoting). */
+  keyIsString?: boolean
 }
 
 /** Resolve a usable JSAPI FeatureLayer from a jimu data source. */
@@ -79,6 +84,48 @@ async function resolveTargetLayer (targetDs: FeatureLayerDataSource): Promise<Es
 function hasApplyEdits (layer: any): layer is EsriFeatureLayer {
   return !!layer && typeof layer.applyEdits === 'function'
 }
+
+/** SQL-quote a key value for a where clause. */
+function sqlLiteral (v: unknown, isString: boolean): string {
+  if (isString) return "'" + String(v).replace(/'/g, "''") + "'"
+  return String(v)
+}
+
+/**
+ * Query the target service for existing features whose key field matches any
+ * incoming key, returning key -> objectId. Batched IN clauses keep the where
+ * length sane. Per the JS SDK, FeatureLayer.queryFeatures queries the service
+ * directly, so this sees all existing rows, not just drawn ones.
+ */
+export async function fetchExistingKeys (
+  layer: EsriFeatureLayer,
+  keyField: string,
+  keys: unknown[],
+  keyIsString: boolean
+): Promise<Map<string, number | string>> {
+  const found = new Map<string, number | string>()
+  const oidField = (layer as any).objectIdField || 'OBJECTID'
+  const unique = Array.from(new Set(keys.filter(k => k !== null && k !== undefined && k !== '').map(k => String(k))))
+  const batchSize = 300
+  for (let i = 0; i < unique.length; i += batchSize) {
+    const batch = unique.slice(i, i + batchSize)
+    const where = `${keyField} IN (${batch.map(k => sqlLiteral(k, keyIsString)).join(',')})`
+    const q = (layer as any).createQuery()
+    q.where = where
+    q.outFields = [oidField, keyField]
+    q.returnGeometry = false
+    const res = await (layer as any).queryFeatures(q)
+    for (const f of res?.features || []) {
+      const k = f.attributes?.[keyField]
+      const oid = f.attributes?.[oidField]
+      if (k !== null && k !== undefined && oid !== null && oid !== undefined && !found.has(String(k))) {
+        found.set(String(k), oid)
+      }
+    }
+  }
+  return found
+}
+
 
 /** Human-readable note about what the layer reports, appended to real errors. */
 function capabilityHint (layer: any): string {
@@ -112,21 +159,77 @@ export async function loadIntoTarget (
 
   const hint = capabilityHint(layer)
 
+  const mode = options.mode || 'insert'
+  const keyField = options.keyField
+
+  // For update/upsert, look up which incoming keys already exist on the service
+  // and stamp matches with the existing objectId so applyEdits updates them.
+  let existing = new Map<string, number | string>()
+  const oidField = (layer as any).objectIdField || 'OBJECTID'
+  if (mode !== 'insert' && keyField) {
+    try {
+      const keys = graphics.map(g => (g as any).attributes?.[keyField])
+      existing = await fetchExistingKeys(layer, keyField, keys, options.keyIsString !== false)
+    } catch (e) {
+      const msg = 'Could not query existing features by key: ' + ((e as Error)?.message || 'query failed')
+      rowMap.forEach(srcIdx => {
+        const rep = reports.find(r => r.index === srcIdx)
+        if (rep) { rep.ok = false; rep.error = msg } else reports.push({ index: srcIdx, ok: false, error: msg })
+      })
+      return { attempted: graphics.length, succeeded: 0, failed: reports.filter(r => !r.ok).length, rows: reports, addedObjectIds: [], inserted: 0, updated: 0 }
+    }
+  }
+
   const chunkSize = options.chunkSize || 200
   const gdbVersion = (targetDs as any).getGDBVersion?.()
   const addedObjectIds: Array<number | string> = []
   let succeeded = 0
   let failed = reports.filter(r => !r.ok).length
+  let inserted = 0
+  let updated = 0
   let done = 0
 
   for (let start = 0; start < graphics.length; start += chunkSize) {
     const slice = graphics.slice(start, start + chunkSize)
     const sliceRows = rowMap.slice(start, start + chunkSize)
+
+    // route each graphic: add, update (existing oid attached), or skip
+    const addFeatures: EsriGraphic[] = []
+    const addRows: number[] = []
+    const updateFeatures: EsriGraphic[] = []
+    const updateRows: number[] = []
+
+    slice.forEach((g, idx) => {
+      const srcIdx = sliceRows[idx]
+      const key = keyField ? (g as any).attributes?.[keyField] : undefined
+      const oid = key !== null && key !== undefined ? existing.get(String(key)) : undefined
+      if (mode === 'insert' || (mode === 'upsert' && oid === undefined)) {
+        addFeatures.push(g); addRows.push(srcIdx)
+      } else if (oid !== undefined) {
+        ;(g as any).attributes[oidField] = oid
+        updateFeatures.push(g); updateRows.push(srcIdx)
+      } else {
+        // update-only mode with no match: report as skipped
+        const rep = reports.find(r => r.index === srcIdx)
+        const msg = `No existing feature matches key "${String(key)}" (update-only mode).`
+        if (rep) { rep.ok = false; rep.error = msg }
+        failed++
+      }
+    })
+
     try {
-      const result = await layer.applyEdits({ addFeatures: slice }, { gdbVersion })
+      const edits: any = {}
+      if (addFeatures.length) edits.addFeatures = addFeatures
+      if (updateFeatures.length) edits.updateFeatures = updateFeatures
+      if (!addFeatures.length && !updateFeatures.length) {
+        done += slice.length
+        options.onProgress?.(done, graphics.length)
+        continue
+      }
+      const result = await layer.applyEdits(edits, { gdbVersion })
       const addResults = result?.addFeatureResults || []
       addResults.forEach((ar: any, idx: number) => {
-        const sourceIndex = sliceRows[idx]
+        const sourceIndex = addRows[idx]
         const rep = reports.find(r => r.index === sourceIndex)
         if (ar.error) {
           if (rep) { rep.ok = false; rep.error = (ar.error.message || 'applyEdits error') + hint }
@@ -134,17 +237,30 @@ export async function loadIntoTarget (
         } else {
           if (ar.objectId != null) addedObjectIds.push(ar.objectId)
           else if (ar.globalId != null) addedObjectIds.push(ar.globalId)
-          succeeded++
+          succeeded++; inserted++
         }
       })
-      // refresh jimu data source so app sees the inserts
-      updateDataSourceAfterEdit(targetDs as any, { addFeatures: slice })
+      const updateResults = result?.updateFeatureResults || []
+      updateResults.forEach((ur: any, idx: number) => {
+        const sourceIndex = updateRows[idx]
+        const rep = reports.find(r => r.index === sourceIndex)
+        if (ur.error) {
+          if (rep) { rep.ok = false; rep.error = (ur.error.message || 'applyEdits update error') + hint }
+          failed++
+        } else {
+          if (ur.objectId != null) addedObjectIds.push(ur.objectId)
+          succeeded++; updated++
+        }
+      })
+      // refresh jimu data source so app sees the changes
+      updateDataSourceAfterEdit(targetDs as any, edits)
     } catch (e) {
-      sliceRows.forEach(sourceIndex => {
+      const affected = [...addRows, ...updateRows]
+      affected.forEach(sourceIndex => {
         const rep = reports.find(r => r.index === sourceIndex)
         if (rep) { rep.ok = false; rep.error = ((e as Error)?.message || 'applyEdits failed') + hint }
       })
-      failed += slice.length
+      failed += affected.length
     }
     done += slice.length
     options.onProgress?.(done, graphics.length)
@@ -155,6 +271,8 @@ export async function loadIntoTarget (
     succeeded,
     failed,
     rows: reports,
-    addedObjectIds
+    addedObjectIds,
+    inserted,
+    updated
   }
 }

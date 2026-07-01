@@ -5,8 +5,12 @@ joins Esri's stock Add Data and Edit widgets into one settings-driven widget and
 inserts a field-mapping step between them. A user adds data from a file, a URL, or
 ArcGIS content, maps the source fields onto an editable target layer across one to
 one, many to one, one to many, and many to many relationships, loads the records,
-and edits them on the map. An author can configure more than one target layer and
-let the user choose where to load, the user can restyle a layer's symbology on the
+and edits them on the map. It is a lightweight ETL tool inside the app: transforms
+cover date parsing, value maps, unit conversion, templates, and expressions; loads
+can insert, update, or upsert by a key field; and a preflight data check reports
+nulls, bad values, truncations, domain violations, and duplicate keys before
+anything is written. An author can configure more than one target layer and let
+the user choose where to load, the user can restyle a layer's symbology on the
 map, and mapping configurations export and import as XML, so repetitive loads do
 not have to be rebuilt by hand.
 

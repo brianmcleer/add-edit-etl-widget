@@ -377,6 +377,8 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
               sourceDs={sourceDs} targetDs={targetDs} sourceSchema={sourceSchema} targetSchema={targetSchema}
               targetFields={targetFields} mapping={mapping} chunkSize={config.loadChunkSize || 200}
               enableReviewEdit={config.enableReviewEdit !== false && editReady}
+              allowUpsert={config.allowUpsert !== false}
+              onMappingChange={setMapping}
               onReviewEdit={() => setStep('edit')}
               onLoaded={(result) => { if (showOnMap) zoomToObjectIds(result.addedObjectIds) }}
             />

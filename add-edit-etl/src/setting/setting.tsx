@@ -171,6 +171,9 @@ const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
         <SettingRow tag='label' label='Load chunk size'>
           <NumericInput size='sm' min={1} max={2000} value={config.loadChunkSize || 200} onChange={(v) => set('loadChunkSize', v)} />
         </SettingRow>
+        <SettingRow tag='label' label={translate('allowUpsert')}>
+          <Switch checked={config.allowUpsert !== false} onChange={(e) => set('allowUpsert', e.target.checked)} />
+        </SettingRow>
       </SettingSection>
     </div>
   )

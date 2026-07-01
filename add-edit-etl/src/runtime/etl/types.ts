@@ -26,8 +26,12 @@ export type Cardinality = '1:1' | 'M:1' | '1:M' | 'M:M'
 export type TransformMode =
   // 1:1
   | 'direct' // copy source[0] -> target[0] with type coercion
+  | 'dateParse' // parse source[0] as a date (options.dateFormat hint) -> epoch ms
+  | 'valueMap' // look source[0] up in options.valueMap -> mapped value
+  | 'numberScale' // numeric conversion: value * factor + offset, rounded to precision
   // M:1
   | 'concat' // join source values with options.delimiter
+  | 'template' // options.template with {field} placeholders over the source row
   | 'coalesce' // first non-null/non-empty source value
   | 'sum' | 'avg' | 'min' | 'max' // numeric reductions over source values
   // 1:M
@@ -49,6 +53,23 @@ export interface TransformOptions {
   emptyAsNull?: boolean // '' becomes null before coercion
   /** When true the engine coerces each output to the target field's esri type. Default true. */
   coerce?: boolean
+  /** dateParse: an input format hint like 'MM/DD/YYYY' or 'DD.MM.YYYY HH:mm'.
+   *  Blank means auto (ISO first, then native Date parsing). */
+  dateFormat?: string
+  /** valueMap: source value -> output value lookup (keys compared as strings). */
+  valueMap?: Record<string, string | number | boolean | null>
+  /** valueMap: what happens when a value is not in the map.
+   *  'passthrough' keeps the original (default), 'null' writes null,
+   *  'default' writes mapDefault. */
+  unmapped?: 'passthrough' | 'null' | 'default'
+  mapDefault?: string | number | boolean | null
+  /** numberScale: output = value * factor + offset, then rounded to precision
+   *  decimal places when precision is set. factor defaults to 1, offset to 0. */
+  factor?: number
+  offset?: number
+  precision?: number
+  /** template: text with {sourceField} placeholders, e.g. '{num} {street}, {city}'. */
+  template?: string
 }
 
 export interface FieldMappingRule {
@@ -83,6 +104,19 @@ export interface FieldMappingConfig {
   geometry: GeometryMapping
   /** last-wins (default) lets a later rule overwrite an earlier rule's target. */
   conflictResolution?: 'lastWins' | 'firstWins'
+  /** How records are written to the target. Travels with the mapping XML so a
+   *  saved workflow keeps its load behavior. */
+  load?: LoadBehavior
+}
+
+/** insert: always add. update: only update rows whose key matches an existing
+ *  feature. upsert: update on key match, insert otherwise. */
+export type LoadMode = 'insert' | 'update' | 'upsert'
+
+export interface LoadBehavior {
+  mode?: LoadMode
+  /** Target field used to match incoming rows to existing features. */
+  keyField?: string
 }
 
 /** Minimal field descriptor used on both sides of the mapping UI. */
@@ -98,6 +132,8 @@ export interface SchemaField {
   /** target only: a value already supplied by the service when omitted. */
   hasDefault?: boolean
   defaultValue?: unknown
+  /** target only: coded value domain, used by the preflight QA report. */
+  domain?: { type: string, codedValues?: Array<{ code: string | number, name: string }>, range?: [number, number] }
 }
 
 export interface Schema {
@@ -130,4 +166,27 @@ export interface LoadResult {
   rows: TransformReportRow[]
   /** objectIds returned by the service for the inserted features. */
   addedObjectIds: Array<number | string>
+  /** upsert/update accounting */
+  inserted?: number
+  updated?: number
+}
+
+/** Per-target-field statistics from the preflight QA pass. */
+export interface FieldQA {
+  field: string
+  nulls: number
+  coercionFailures: number
+  truncations: number
+  domainViolations: number
+  /** up to a few sample offending values for the message */
+  samples: string[]
+}
+
+export interface QAReport {
+  rows: number
+  fields: FieldQA[]
+  /** duplicate key values found within the incoming data (key -> count>1). */
+  duplicateKeysInSource: Array<{ key: string, count: number }>
+  /** total warnings across the run */
+  warnings: number
 }

@@ -24,6 +24,46 @@ const isEmpty = (v: unknown): boolean => isNil(v) || (typeof v === 'string' && v
 // Expression evaluation
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Date parsing
+// ---------------------------------------------------------------------------
+
+/**
+ * Parse a date value to epoch milliseconds. If a format hint is given
+ * (tokens: YYYY YY MM DD HH mm ss, any separators), the value is parsed
+ * against it strictly; otherwise ISO and native Date parsing are tried.
+ * Returns null when the value cannot be parsed.
+ */
+export function parseDateValue (value: unknown, format?: string): number | null {
+  if (value === null || value === undefined || value === '') return null
+  if (typeof value === 'number' && !Number.isNaN(value)) return value
+  const s = String(value).trim()
+  if (s === '') return null
+
+  if (format && format.trim() !== '') {
+    const tokenRe = /(YYYY|YY|MM|DD|HH|mm|ss)/g
+    const order: string[] = []
+    const pattern = format.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(tokenRe, (t) => {
+      order.push(t)
+      return t === 'YYYY' ? '(\\d{4})' : '(\\d{1,2})'
+    })
+    const m = s.match(new RegExp('^' + pattern + '$'))
+    if (!m) return null
+    const parts: Record<string, number> = { YYYY: 1970, MM: 1, DD: 1, HH: 0, mm: 0, ss: 0 }
+    order.forEach((t, i) => {
+      let n = parseInt(m[i + 1], 10)
+      if (t === 'YY') { n = n + (n >= 70 ? 1900 : 2000); parts.YYYY = n } else parts[t] = n
+    })
+    const d = new Date(parts.YYYY, parts.MM - 1, parts.DD, parts.HH, parts.mm, parts.ss)
+    // reject rollovers such as month 13 or day 32
+    if (d.getFullYear() !== parts.YYYY || d.getMonth() !== parts.MM - 1 || d.getDate() !== parts.DD) return null
+    return d.getTime()
+  }
+
+  const t = Date.parse(s)
+  return Number.isNaN(t) ? null : t
+}
+
 /**
  * Helpers exposed to user expressions. Expressions are written by the person
  * using the widget (e.g. `helpers.upper($.FIRST) + ' ' + $.LAST`). They run
@@ -36,18 +76,36 @@ export const expressionHelpers = {
   join: (sep: string, ...args: unknown[]) => args.filter(a => !isNil(a)).join(sep),
   upper: (s: unknown) => (isNil(s) ? s : String(s).toUpperCase()),
   lower: (s: unknown) => (isNil(s) ? s : String(s).toLowerCase()),
+  title: (s: unknown) => (isNil(s) ? s : String(s).toLowerCase().replace(/(^|\s)\S/g, m => m.toUpperCase())),
   trim: (s: unknown) => (isNil(s) ? s : String(s).trim()),
   substring: (s: unknown, start: number, end?: number) => (isNil(s) ? s : String(s).substring(start, end)),
+  left: (s: unknown, n: number) => (isNil(s) ? s : String(s).substring(0, n)),
+  right: (s: unknown, n: number) => (isNil(s) ? s : String(s).slice(-n)),
   replace: (s: unknown, a: string, b: string) => (isNil(s) ? s : String(s).split(a).join(b)),
+  regexReplace: (s: unknown, pattern: string, flags: string, replacement: string) => {
+    if (isNil(s)) return s
+    try { return String(s).replace(new RegExp(pattern, flags), replacement) } catch (e) { return s }
+  },
   toNumber: (s: unknown) => {
     if (isNil(s) || s === '') return null
     const n = Number(s)
     return Number.isNaN(n) ? null : n
   },
+  round: (v: unknown, places = 0) => {
+    const n = Number(v)
+    if (Number.isNaN(n)) return null
+    const f = Math.pow(10, places)
+    return Math.round(n * f) / f
+  },
   toString: (s: unknown) => (isNil(s) ? s : String(s)),
   ifNull: (v: unknown, fallback: unknown) => (isNil(v) ? fallback : v),
   coalesce: (...args: unknown[]) => args.find(a => !isEmpty(a)) ?? null,
   now: () => Date.now(),
+  /** Parse a date (optionally with a format hint like 'MM/DD/YYYY') to epoch ms. */
+  date: (s: unknown, format?: string) => parseDateValue(s, format),
+  year: (s: unknown) => { const t = parseDateValue(s); return t == null ? null : new Date(t).getFullYear() },
+  month: (s: unknown) => { const t = parseDateValue(s); return t == null ? null : new Date(t).getMonth() + 1 },
+  day: (s: unknown) => { const t = parseDateValue(s); return t == null ? null : new Date(t).getDate() },
   padStart: (s: unknown, len: number, pad = '0') => (isNil(s) ? s : String(s).padStart(len, pad))
 }
 
@@ -143,6 +201,43 @@ export function runRule (rule: FieldMappingRule, source: Record<string, unknown>
     }
     case 'direct': {
       out[rule.targetFields[0]] = applyStringOpts(src[0], opts)
+      return out
+    }
+    case 'dateParse': {
+      out[rule.targetFields[0]] = parseDateValue(applyStringOpts(src[0], opts), opts.dateFormat)
+      return out
+    }
+    case 'valueMap': {
+      const raw = applyStringOpts(src[0], opts)
+      if (isNil(raw)) { out[rule.targetFields[0]] = null; return out }
+      const key = String(raw)
+      const map = opts.valueMap || {}
+      if (Object.prototype.hasOwnProperty.call(map, key)) {
+        out[rule.targetFields[0]] = map[key]
+      } else {
+        const unmapped = opts.unmapped || 'passthrough'
+        out[rule.targetFields[0]] = unmapped === 'null' ? null : unmapped === 'default' ? (opts.mapDefault ?? null) : raw
+      }
+      return out
+    }
+    case 'numberScale': {
+      const n = Number(applyStringOpts(src[0], opts))
+      if (Number.isNaN(n)) { out[rule.targetFields[0]] = null; return out }
+      let v = n * (opts.factor ?? 1) + (opts.offset ?? 0)
+      if (typeof opts.precision === 'number') {
+        const f = Math.pow(10, opts.precision)
+        v = Math.round(v * f) / f
+      }
+      out[rule.targetFields[0]] = v
+      return out
+    }
+    case 'template': {
+      const tpl = opts.template || ''
+      const rendered = tpl.replace(/\{([^}]+)\}/g, (_, name: string) => {
+        const v = source[name.trim()]
+        return isNil(v) ? '' : String(v)
+      })
+      out[rule.targetFields[0]] = applyStringOpts(rendered, opts)
       return out
     }
     case 'concat': {
@@ -298,4 +393,83 @@ export function validateMapping (
   }
 
   return issues
+}
+
+// ---------------------------------------------------------------------------
+// Preflight QA
+// ---------------------------------------------------------------------------
+
+import type { QAReport, FieldQA } from './types'
+
+/**
+ * Run the transform over every row without writing anything, and aggregate
+ * per-target-field quality statistics: nulls produced, coercion failures,
+ * string truncations, coded-domain violations, and duplicate key values in
+ * the incoming data. This is the "measure twice, cut once" step before load.
+ */
+export function analyzeRecords (
+  rows: Array<Record<string, unknown>>,
+  config: FieldMappingConfig,
+  targetFields: SchemaField[],
+  keyField?: string
+): QAReport {
+  const statByField = new Map<string, FieldQA>()
+  const stat = (f: string): FieldQA => {
+    let s = statByField.get(f)
+    if (!s) { s = { field: f, nulls: 0, coercionFailures: 0, truncations: 0, domainViolations: 0, samples: [] }; statByField.set(f, s) }
+    return s
+  }
+  const domains = new Map<string, Set<string>>()
+  targetFields.forEach(tf => {
+    if (tf.domain?.codedValues?.length) {
+      domains.set(tf.name, new Set(tf.domain.codedValues.map(cv => String(cv.code))))
+    }
+  })
+
+  const keyCounts = new Map<string, number>()
+  let warnings = 0
+
+  for (const row of rows) {
+    const { attributes, issues } = transformRecord(row, config, targetFields)
+    for (const issue of issues) {
+      warnings++
+      const f = issue.targetField || ''
+      if (!f) continue
+      const s = stat(f)
+      const msg = issue.message || ''
+      if (msg.includes('truncated')) s.truncations++
+      else s.coercionFailures++
+      if (s.samples.length < 3) {
+        const m = msg.match(/"([^"]*)"/)
+        if (m && m[1] && !s.samples.includes(m[1])) s.samples.push(m[1])
+      }
+    }
+    for (const [name, value] of Object.entries(attributes)) {
+      if (value === null || value === undefined) { stat(name).nulls++; continue }
+      const domain = domains.get(name)
+      if (domain && !domain.has(String(value))) {
+        const s = stat(name)
+        s.domainViolations++
+        warnings++
+        if (s.samples.length < 3 && !s.samples.includes(String(value))) s.samples.push(String(value))
+      }
+    }
+    if (keyField) {
+      const k = attributes[keyField]
+      if (k !== null && k !== undefined && k !== '') {
+        const ks = String(k)
+        keyCounts.set(ks, (keyCounts.get(ks) || 0) + 1)
+      }
+    }
+  }
+
+  const duplicateKeysInSource: Array<{ key: string, count: number }> = []
+  keyCounts.forEach((count, key) => { if (count > 1) duplicateKeysInSource.push({ key, count }) })
+  duplicateKeysInSource.sort((a, b) => b.count - a.count)
+
+  const fields = Array.from(statByField.values())
+    .filter(s => s.nulls + s.coercionFailures + s.truncations + s.domainViolations > 0)
+    .sort((a, b) => (b.coercionFailures + b.domainViolations) - (a.coercionFailures + a.domainViolations))
+
+  return { rows: rows.length, fields, duplicateKeysInSource, warnings }
 }

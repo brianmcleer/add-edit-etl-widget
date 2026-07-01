@@ -1,4 +1,4 @@
-import { transformRecord, validateMapping } from '../src/runtime/etl/transform-engine'
+import { transformRecord, validateMapping, analyzeRecords } from '../src/runtime/etl/transform-engine'
 import type { FieldMappingConfig, SchemaField } from '../src/runtime/etl/types'
 
 const targetFields: SchemaField[] = [
@@ -70,5 +70,57 @@ describe('ETL transform engine - cardinalities', () => {
     const issues = validateMapping(cfg, [{ name: 'real', jimuName: 'real', type: 'STRING' }] as any, targetFields)
     expect(issues.some(i => i.level === 'error' && /not in the added data/.test(i.message))).toBe(true)
     expect(issues.some(i => i.level === 'error' && i.targetField === 'STATUS')).toBe(true)
+  })
+})
+
+describe('ETL transform engine - v1.2 modes', () => {
+  it('dateParse honors a format hint and rejects rollovers', () => {
+    const cfg: FieldMappingConfig = { rules: [
+      { id: 'd1', cardinality: '1:1', sourceFields: ['when'], targetFields: ['FULLNAME'], mode: 'dateParse', options: { dateFormat: 'MM/DD/YYYY', coerce: false } }
+    ], geometry: geom }
+    const ok = transformRecord({ when: '06/15/2026' }, cfg, targetFields)
+    expect(ok.attributes.FULLNAME).toBe(new Date(2026, 5, 15).getTime())
+    const bad = transformRecord({ when: '13/45/2026' }, cfg, targetFields)
+    expect(bad.attributes.FULLNAME).toBeNull()
+  })
+
+  it('valueMap maps, passes through, nulls, or defaults unmapped values', () => {
+    const base = { id: 'v1', cardinality: '1:1' as const, sourceFields: ['s'], targetFields: ['STATUS'], mode: 'valueMap' as const }
+    const mapped = transformRecord({ s: 'OOS' }, { rules: [{ ...base, options: { valueMap: { OOS: 'Out of Service' } } }], geometry: geom }, targetFields)
+    expect(mapped.attributes.STATUS).toBe('Out of Service')
+    const def = transformRecord({ s: 'ZZ' }, { rules: [{ ...base, options: { valueMap: {}, unmapped: 'default', mapDefault: 'Unknown' } }], geometry: geom }, targetFields)
+    expect(def.attributes.STATUS).toBe('Unknown')
+  })
+
+  it('numberScale converts units with precision', () => {
+    const cfg: FieldMappingConfig = { rules: [
+      { id: 'n1', cardinality: '1:1', sourceFields: ['ft'], targetFields: ['TOTAL'], mode: 'numberScale', options: { factor: 0.3048, precision: 2 } }
+    ], geometry: geom }
+    const { attributes } = transformRecord({ ft: '100' }, cfg, targetFields)
+    expect(attributes.TOTAL).toBe(30.48)
+  })
+
+  it('template renders {field} placeholders', () => {
+    const cfg: FieldMappingConfig = { rules: [
+      { id: 't1', cardinality: 'M:1', sourceFields: ['num', 'street'], targetFields: ['COMBO'], mode: 'template', options: { template: '{num} {street}' } }
+    ], geometry: geom }
+    const { attributes } = transformRecord({ num: 680, street: 'North Ave' }, cfg, targetFields)
+    expect(attributes.COMBO).toBe('680 North Ave')
+  })
+
+  it('analyzeRecords reports domain violations and duplicate keys', () => {
+    const tf: any = [
+      { name: 'STATUS', type: 'STRING', esriType: 'esriFieldTypeString', domain: { type: 'codedValue', codedValues: [{ code: 'Active', name: 'Active' }] } },
+      { name: 'FIRST', type: 'STRING', esriType: 'esriFieldTypeString' }
+    ]
+    const cfg: FieldMappingConfig = { rules: [
+      { id: 'a', cardinality: '1:1', sourceFields: ['s'], targetFields: ['STATUS'], mode: 'direct' },
+      { id: 'b', cardinality: '1:1', sourceFields: ['k'], targetFields: ['FIRST'], mode: 'direct' }
+    ], geometry: geom }
+    const qa = analyzeRecords([
+      { s: 'Active', k: 'A' }, { s: 'Broken', k: 'A' }
+    ], cfg, tf, 'FIRST')
+    expect(qa.fields.find(f => f.field === 'STATUS')?.domainViolations).toBe(1)
+    expect(qa.duplicateKeysInSource).toEqual([{ key: 'A', count: 2 }])
   })
 })

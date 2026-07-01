@@ -69,6 +69,7 @@ export default {
   zoomToSelected: 'Zoom to selected feature',
   targetMultiHint: 'Add one or more editable layers. When more than one is set, the user picks which to load into.',
   allowSymbology: 'Allow changing symbology',
+  allowUpsert: 'Allow update and upsert load modes',
   editExisting: 'Start in edit mode',
   rulesCount: '{count} rules',
   removeRule: 'Remove rule',

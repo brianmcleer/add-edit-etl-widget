@@ -87,6 +87,8 @@ export interface Config {
   allowExpressions?: boolean
   /** applyEdits chunk size. */
   loadChunkSize?: number
+  /** Expose the update and upsert load modes (match by key field) at runtime. Default true. */
+  allowUpsert?: boolean
 }
 
 export type IMConfig = ImmutableObject<Config>

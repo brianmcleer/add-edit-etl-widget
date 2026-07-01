@@ -30,12 +30,29 @@ function optionsToXml (opts: TransformOptions | undefined, indent: string): stri
   const attrs: string[] = []
   if (o.delimiter !== undefined) attrs.push(`delimiter="${esc(o.delimiter)}"`)
   if (o.regexFlags !== undefined) attrs.push(`regexFlags="${esc(o.regexFlags)}"`)
+  if (o.dateFormat !== undefined) attrs.push(`dateFormat="${esc(o.dateFormat)}"`)
+  if (o.unmapped !== undefined) attrs.push(`unmapped="${esc(o.unmapped)}"`)
+  if (o.factor !== undefined) attrs.push(`factor="${esc(o.factor)}"`)
+  if (o.offset !== undefined) attrs.push(`offset="${esc(o.offset)}"`)
+  if (o.precision !== undefined) attrs.push(`precision="${esc(o.precision)}"`)
   if (o.trim !== undefined) attrs.push(`trim="${bool(o.trim)}"`)
   if (o.emptyAsNull !== undefined) attrs.push(`emptyAsNull="${bool(o.emptyAsNull)}"`)
   if (o.coerce !== undefined) attrs.push(`coerce="${bool(o.coerce)}"`)
 
   const children: string[] = []
   if (o.regex !== undefined) children.push(`${indent}  <regex>${esc(o.regex)}</regex>`)
+  if (o.template !== undefined) children.push(`${indent}  <template>${esc(o.template)}</template>`)
+  if (o.mapDefault !== undefined) {
+    const t = o.mapDefault === null ? 'null' : typeof o.mapDefault
+    children.push(`${indent}  <mapDefault type="${t}">${esc(o.mapDefault)}</mapDefault>`)
+  }
+  if (o.valueMap && Object.keys(o.valueMap).length) {
+    const entries = Object.entries(o.valueMap).map(([k, v]) => {
+      const t = v === null ? 'null' : typeof v
+      return `${indent}    <entry key="${esc(k)}" type="${t}">${esc(v)}</entry>`
+    }).join('\n')
+    children.push(`${indent}  <valueMap>\n${entries}\n${indent}  </valueMap>`)
+  }
   if (o.constant !== undefined) {
     const t = o.constant === null ? 'null' : typeof o.constant
     children.push(`${indent}  <constant type="${t}">${esc(o.constant)}</constant>`)
@@ -76,10 +93,15 @@ export function mappingToXml (config: FieldMappingConfig): string {
 
   const rules = (config.rules || []).map(r => ruleToXml(r, '    ')).join('\n')
 
+  const loadEl = config.load
+    ? `  <load mode="${esc(config.load.mode || 'insert')}"${config.load.keyField ? ` keyField="${esc(config.load.keyField)}"` : ''}/>`
+    : null
+
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
     `<fieldMapping version="${MAPPING_XML_VERSION}">`,
     `  <conflictResolution>${esc(config.conflictResolution || 'lastWins')}</conflictResolution>`,
+    ...(loadEl ? [loadEl] : []),
     `  <geometry ${geomAttrs}/>`,
     '  <rules>',
     rules,
@@ -104,6 +126,11 @@ function parseOptions (el: Element | null): TransformOptions | undefined {
   const o: TransformOptions = {}
   const delimiter = attr(el, 'delimiter'); if (delimiter !== undefined) o.delimiter = delimiter
   const regexFlags = attr(el, 'regexFlags'); if (regexFlags !== undefined) o.regexFlags = regexFlags
+  const dateFormat = attr(el, 'dateFormat'); if (dateFormat !== undefined) o.dateFormat = dateFormat
+  const unmapped = attr(el, 'unmapped'); if (unmapped !== undefined) o.unmapped = unmapped as any
+  const factor = attr(el, 'factor'); if (factor !== undefined) o.factor = Number(factor)
+  const offset = attr(el, 'offset'); if (offset !== undefined) o.offset = Number(offset)
+  const precision = attr(el, 'precision'); if (precision !== undefined) o.precision = Number(precision)
   const trim = parseBool(attr(el, 'trim')); if (trim !== undefined) o.trim = trim
   const emptyAsNull = parseBool(attr(el, 'emptyAsNull')); if (emptyAsNull !== undefined) o.emptyAsNull = emptyAsNull
   const coerce = parseBool(attr(el, 'coerce')); if (coerce !== undefined) o.coerce = coerce
@@ -116,6 +143,29 @@ function parseOptions (el: Element | null): TransformOptions | undefined {
     const t = attr(constEl, 'type')
     const raw = txt(constEl)
     o.constant = t === 'number' ? Number(raw) : t === 'boolean' ? raw === 'true' : t === 'null' ? null : raw
+  }
+
+  const tplEl = el.getElementsByTagName('template')[0]
+  if (tplEl) o.template = tplEl.textContent ?? ''
+
+  const mapDefEl = el.getElementsByTagName('mapDefault')[0]
+  if (mapDefEl) {
+    const t = attr(mapDefEl, 'type')
+    const raw = txt(mapDefEl)
+    o.mapDefault = t === 'number' ? Number(raw) : t === 'boolean' ? raw === 'true' : t === 'null' ? null : raw
+  }
+
+  const vmEl = el.getElementsByTagName('valueMap')[0]
+  if (vmEl) {
+    const vm: Record<string, string | number | boolean | null> = {}
+    Array.from(vmEl.getElementsByTagName('entry')).forEach(en => {
+      const k = attr(en, 'key')
+      if (k === undefined) return
+      const t = attr(en, 'type')
+      const raw = (en.textContent ?? '').trim()
+      vm[k] = t === 'number' ? Number(raw) : t === 'boolean' ? raw === 'true' : t === 'null' ? null : raw
+    })
+    o.valueMap = vm
   }
 
   const exprsEl = el.getElementsByTagName('expressions')[0]
@@ -141,6 +191,14 @@ export function xmlToMapping (xml: string): FieldMappingConfig {
 
   const crEl = root.getElementsByTagName('conflictResolution')[0]
   const conflictResolution = txt(crEl) === 'firstWins' ? 'firstWins' : 'lastWins'
+
+  const loadEl = root.getElementsByTagName('load')[0]
+  const load = loadEl
+    ? {
+        mode: ((attr(loadEl, 'mode') as any) || 'insert'),
+        keyField: attr(loadEl, 'keyField')
+      }
+    : undefined
 
   const gEl = root.getElementsByTagName('geometry')[0]
   const geometry: GeometryMapping = { mode: 'passthrough' }
@@ -171,5 +229,7 @@ export function xmlToMapping (xml: string): FieldMappingConfig {
     return rule
   })
 
-  return { rules, geometry, conflictResolution }
+  const out: FieldMappingConfig = { rules, geometry, conflictResolution }
+  if (load) out.load = load
+  return out
 }

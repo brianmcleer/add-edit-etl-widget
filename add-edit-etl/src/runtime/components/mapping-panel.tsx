@@ -20,8 +20,8 @@ interface Props {
 }
 
 const MODES_BY_CARDINALITY: Record<Cardinality, TransformMode[]> = {
-  '1:1': ['direct', 'expression', 'constant'],
-  'M:1': ['concat', 'coalesce', 'sum', 'avg', 'min', 'max', 'expression'],
+  '1:1': ['direct', 'dateParse', 'valueMap', 'numberScale', 'expression', 'constant'],
+  'M:1': ['concat', 'template', 'coalesce', 'sum', 'avg', 'min', 'max', 'expression'],
   '1:M': ['splitDelimiter', 'splitRegex', 'duplicate'],
   'M:M': ['expression']
 }
@@ -276,6 +276,80 @@ const RuleOptions = (p: { rule: FieldMappingRule, translate: (k: string, v?: any
       </div>
     )
   }
+
+  if (rule.mode === 'dateParse') {
+    blocks.push(
+      <div key='datefmt'>
+        <Label className='blk-label'>{translate('dateFormat')}</Label>
+        <TextInput size='sm' aria-label={translate('dateFormat')} placeholder='MM/DD/YYYY' value={o.dateFormat ?? ''} onChange={(e) => onOptions({ dateFormat: e.target.value })} />
+        <div className='opt-hint'>{translate('dateFormatHint')}</div>
+      </div>
+    )
+  }
+
+  if (rule.mode === 'valueMap') {
+    const asText = Object.entries(o.valueMap || {}).map(([k, v]) => `${k}=${v === null ? '' : String(v)}`).join('\n')
+    blocks.push(
+      <div key='vmap'>
+        <Label className='blk-label'>{translate('valueMap')}</Label>
+        <textarea
+          className='vmap-editor'
+          aria-label={translate('valueMap')}
+          rows={4}
+          placeholder={'OOS=Out of Service\nACT=Active'}
+          defaultValue={asText}
+          onBlur={(e) => {
+            const map: Record<string, string> = {}
+            e.target.value.split('\n').forEach(line => {
+              const i = line.indexOf('=')
+              if (i > 0) map[line.substring(0, i).trim()] = line.substring(i + 1).trim()
+            })
+            onOptions({ valueMap: map })
+          }}
+        />
+        <div className='opt-hint'>{translate('valueMapHint')}</div>
+        <Label className='blk-label'>{translate('unmapped')}</Label>
+        <Select size='sm' aria-label={translate('unmapped')} value={o.unmapped || 'passthrough'} onChange={(e) => onOptions({ unmapped: e.target.value })}>
+          <Option value='passthrough'>{translate('unmappedPassthrough')}</Option>
+          <Option value='null'>{translate('unmappedNull')}</Option>
+          <Option value='default'>{translate('unmappedDefault')}</Option>
+        </Select>
+        {o.unmapped === 'default' && (
+          <TextInput size='sm' className='mt-1' aria-label={translate('mapDefault')} placeholder={translate('mapDefault')} value={o.mapDefault == null ? '' : String(o.mapDefault)} onChange={(e) => onOptions({ mapDefault: e.target.value })} />
+        )}
+      </div>
+    )
+  }
+
+  if (rule.mode === 'numberScale') {
+    blocks.push(
+      <div key='nscale' className='num-scale'>
+        <div>
+          <Label className='blk-label'>{translate('factor')}</Label>
+          <NumericInput size='sm' aria-label={translate('factor')} value={o.factor ?? 1} onChange={(v) => onOptions({ factor: v })} />
+        </div>
+        <div>
+          <Label className='blk-label'>{translate('offset')}</Label>
+          <NumericInput size='sm' aria-label={translate('offset')} value={o.offset ?? 0} onChange={(v) => onOptions({ offset: v })} />
+        </div>
+        <div>
+          <Label className='blk-label'>{translate('precision')}</Label>
+          <NumericInput size='sm' aria-label={translate('precision')} min={0} max={10} value={o.precision ?? 2} onChange={(v) => onOptions({ precision: v })} />
+        </div>
+        <div className='opt-hint'>{translate('numberScaleHint')}</div>
+      </div>
+    )
+  }
+
+  if (rule.mode === 'template') {
+    blocks.push(
+      <div key='tpl'>
+        <Label className='blk-label'>{translate('template')}</Label>
+        <TextInput size='sm' aria-label={translate('template')} placeholder='{num} {street}, {city}' value={o.template ?? ''} onChange={(e) => onOptions({ template: e.target.value })} />
+        <div className='opt-hint'>{translate('templateHint')}</div>
+      </div>
+    )
+  }
   if (rule.mode === 'splitRegex') {
     blocks.push(
       <div key='re'>
@@ -341,4 +415,8 @@ const style = css`
   .expr-target { font-family: monospace; margin-right: 6px; }
   .expr-help { color: var(--sys-color-surface-paper-hint); font-size: 0.6875rem; margin-top: 2px; }
   .xy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .opt-hint { color: var(--sys-color-surface-paper-hint); font-size: 0.6875rem; margin-top: 2px; }
+  .vmap-editor { width: 100%; font-family: monospace; font-size: 0.75rem; border: 1px solid var(--sys-color-divider-secondary); border-radius: 2px; background: var(--sys-color-surface-paper); color: inherit; padding: 4px 6px; resize: vertical; }
+  .num-scale { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .num-scale .opt-hint { grid-column: 1 / -1; }
 `

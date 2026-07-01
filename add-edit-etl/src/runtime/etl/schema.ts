@@ -62,7 +62,10 @@ export function readTargetSchema (ds: FeatureLayerDataSource): Schema {
         editable: raw.editable !== false,
         length: f.length || raw.length,
         hasDefault: raw.defaultValue !== null && raw.defaultValue !== undefined,
-        defaultValue: raw.defaultValue
+        defaultValue: raw.defaultValue,
+        domain: raw.domain && raw.domain.type === 'codedValue'
+          ? { type: 'codedValue', codedValues: (raw.domain.codedValues || []).map((cv: any) => ({ code: cv.code, name: cv.name })) }
+          : (raw.domain && raw.domain.type === 'range' ? { type: 'range', range: raw.domain.range } : undefined)
       })
     })
   }
