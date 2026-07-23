@@ -5,8 +5,8 @@
   "dependency": [
     "jimu-arcgis"
   ],
-  "version": "1.20.0",
-  "exbVersion": "1.20.0",
+  "version": "1.21.0",
+  "exbVersion": "1.21.0",
   "author": "Merged from Esri OOTB Add Data + Edit",
   "description": "Add data, map its schema onto an editable target layer (1:1, M:1, 1:M, M:M), load the records, then optionally edit them.",
   "copyright": "",

@@ -22,7 +22,7 @@ $ErrorActionPreference = "Stop"
 # ----- EDIT THESE THREE PER WIDGET -----------------------------------------
 $WidgetName    = "add-edit-etl"   # widget folder name (must match EB folder + repo subfolder)
 $RepoName      = "add-edit-etl-widget"
-$ExbWidgetPath = "C:\arcgis-experience-builder-1.20\client\your-extensions\widgets\$WidgetName"
+$ExbWidgetPath = "C:\arcgis-experience-builder-1.21\client\your-extensions\widgets\$WidgetName"
 # ----------------------------------------------------------------------------
 
 $RepoPath   = $PSScriptRoot
@@ -32,7 +32,19 @@ Write-Host "==> Repo:   $RepoPath"
 Write-Host "==> Source: $ExbWidgetPath"
 
 if (-not (Test-Path $ExbWidgetPath)) {
-    throw "Cannot find the widget folder at:`n  $ExbWidgetPath`nEdit `$ExbWidgetPath in publish.ps1."
+    # Fallback: find the newest Experience Builder install that has this widget,
+    # so an EB version upgrade does not require editing this script.
+    $candidates = Get-ChildItem "C:\" -Directory -Filter "arcgis-experience-builder-*" -ErrorAction SilentlyContinue |
+        Sort-Object Name -Descending |
+        ForEach-Object { Join-Path $_.FullName "client\your-extensions\widgets\$WidgetName" } |
+        Where-Object { Test-Path $_ }
+    if ($candidates) {
+        $ExbWidgetPath = $candidates | Select-Object -First 1
+        Write-Host "==> Configured path not found; using newest EB install instead:"
+        Write-Host "    $ExbWidgetPath"
+    } else {
+        throw "Cannot find the widget folder at:`n  $ExbWidgetPath`nEdit `$ExbWidgetPath in publish.ps1."
+    }
 }
 
 Write-Host "`n==> Syncing widget files (skipping node_modules)..."
