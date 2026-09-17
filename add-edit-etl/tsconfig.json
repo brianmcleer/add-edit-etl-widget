@@ -1,9 +1,23 @@
 {
-  "extends": "../../../tsconfig.json",
+  "//": "Mode B (self-contained) per WIDGETHANDOFF Section 12 item 3: Visual Studio cannot read client\\node_modules under the EB 1.21 pnpm layout (IDE1100), so nothing here reaches outside the widget. Every import is declared ambiently in src/exb-editor-shims.d.ts (shared master, copied byte for byte from widgets\\_vs, never edited per widget) and src/vendor-shims.d.ts (this widget's own additions). jsx and jsxImportSource match client\\tsconfig.json and must not change: ts-loader reads this file, so a different jsx setting changes what webpack emits. Check with: npx tsc -p . (0 errors expected; add --ignoreDeprecations 6.0 on TypeScript 6).",
   "compilerOptions": {
-    "baseUrl": "../../.."
+    "target": "ES2020",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "types": [],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true
   },
-  "include": [
-    "./**/*"
-  ]
+  "//files": "Order matters: the master shim declares jimu-for-builder and jimu-ui/* in shorthand form (declare module 'x';) and the first ambient declaration of a module id wins, so vendor-shims.d.ts must be seen first to give those modules real shapes. files and include are unioned.",
+  "files": ["src/vendor-shims.d.ts", "src/exb-editor-shims.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "dist", ".vs", "Claude outputs", "tests"]
 }

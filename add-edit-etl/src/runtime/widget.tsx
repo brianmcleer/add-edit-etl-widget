@@ -4,6 +4,7 @@ import {
   DataSourceComponent, type DataSource, type FeatureLayerDataSource, type UseDataSource
 } from 'jimu-core'
 import { Button, Paper, defaultMessages as jimuUIMessages, Select, Option, Alert } from 'jimu-ui'
+import { CalciteIcon } from 'calcite-components'
 import { JimuMapViewComponent, type JimuMapView } from 'jimu-arcgis'
 
 import defaultMessages from './translations/default'
@@ -24,6 +25,11 @@ import EditFeatureForm from '../vendor/edit/runtime/components/feature-form-comp
 import EditorComponent from '../vendor/edit/runtime/components/editor-component'
 
 // --- ETL ---
+// --- shared in-widget help guide ---
+import HelpPopup from './components/HelpPopup'
+import FirstRunHint from './components/FirstRunHint'
+import { buildHelpSections, type HelpFeatures } from './helpSections'
+
 import MappingPanel from './components/mapping-panel'
 import LoadPanel from './components/load-panel'
 import SymbologyPanel from './components/symbology-panel'
@@ -50,9 +56,28 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   const [selectedTargetId, setSelectedTargetId] = useState<string>('')
   const [targetLayer, setTargetLayer] = useState<any>(null)
   const [jimuMapView, setJimuMapView] = useState<JimuMapView>(null)
-  const [mapping, setMapping] = useState<FieldMappingConfig>(() => config.defaultMapping?.asMutable?.({ deep: true }) || emptyMappingConfig())
+  const [mapping, setMapping] = useState<FieldMappingConfig>(() => (config.defaultMapping as any)?.asMutable?.({ deep: true }) || emptyMappingConfig())
   const [canEditFeature, setCanEditFeature] = useState(false)
   const [editorRefresh, setEditorRefresh] = useState(0)
+
+  // ----- Help guide -----
+  // The dismissal is kept per browser and named after this copy of the widget, so
+  // two copies in one app do not share it. Reading and writing are both guarded:
+  // private browsing throws on both, and the guide is not worth breaking a widget over.
+  const [helpOpen, setHelpOpen] = useState(false)
+  const hintKey = `addEditEtl.helpHintDismissed.${id}`
+  const [showFirstRunHint, setShowFirstRunHint] = useState<boolean>(() => {
+    try { return window.localStorage.getItem(hintKey) !== '1' } catch { return true }
+  })
+  const dismissFirstRunHint = useCallback(() => {
+    setShowFirstRunHint(false)
+    try { window.localStorage.setItem(hintKey, '1') } catch { /* private browsing */ }
+  }, [hintKey])
+  // Opening the guide counts as answering the hint.
+  const openHelp = useCallback(() => {
+    setHelpOpen(true)
+    dismissFirstRunHint()
+  }, [dismissFirstRunHint])
 
   // ----- Add Data config for the vendored popper -----
   const addDataConfig = useMemo(() => Immutable({
@@ -268,6 +293,27 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   const editReady = !!editInfo
   const allowMapping = config.allowRuntimeMapping !== false
 
+  // Every flag comes from the same check the render code uses, so the guide never
+  // describes a control this widget is not currently showing.
+  const helpFeatures: HelpFeatures = useMemo(() => ({
+    addByFile: !config.disableAddByFile,
+    addByUrl: !config.disableAddByUrl,
+    addBySearch: !config.disableAddBySearch,
+    hasTarget,
+    multipleTargets: configuredTargets.length > 1,
+    allowMapping,
+    allowExpressions: config.allowExpressions !== false,
+    allowUpsert: config.allowUpsert !== false,
+    reviewEdit: config.enableReviewEdit !== false && editReady,
+    showOnMap,
+    geometryEdit: useGeometryEditor,
+    allowCreate: config.allowCreate !== false,
+    allowDelete: config.allowDelete !== false,
+    allowSymbology
+  }), [config, hasTarget, configuredTargets, allowMapping, editReady, showOnMap, useGeometryEditor, allowSymbology])
+
+  const helpSections = useMemo(() => buildHelpSections(translate, helpFeatures), [translate, helpFeatures])
+
   // which steps are reachable by clicking the stepper
   const canVisit = useCallback((s: Step): boolean => {
     if (s === 'add') return true
@@ -294,6 +340,11 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
         <JimuMapViewComponent useMapWidgetId={mapWidgetId} onActiveViewChange={handleActiveViewChange} />
       )}
 
+      {/* Help button, top right of the widget. */}
+      <div className='header-row' style={{ display: 'flex', justifyContent: 'flex-end', padding: '6px 8px 0 8px' }}>
+        <Button size="sm" type="tertiary" icon onClick={openHelp} title={translate('helpTitle')} aria-label={translate('helpTitle')} style={{ flexShrink: 0 }}><CalciteIcon icon="question" scale="s" /></Button>
+      </div>
+
       <div className='stepper d-flex align-items-center' role='group' aria-label={translate('stepsNav')}>
         {STEPS.map((s, i) => {
           const reachable = canVisit(s)
@@ -314,6 +365,17 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
           )
         })}
       </div>
+
+      {showFirstRunHint && (
+        <FirstRunHint
+          title={translate('firstRunTitle')}
+          body={translate('firstRunBody')}
+          linkLabel={translate('firstRunHelpLink')}
+          dismissLabel={translate('firstRunDismiss')}
+          onOpenHelp={openHelp}
+          onDismiss={dismissFirstRunHint}
+        />
+      )}
 
       {!hasTarget && <Alert type='warning' open withIcon className='m-3' text={translate('noTarget')} />}
 
@@ -422,6 +484,17 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
               )
         )}
       </div>
+
+      <HelpPopup
+        open={helpOpen}
+        onClose={() => { setHelpOpen(false) }}
+        sections={helpSections}
+        title={translate('helpTitle')}
+        intro={translate('helpIntro')}
+        searchPlaceholder={translate('helpSearchPlaceholder')}
+        noMatches={translate('helpNoMatches')}
+        closeLabel={translate('close')}
+      />
     </Paper>
   )
 }

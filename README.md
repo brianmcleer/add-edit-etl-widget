@@ -49,6 +49,12 @@ release zip, place the `add-edit-etl` folder so its `manifest.json` sits directl
 inside `client/your-extensions/widgets/add-edit-etl/`, then run `npm install` in
 the `client` folder and restart.
 
+### The release zip and the editor shims
+
+The zip is the widget only. The Visual Studio type shims in the repo (`add-edit-etl/src/exb-editor-shims.d.ts`, `add-edit-etl/src/vendor-shims.d.ts`) are left out on purpose: their ambient `declare module` blocks are not file-scoped and would rewrite the react, jimu and esri types for every other widget in your `your-extensions` folder.
+
+If you clone the repository instead of using the zip, delete `add-edit-etl/src/exb-editor-shims.d.ts` and the other shim files listed above before building; nothing else depends on them.
+
 ## Requirements
 
 - ArcGIS Experience Builder Developer Edition 1.19 or 1.20 (React 19). EB 1.18 and

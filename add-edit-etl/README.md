@@ -1,4 +1,4 @@
-# Add → Map → Edit (ETL) — merged Experience Builder widget
+# Add → Map → Edit (ETL) - merged Experience Builder widget
 
 A single ArcGIS Experience Builder **Developer Edition 1.20** widget that merges
 the OOTB **Add Data** and **Edit** widgets and inserts a real field-mapping ETL
@@ -16,6 +16,17 @@ The runtime user adds data (file / URL / ArcGIS content), maps the **source
 schema** onto the **target schema** of the editable layer the app author
 configured, and loads the records. Optionally they then edit the loaded
 records in the OOTB Edit feature form.
+
+## Features
+
+- Three-step wizard: **Add data** → **Map fields** → **Load**, with an optional
+  **Edit** step for the records that land in the target layer.
+- Field mapping with all four cardinalities, type coercion, validation, a data
+  quality check, insert / update / upsert load modes and XML import/export of
+  the rules.
+- **Help guide** - a question button at the top right opens a short, searchable,
+  plain-language guide that adapts to the options the app author enabled; a
+  one-time hint points new users at it.
 
 ## Where things live
 
@@ -50,7 +61,7 @@ add-edit-etl/
 ```
 
 The two OOTB `src` trees are vendored **verbatim** under `src/vendor/` (each is
-self-contained — its internal imports only reference itself plus jimu packages),
+self-contained - its internal imports only reference itself plus jimu packages),
 so the merge does not fork or rewrite Esri's code. The wizard imports the exact
 pieces it needs from them. Unused vendored files are harmless dead weight and
 can be pruned later.
@@ -97,10 +108,16 @@ At runtime: **Add data → choose which added layer is the source → Map fields
 (auto-match seeds 1:1 rules; refine cardinalities) → Validate / Preview / Load →
 (optional) Edit loaded records.**
 
+### The release zip and the editor shims
+
+The zip is the widget only. The Visual Studio type shims in the repo (`add-edit-etl/src/exb-editor-shims.d.ts`, `add-edit-etl/src/vendor-shims.d.ts`) are left out on purpose: their ambient `declare module` blocks are not file-scoped and would rewrite the react, jimu and esri types for every other widget in your `your-extensions` folder.
+
+If you clone the repository instead of using the zip, delete `add-edit-etl/src/exb-editor-shims.d.ts` and the other shim files listed above before building; nothing else depends on them.
+
 ## What is verified vs what needs a live EB build
 
 - **Verified here:** the framework-free ETL engine (transform + coercion +
-  validation) — `tests/transform-engine.test.ts`, 18 assertions across all four
+  validation) - `tests/transform-engine.test.ts`, 18 assertions across all four
   cardinalities, all passing.
 - **Needs your EB 1.20 environment to build/run** (this sandbox has no jimu SDK
   or Esri JSAPI, so it can't be compiled here). When you build, sanity-check
@@ -109,13 +126,31 @@ At runtime: **Add data → choose which added layer is the source → Map fields
   compile fixes:
   - `DataSourceComponent`, `DataSourceSelector` prop names.
   - `ds.query({ page, pageSize })` paging shape in `schema.ts` /
-    `load-panel.ts` — adjust if your build expects `{ start, num }`.
-  - `loadArcGISJSAPIModules(['esri/geometry/projection', …])` —
+    `load-panel.ts` - adjust if your build expects `{ start, num }`.
+  - `loadArcGISJSAPIModules(['esri/geometry/projection', …])`  - 
     if your JSAPI is 4.30+ you may prefer the `operators/projectOperator`.
   - The review step builds an attribute-only Edit config via the vendored
     `constructConfig`; the OOTB feature form lists all records, not only the
     just-loaded ones (the loaded objectIds are returned in the load result if
     you want to add a filter).
+
+## Troubleshooting: `add-edit-etl is duplicated`
+
+If `npm start` (or `pnpm start`) stops with `add-edit-etl is duplicated`, Experience Builder found two copies of the
+widget registered under the same name. A single, correctly placed copy cannot duplicate itself,
+so a second copy is present somewhere. Check, in this order:
+
+1. A nested folder: `widgets\add-edit-etl\add-edit-etl\`. The `manifest.json` must sit directly
+   inside `widgets\add-edit-etl\`, not a level deeper. This is the usual cause when a zip is
+   extracted into a folder that already has the widget's name.
+2. A leftover folder from an earlier build or version, including any `-copy` folder or a folder
+   under a previous name if the widget was renamed.
+3. A stale compiled build in `client\dist\widgets\add-edit-etl`. Stop the client server, delete
+   that folder (or run a clean build), then start again.
+
+Tell for the nesting case: if removing one copy makes the widget vanish from the build entirely,
+the copy that remains is nested too deep. Move it so `manifest.json` is directly inside the
+widget folder.
 
 ## License
 

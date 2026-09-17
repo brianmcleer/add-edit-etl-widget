@@ -14,3 +14,7 @@ desktop.ini
 
 # Tests are not needed in the published widget
 tests/
+
+# Cowork working folder and release zips never ship
+Claude outputs/
+*.zip
