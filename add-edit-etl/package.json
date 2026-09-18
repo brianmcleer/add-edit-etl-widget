@@ -1,6 +1,6 @@
 {
   "name": "add-edit-etl",
-  "version": "1.22.1",
+  "version": "1.22.2",
   "description": "An ArcGIS Experience Builder widget that adds data, maps its fields onto an editable target layer across 1:1, M:1, 1:M, and M:M cardinalities, loads the records, and edits them on the map. It is a derivative work combining Esri's Add Data and Edit widgets.",
   "keywords": [
     "exb-widget",
