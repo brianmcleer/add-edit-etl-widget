@@ -10,6 +10,8 @@ import { JimuMapViewComponent, type JimuMapView } from 'jimu-arcgis'
 import defaultMessages from './translations/default'
 import type { IMConfig } from '../config'
 import { versionManager } from '../version-manager'
+import { beacon } from '../shared/beacon'
+import type { BeaconHandle } from '../shared/beacon'
 
 // --- vendored Add Data pieces ---
 import { AddDataPopper, type SupportedTabs } from '../vendor/add-data/runtime/components/add-data-popper'
@@ -47,6 +49,8 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   const translate = hooks.useTranslation(jimuUIMessages, defaultMessages)
   const rootRef = useRef<HTMLDivElement>(null)
   const mapWidgetId = useMapWidgetIds?.[0]
+  const beaconRef = useRef<BeaconHandle | null>(null)
+  useEffect(() => { beaconRef.current = beacon.init(props) }, [])
 
   const [step, setStep] = useState<Step>(config.startInEditMode ? 'edit' : 'add')
   const [multiDataOptions, setMultiDataOptions] = useState<DataOptions[]>([])
@@ -98,7 +102,8 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   const nextOrder = useMemo(() => multiDataOptions.length > 0 ? Math.max(...multiDataOptions.map(d => d.order)) + 1 : 0, [multiDataOptions])
 
   const onAddData = useCallback((added: DataOptions[]) => {
-    createDataSourcesByDataOptions(added, id, addDataConfig as any).catch(e => console.error('create ds failed', e))
+    beaconRef.current?.action('add-data')
+    createDataSourcesByDataOptions(added, id, addDataConfig as any).catch(e => { beaconRef.current?.error(e, 'add-data'); console.error('create ds failed', e) })
     setMultiDataOptions(prev => {
       const next = prev.concat(added)
       if (added[0]) setSourceDsId(added[0].dataSourceJson.id)
@@ -224,7 +229,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
       } else {
         await jimuMapView.view.goTo(res.extent.expand ? res.extent.expand(1.2) : res.extent)
       }
-    } catch (e) { console.error('zoom to features failed', e) }
+    } catch (e) { beaconRef.current?.error(e, 'load'); console.error('zoom to features failed', e) }
   }, [jimuMapView, targetLayer, config.zoomScale])
 
   const zoomToSelection = useCallback(() => {
@@ -322,7 +327,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
     return canGoMap
   }, [hasTarget, editReady, canGoMap])
 
-  const goEdit = useCallback(() => setStep('edit'), [])
+  const goEdit = useCallback(() => { beaconRef.current?.action('edit'); setStep('edit') }, [])
 
   return (
     <Paper className='widget-add-edit-etl jimu-widget' css={style} ref={rootRef} shape='none'>
@@ -442,7 +447,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
               allowUpsert={config.allowUpsert !== false}
               onMappingChange={setMapping}
               onReviewEdit={() => setStep('edit')}
-              onLoaded={(result) => { if (showOnMap) zoomToObjectIds(result.addedObjectIds) }}
+              onLoaded={(result) => { beaconRef.current?.action('load'); if (showOnMap) zoomToObjectIds(result.addedObjectIds) }}
             />
             <div className='nav mt-3'>
               <Button type='tertiary' onClick={() => setStep('map')}>{translate('back')}</Button>
