@@ -1,5 +1,7 @@
 # Add, Map & Edit Data widget
 
+[![License](https://img.shields.io/github/license/brianmcleer/add-edit-etl-widget)](LICENSE) [![Release](https://img.shields.io/github/v/release/brianmcleer/=tag)](https://github.com/brianmcleer/add-edit-etl-widget/releases) [![Issues](https://img.shields.io/github/issues/brianmcleer/add-edit-etl-widget)](https://github.com/brianmcleer/add-edit-etl-widget/issues)
+
 A custom ArcGIS Experience Builder widget for the City of Grand Junction, CO. It
 joins Esri's stock Add Data and Edit widgets into one settings-driven widget and
 inserts a field-mapping step between them. A user adds data from a file, a URL, or
@@ -22,24 +24,24 @@ drop that folder into your Experience Builder install, and run the standard clie
 
 ```
 add-edit-etl-widget/             <- this repo
-├── README.md                    <- this file (GitHub landing page)
-├── LICENSE                      <- Apache-2.0
-├── NOTICE                       <- attribution for the derivative work
-├── .gitignore                   <- ignores node_modules, .vs, dist, OS cruft
-├── SECURITY.md                  <- how to report a vulnerability
-├── publish.ps1                  <- one-command publish and update automation
-└── add-edit-etl/                <- the widget (drops into your-extensions/widgets)
-    ├── package.json
-    ├── package-lock.json        <- generated in the EB environment
-    ├── manifest.json
-    ├── config.json
-    ├── icon.svg
-    ├── README.md                <- install steps and feature list
-    ├── LICENSE
-    ├── NOTICE
-    ├── .gitignore
-    ├── .npmignore
-    └── src/ ...
+â”œâ”€â”€ README.md                    <- this file (GitHub landing page)
+â”œâ”€â”€ LICENSE                      <- Apache-2.0
+â”œâ”€â”€ NOTICE                       <- attribution for the derivative work
+â”œâ”€â”€ .gitignore                   <- ignores node_modules, .vs, dist, OS cruft
+â”œâ”€â”€ SECURITY.md                  <- how to report a vulnerability
+â”œâ”€â”€ publish.ps1                  <- one-command publish and update automation
+â””â”€â”€ add-edit-etl/                <- the widget (drops into your-extensions/widgets)
+    â”œâ”€â”€ package.json
+    â”œâ”€â”€ package-lock.json        <- generated in the EB environment
+    â”œâ”€â”€ manifest.json
+    â”œâ”€â”€ config.json
+    â”œâ”€â”€ icon.svg
+    â”œâ”€â”€ README.md                <- install steps and feature list
+    â”œâ”€â”€ LICENSE
+    â”œâ”€â”€ NOTICE
+    â”œâ”€â”€ .gitignore
+    â”œâ”€â”€ .npmignore
+    â””â”€â”€ src/ ...
 ```
 
 ## Install (for users)

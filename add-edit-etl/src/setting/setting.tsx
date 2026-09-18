@@ -175,6 +175,15 @@ const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
           <Switch checked={config.allowUpsert !== false} onChange={(e) => set('allowUpsert', e.target.checked)} />
         </SettingRow>
       </SettingSection>
+      <SettingSection title='Help'>
+        <SettingRow tag='label' label='Show help guide'>
+          <Switch
+            checked={props.config?.showHelp !== false}
+            onChange={(evt) => { props.onSettingChange({ id: (props as any).id, config: (props.config as any).set('showHelp', evt.target.checked) }) }}
+            aria-label='Show the question-mark button that opens the widget help guide'
+          />
+        </SettingRow>
+      </SettingSection>
     </div>
   )
 }

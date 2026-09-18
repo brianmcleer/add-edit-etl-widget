@@ -347,7 +347,9 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
 
       {/* Help button, top right of the widget. */}
       <div className='header-row' style={{ display: 'flex', justifyContent: 'flex-end', padding: '6px 8px 0 8px' }}>
-        <Button size="sm" type="tertiary" icon onClick={openHelp} title={translate('helpTitle')} aria-label={translate('helpTitle')} style={{ flexShrink: 0 }}><CalciteIcon icon="question" scale="s" /></Button>
+        {props.config?.showHelp !== false && (
+            <Button size="sm" type="tertiary" icon onClick={openHelp} title={translate('helpTitle')} aria-label={translate('helpTitle')} style={{ flexShrink: 0 }}><CalciteIcon icon="question" scale="s" /></Button>
+        )}
       </div>
 
       <div className='stepper d-flex align-items-center' role='group' aria-label={translate('stepsNav')}>
@@ -371,7 +373,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
         })}
       </div>
 
-      {showFirstRunHint && (
+      {props.config?.showHelp !== false && showFirstRunHint && (
         <FirstRunHint
           title={translate('firstRunTitle')}
           body={translate('firstRunBody')}
