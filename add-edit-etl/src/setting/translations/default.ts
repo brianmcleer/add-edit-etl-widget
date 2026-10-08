@@ -73,5 +73,14 @@ export default {
   editExisting: 'Start in edit mode',
   rulesCount: '{count} rules',
   removeRule: 'Remove rule',
-  expressionHelp: 'Use $.FIELD for source values, e.g. helpers.upper($.NAME). One expression per target.'
+  expressionHelp: 'Use $.FIELD for source values, e.g. helpers.upper($.NAME). One expression per target.',
+  allowSearch: 'Allow search',
+  allowUrl: 'Allow URL',
+  allowFileUpload: 'Allow file upload',
+  letUserEditTheMapping: 'Let user edit the mapping',
+  allowExpressionTransforms: 'Allow expression transforms',
+  loadChunkSize: 'Load chunk size',
+  help: 'Help',
+  showHelpGuide: 'Show help guide',
+  showTheQuestionMarkButtonThat: 'Show the question-mark button that opens the widget help guide'
 }

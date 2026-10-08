@@ -432,7 +432,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
             )}
             {allowMapping
               ? <MappingPanel sourceSchema={sourceSchema} targetSchema={targetSchema} targetFields={targetFields} value={mapping} allowExpressions={config.allowExpressions !== false} onChange={setMapping} />
-              : <Alert type='info' open withIcon text='Mapping is fixed by the app author.' />}
+              : <Alert type='info' open withIcon text={translate('mappingIsFixedByTheApp')} />}
             <div className='nav mt-3 d-flex justify-content-between'>
               <Button type='tertiary' onClick={() => setStep('add')}>{translate('back')}</Button>
               <Button type='primary' onClick={() => setStep('load')}>{translate('next')}</Button>

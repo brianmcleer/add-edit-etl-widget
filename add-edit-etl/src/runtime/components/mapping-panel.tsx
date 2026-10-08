@@ -296,7 +296,7 @@ const RuleOptions = (p: { rule: FieldMappingRule, translate: (k: string, v?: any
           className='vmap-editor'
           aria-label={translate('valueMap')}
           rows={4}
-          placeholder={'OOS=Out of Service\nACT=Active'}
+          placeholder={translate('oosOutOfServiceActActive')}
           defaultValue={asText}
           onBlur={(e) => {
             const map: Record<string, string> = {}
@@ -345,7 +345,7 @@ const RuleOptions = (p: { rule: FieldMappingRule, translate: (k: string, v?: any
     blocks.push(
       <div key='tpl'>
         <Label className='blk-label'>{translate('template')}</Label>
-        <TextInput size='sm' aria-label={translate('template')} placeholder='{num} {street}, {city}' value={o.template ?? ''} onChange={(e) => onOptions({ template: e.target.value })} />
+        <TextInput size='sm' aria-label={translate('template')} placeholder={translate('numStreetCity')} value={o.template ?? ''} onChange={(e) => onOptions({ template: e.target.value })} />
         <div className='opt-hint'>{translate('templateHint')}</div>
       </div>
     )

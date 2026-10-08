@@ -150,37 +150,37 @@ const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
       </SettingSection>
 
       <SettingSection title={translate('stepAdd')}>
-        <SettingRow tag='label' label='Allow search'>
+        <SettingRow tag='label' label={translate('allowSearch')}>
           <Switch checked={!config.disableAddBySearch} onChange={(e) => set('disableAddBySearch', !e.target.checked)} />
         </SettingRow>
-        <SettingRow tag='label' label='Allow URL'>
+        <SettingRow tag='label' label={translate('allowUrl')}>
           <Switch checked={!config.disableAddByUrl} onChange={(e) => set('disableAddByUrl', !e.target.checked)} />
         </SettingRow>
-        <SettingRow tag='label' label='Allow file upload'>
+        <SettingRow tag='label' label={translate('allowFileUpload')}>
           <Switch checked={!config.disableAddByFile} onChange={(e) => set('disableAddByFile', !e.target.checked)} />
         </SettingRow>
       </SettingSection>
 
       <SettingSection title={translate('stepMap')}>
-        <SettingRow tag='label' label='Let user edit the mapping'>
+        <SettingRow tag='label' label={translate('letUserEditTheMapping')}>
           <Switch checked={config.allowRuntimeMapping !== false} onChange={(e) => set('allowRuntimeMapping', e.target.checked)} />
         </SettingRow>
-        <SettingRow tag='label' label='Allow expression transforms'>
+        <SettingRow tag='label' label={translate('allowExpressionTransforms')}>
           <Switch checked={config.allowExpressions !== false} onChange={(e) => set('allowExpressions', e.target.checked)} />
         </SettingRow>
-        <SettingRow tag='label' label='Load chunk size'>
+        <SettingRow tag='label' label={translate('loadChunkSize')}>
           <NumericInput size='sm' min={1} max={2000} value={config.loadChunkSize || 200} onChange={(v) => set('loadChunkSize', v)} />
         </SettingRow>
         <SettingRow tag='label' label={translate('allowUpsert')}>
           <Switch checked={config.allowUpsert !== false} onChange={(e) => set('allowUpsert', e.target.checked)} />
         </SettingRow>
       </SettingSection>
-      <SettingSection title='Help'>
-        <SettingRow tag='label' label='Show help guide'>
+      <SettingSection title={translate('help')}>
+        <SettingRow tag='label' label={translate('showHelpGuide')}>
           <Switch
             checked={props.config?.showHelp !== false}
             onChange={(evt) => { props.onSettingChange({ id: (props as any).id, config: (props.config as any).set('showHelp', evt.target.checked) }) }}
-            aria-label='Show the question-mark button that opens the widget help guide'
+            aria-label={translate('showTheQuestionMarkButtonThat')}
           />
         </SettingRow>
       </SettingSection>

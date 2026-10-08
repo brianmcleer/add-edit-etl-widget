@@ -209,5 +209,8 @@ export default {
   helpTipsTitle: 'Good to know',
   helpTips1: 'Run Check data before every load. It is quick, and it catches most of the trouble.',
   helpTips2: 'Try a few rows first, look at the result, then load the whole file.',
-  helpTips3: 'Once the rules are right, press Export XML. Next time you can press Import XML instead of building them again.'
+  helpTips3: 'Once the rules are right, press Export XML. Next time you can press Import XML instead of building them again.',
+  oosOutOfServiceActActive: 'OOS=Out of Service ACT=Active',
+  numStreetCity: '{num} {street}, {city}',
+  mappingIsFixedByTheApp: 'Mapping is fixed by the app author.'
 }
