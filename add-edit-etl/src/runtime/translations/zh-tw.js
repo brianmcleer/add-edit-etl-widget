@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=退出 ACT=主动",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "映射由應用程式作者固定 。",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "轉換失敗",
+        queryFailed: "查詢失敗",
+        applyEditsError: "應用程式編輯錯誤",
+        applyEditsUpdateError: "應用程式 Edits 更新錯誤",
+        applyEditsFailed: "應用程式編輯失敗",
+        unknownError: "未知的錯誤",
+        unserializableError: "不串連的錯誤",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS = mimo služby ACT=Active",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Mapovanie určuje autor aplikácie.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "transformácia zlyhala",
+        queryFailed: "dotaz zlyhal",
+        applyEditsError: "AppleEdits error",
+        applyEditsUpdateError: "AppleEdits aktualizácie chyba",
+        applyEditsFailed: "AppleEdits zlyhal",
+        unknownError: "neznáma chyba",
+        unserializableError: "neserializovateľná chyba",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

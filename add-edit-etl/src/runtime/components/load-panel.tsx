@@ -6,6 +6,7 @@ import type { Schema, SchemaField, FieldMappingConfig, MappingValidationIssue, L
 import { transformRecord, validateMapping, analyzeRecords } from '../etl/transform-engine'
 import { readSourceRecords } from '../etl/schema'
 import { buildAddFeatures, loadIntoTarget, type SourceRow } from '../etl/apply'
+import { __locale, __setIntl } from '../i18n-t'
 
 const { useState, useMemo, useCallback } = React
 
@@ -28,10 +29,11 @@ interface Props {
 }
 
 const fmt = (n: number) => {
-  try { return n.toLocaleString() } catch { return String(n) }
+  try { return n.toLocaleString(__locale()) } catch { return String(n) }
 }
 
 const LoadPanel = (props: Props) => {
+  __setIntl((props as any).intl)
   const { sourceDs, targetDs, sourceSchema, targetSchema, targetFields, mapping, chunkSize, enableReviewEdit, allowUpsert, onMappingChange, onReviewEdit, onLoaded } = props
   const translate = hooks.useTranslation(jimuUIMessages, defaultMessages)
 

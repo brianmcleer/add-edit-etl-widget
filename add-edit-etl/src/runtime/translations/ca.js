@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Out of Service ACT=Active",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "El mapa està arranjat per l' autor de l' aplicació.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "Ha fallat la transformació",
+        queryFailed: "Ha fallat la consulta",
+        applyEditsError: "Error d' a aplicarEdits",
+        applyEditsUpdateError: "Error d' actualització delsEdits",
+        applyEditsFailed: "ha fallat l' a aplicarEdits",
+        unknownError: "error desconegut",
+        unserializableError: "Error no llegible",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=ไม่มีกิจกรรมบริการ=การกระทํา",
         numStreetCity: "{num} {street}. {city}",
         mappingIsFixedByTheApp: "การเคาะถูกแก้ไขโดยนักเขียนแอพ.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "การแปลงล้มเหลว",
+        queryFailed: "การสืบค้นล้มเหลว",
+        applyEditsError: "ปรับใช้การแก้ไขผิดพลาด",
+        applyEditsUpdateError: "ปรับใช้การปรับปรุงตัวแก้ไขผิดพลาด",
+        applyEditsFailed: "การแก้ไขโปรแกรมล้มเหลว",
+        unknownError: "ข้อผิดพลาดไม่ทราบสาเหตุ",
+        unserializableError: "ข้อผิดพลาดที่ไม่สามารถตรวจสอบได้",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

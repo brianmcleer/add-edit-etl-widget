@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Out of Service ACT=Active",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Mapping uygulama yazarı tarafından düzeltilir.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "Dönüşüm başarısız oldu",
+        queryFailed: "Soru başarısız oldu",
+        applyEditsError: "Uygulanır",
+        applyEditsUpdateError: "UygulamaEdits update error",
+        applyEditsFailed: "Başvurular başarısız oldu",
+        unknownError: "Bilinmeyen hata",
+        unserializableError: "Başarısız olmayan hata",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

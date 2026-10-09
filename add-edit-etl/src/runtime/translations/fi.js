@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Out of Service ACT=Active",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Mapping on korjattu sovelluksen tekijä.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "transform epäonnistui",
+        queryFailed: "Kysely epäonnistui",
+        applyEditsError: "applyEdits-virhe",
+        applyEditsUpdateError: "soveltaaMuokkaa päivitysvirhettä",
+        applyEditsFailed: "applyEdits epäonnistui",
+        unknownError: "tuntematon virhe",
+        unserializableError: "epätavallinen virhe",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

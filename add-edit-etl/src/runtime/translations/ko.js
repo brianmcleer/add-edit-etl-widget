@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=서비스 종료 ACT=Active",
         numStreetCity: "{num} {street}· {city}",
         mappingIsFixedByTheApp: "Mapping은 앱 저자에 의해 고정됩니다.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "변환 실패",
+        queryFailed: "질문 실패",
+        applyEditsError: "applyEdits 오류",
+        applyEditsUpdateError: "applyEdits 업데이트 오류",
+        applyEditsFailed: "applyEdits 실패",
+        unknownError: "알 수없는 오류",
+        unserializableError: "unserializable 오류",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Service ACT=Activeのアウト",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "メーピングはアプリの作者によって固定されます。",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "変換 失敗",
+        queryFailed: "クエリ失敗",
+        applyEditsError: "applicationEdits エラー",
+        applyEditsUpdateError: "applicationEdits 更新エラー",
+        applyEditsFailed: "applicationEdits が失敗しました",
+        unknownError: "未知のエラー",
+        unserializableError: "unserializable エラー",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

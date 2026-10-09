@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=退出服务ACT=主动",
         numStreetCity: "{num} {street}, (中文). {city}",
         mappingIsFixedByTheApp: "绘图由应用程序作者固定.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "转换失败",
+        queryFailed: "查询失败",
+        applyEditsError: "应用编辑错误",
+        applyEditsUpdateError: "应用编辑器更新错误",
+        applyEditsFailed: "应用编辑失败",
+        unknownError: "未知错误",
+        unserializableError: "无序错误",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

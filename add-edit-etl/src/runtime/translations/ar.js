@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Out of Service ACT=Active",
         numStreetCity: "{num} {street}.. {city}",
         mappingIsFixedByTheApp: "ويحدد مقدم الطلب رسم الخرائط.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "التحول الفاشل",
+        queryFailed: "الاستفسارات فشلت",
+        applyEditsError: "الأخطاء",
+        applyEditsUpdateError: "الخطأ المستكمل",
+        applyEditsFailed: "الطلبات فشلت",
+        unknownError: "خطأ مجهول",
+        unserializableError: "خطأ غير معقول",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Out Service ACT=Active",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Kaardistamise fikseerib rakenduse autor.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "teisendamine nurjus",
+        queryFailed: "päring nurjus",
+        applyEditsError: "RakendaEditeerimise viga",
+        applyEditsUpdateError: "applyEdit' i uuendamise viga",
+        applyEditsFailed: "appliedEdits nurjus",
+        unknownError: "tundmatu viga",
+        unserializableError: "seeriaviisiline viga",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS = Out of Service ACT = Aktif",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Pemetaan diperbaiki oleh penulis aplikasi.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
+        transformFailed: "transformasi gagal",
+        queryFailed: "query gagal",
         applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        applyEditsUpdateError: "applyEdits error update",
+        applyEditsFailed: "applyEdits gagal",
+        unknownError: "galat tak dikenal",
+        unserializableError: "kesalahan tidak serialisasi",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

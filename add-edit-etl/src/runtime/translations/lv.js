@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS = ārpus pakalpojuma ACT = aktīvs",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Kartēšanu nosaka lietotnes autors.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "pārveidot neizdevās",
+        queryFailed: "vaicājums neizdevās",
+        applyEditsError: "PiemērotsEdits error",
+        applyEditsUpdateError: "PielietotEdits update error",
+        applyEditsFailed: "neizdevās",
+        unknownError: "nezināma kļūda",
+        unserializableError: "nepārspējama kļūda",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

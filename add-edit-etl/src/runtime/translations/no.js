@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Uten tjeneste ACT=Aktive",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Mapping er fikset av app forfatter.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "transformering mislyktes",
+        queryFailed: "spørring mislyktes",
+        applyEditsError: "applyEdits feil",
+        applyEditsUpdateError: "applicerer oppdateringsfeil",
+        applyEditsFailed: "applikasjonEdits mislyktes",
+        unknownError: "ukjent feil",
+        unserializableError: "uiserbar feil",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

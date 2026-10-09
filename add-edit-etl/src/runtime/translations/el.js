@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Εκτός λειτουργίας ACT= Ενεργός",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Η χαρτογράφηση καθορίζεται από τον συντάκτη της εφαρμογής.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "Αποτυχία μετατροπής",
+        queryFailed: "Το ερώτημα απέτυχε",
+        applyEditsError: "εφαρμογήEdits error",
+        applyEditsUpdateError: "applyEdits σφάλμα ενημέρωσης",
+        applyEditsFailed: "Η εφαρμογήΕπεξεργασίας απέτυχε",
+        unknownError: "άγνωστο σφάλμα",
+        unserializableError: "σφάλμα μη ανιχνεύσιμο",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

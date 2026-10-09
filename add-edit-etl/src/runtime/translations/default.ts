@@ -219,5 +219,6 @@ export default {
   applyEditsUpdateError: 'applyEdits update error',
   applyEditsFailed: 'applyEdits failed',
   unknownError: 'unknown error',
-  unserializableError: 'unserializable error'
+  unserializableError: 'unserializable error',
+  layerReportsValue1: ' [layer reports: {value1}]'
 }

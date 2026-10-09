@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS = Szolgálaton kívül ACT = Aktív",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "A feltérképezést az alkalmazás szerzője határozza meg.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "átalakítás sikertelen",
+        queryFailed: "A lekérdezés sikertelen",
+        applyEditsError: "Az alkalmazás szerkesztési hibája",
+        applyEditsUpdateError: "Alkalmazási szerkesztési hiba",
+        applyEditsFailed: "Az alkalmazások szerkesztése sikertelen",
+        unknownError: "ismeretlen hiba",
+        unserializableError: "nem sorozható hiba",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

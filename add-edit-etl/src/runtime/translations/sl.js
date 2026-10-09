@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=izklop storitve ACT=aktivno",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Kartiranje določi avtor aplikacije.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "preobrazba ni uspela",
+        queryFailed: "poizvedba ni uspela",
+        applyEditsError: "uporabljaEdits error",
+        applyEditsUpdateError: "uporabljaEdits update error",
+        applyEditsFailed: "uporabljaEdits ni uspel",
+        unknownError: "neznana napaka",
+        unserializableError: "Neizvedljiva napaka",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

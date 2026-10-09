@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS = mimo provoz ACT = aktivní",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Mapování opravuje autor aplikace.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "Přeměnit selhalo",
+        queryFailed: "dotaz selhal",
+        applyEditsError: "Použít Chybu Edits",
+        applyEditsUpdateError: "appyEdits update error",
+        applyEditsFailed: "ApplicyEdits selhaly",
+        unknownError: "neznámá chyba",
+        unserializableError: "neserializovatelná chyba",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

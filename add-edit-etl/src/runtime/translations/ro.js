@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Out of Service ACT=Active",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Mapping este fixat de autorul aplicației.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "transformare eșuată",
+        queryFailed: "interogarea a eșuat",
+        applyEditsError: "aplicăErrorEdits",
+        applyEditsUpdateError: "aplică eroarea de actualizare",
+        applyEditsFailed: "Comment",
+        unknownError: "Eroare necunoscută",
+        unserializableError: "eroare inoperabilă",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

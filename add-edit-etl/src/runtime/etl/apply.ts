@@ -135,7 +135,7 @@ function capabilityHint (layer: any): string {
   if (layer?.editingEnabled === false) bits.push('editingEnabled=false')
   if (ops && ops.supportsAdd === false) bits.push('supportsAdd=false')
   if (ops && ops.supportsAdd === true) bits.push('supportsAdd=true')
-  return bits.length ? ' [layer reports: ' + bits.join(', ') + ']' : ''
+  return bits.length ? __t("layerReportsValue1", { value1: bits.join(', ') }) : ''
 }
 
 /** Append graphics to the target layer in chunks, collecting service results. */

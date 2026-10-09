@@ -3,8 +3,8 @@
   "generator": "exb-i18n-kit",
   "parts": {
     "runtime": {
-      "en": "5139f46c60f8",
-      "keys": 211,
+      "en": "3b86f63a01d6",
+      "keys": 212,
       "hashes": {
         "_widgetLabel": "3c1ca1b2a639",
         "stepAdd": "af8621fa0bda",
@@ -216,20 +216,21 @@
         "applyEditsUpdateError": "09cd6d1b8b7d",
         "applyEditsFailed": "cba928a1e6a6",
         "unknownError": "af6321ca7a8b",
-        "unserializableError": "76e73551597a"
+        "unserializableError": "76e73551597a",
+        "layerReportsValue1": "2e04973cbc6d"
       },
       "locales": {
         "ar": {
-          "file": "caa7e675ac5f",
+          "file": "1620b262fac8",
           "counts": {
-            "esri": 182,
+            "esri": 189,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 21,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "stepLoad": {
@@ -340,16 +341,16 @@
           }
         },
         "bg": {
-          "file": "28c9db29eabc",
+          "file": "dc7314735b0d",
           "counts": {
-            "esri": 201,
+            "esri": 208,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 2,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "oosOutOfServiceActActive": {
@@ -365,7 +366,7 @@
           }
         },
         "bs": {
-          "file": "12e376a62a2d",
+          "file": "74001c4ad4ad",
           "counts": {
             "esri": 30,
             "esri-check": 1,
@@ -374,21 +375,21 @@
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 180
+            "missing": 181
           },
           "entries": {}
         },
         "ca": {
-          "file": "180dab38b22c",
+          "file": "c23462b6d09d",
           "counts": {
-            "esri": 201,
+            "esri": 208,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 2,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "oosOutOfServiceActActive": {
@@ -404,16 +405,16 @@
           }
         },
         "cs": {
-          "file": "eaf63c1efbf2",
+          "file": "3ddb093a38ec",
           "counts": {
-            "esri": 199,
+            "esri": 206,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 4,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "loadModeUpsert": {
@@ -439,16 +440,16 @@
           }
         },
         "da": {
-          "file": "8ba19e740250",
+          "file": "a41ccb6b9169",
           "counts": {
-            "esri": 199,
+            "esri": 206,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 4,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "snappingSection": {
@@ -474,16 +475,16 @@
           }
         },
         "de": {
-          "file": "d51ea540aa93",
+          "file": "6048bee72b3f",
           "counts": {
-            "esri": 198,
+            "esri": 205,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 5,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "importXml": {
@@ -514,16 +515,16 @@
           }
         },
         "el": {
-          "file": "a3d8d326c6ca",
+          "file": "644724c639c1",
           "counts": {
-            "esri": 202,
+            "esri": 209,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 1,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "numStreetCity": {
@@ -534,16 +535,16 @@
           }
         },
         "es": {
-          "file": "aa2a579a9d8f",
+          "file": "36d616883388",
           "counts": {
-            "esri": 197,
+            "esri": 203,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 6,
+            "machine": 7,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "snapGrid": {
@@ -575,20 +576,25 @@
               "t": "{num} {street}, {city}",
               "src": "machine",
               "h": "e1a6f40bf4bb"
+            },
+            "applyEditsError": {
+              "t": "applyEdits error",
+              "src": "machine",
+              "h": "d380d5e11059"
             }
           }
         },
         "et": {
-          "file": "2b710136182d",
+          "file": "36c2efe778fc",
           "counts": {
-            "esri": 200,
+            "esri": 207,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 3,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "qaNulls": {
@@ -609,16 +615,16 @@
           }
         },
         "fi": {
-          "file": "e33985e853e9",
+          "file": "10418c3bedd5",
           "counts": {
-            "esri": 201,
+            "esri": 208,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 2,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "oosOutOfServiceActActive": {
@@ -634,16 +640,16 @@
           }
         },
         "fr": {
-          "file": "bc126b23bbc9",
+          "file": "d7a66004b688",
           "counts": {
-            "esri": 198,
+            "esri": 205,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 5,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "qaNulls": {
@@ -674,16 +680,16 @@
           }
         },
         "he": {
-          "file": "e0d34960014b",
+          "file": "103983874b19",
           "counts": {
-            "esri": 182,
+            "esri": 189,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 21,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "importXml": {
@@ -794,7 +800,7 @@
           }
         },
         "hr": {
-          "file": "12e376a62a2d",
+          "file": "74001c4ad4ad",
           "counts": {
             "esri": 30,
             "esri-check": 1,
@@ -803,21 +809,21 @@
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 180
+            "missing": 181
           },
           "entries": {}
         },
         "hu": {
-          "file": "cc738be86ec6",
+          "file": "26046d794207",
           "counts": {
-            "esri": 202,
+            "esri": 209,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 1,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "numStreetCity": {
@@ -828,23 +834,18 @@
           }
         },
         "id": {
-          "file": "828266ce694d",
+          "file": "087e651cb933",
           "counts": {
-            "esri": 195,
+            "esri": 203,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 8,
+            "machine": 7,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
-            "stepEdit": {
-              "t": "Sunting",
-              "src": "machine",
-              "h": "5301648dcf6b"
-            },
             "snappingSection": {
               "t": "Snapping",
               "src": "machine",
@@ -854,11 +855,6 @@
               "t": "Grid snapping",
               "src": "machine",
               "h": "3730c907e2b5"
-            },
-            "template": {
-              "t": "Templat",
-              "src": "machine",
-              "h": "3ec1ae061c27"
             },
             "qaNulls": {
               "t": "Nulls",
@@ -879,20 +875,25 @@
               "t": "{num} {street}, {city}",
               "src": "machine",
               "h": "e1a6f40bf4bb"
+            },
+            "applyEditsError": {
+              "t": "applyEdits error",
+              "src": "machine",
+              "h": "d380d5e11059"
             }
           }
         },
         "it": {
-          "file": "9c8077a4632b",
+          "file": "278e2bbecb21",
           "counts": {
-            "esri": 202,
+            "esri": 209,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 2,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "qaNulls": {
@@ -908,16 +909,16 @@
           }
         },
         "ja": {
-          "file": "887a08ca9ff6",
+          "file": "773b08d386cd",
           "counts": {
-            "esri": 187,
+            "esri": 194,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 17,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "importXml": {
@@ -1008,16 +1009,16 @@
           }
         },
         "ko": {
-          "file": "6fe7d2832095",
+          "file": "576824090828",
           "counts": {
-            "esri": 188,
+            "esri": 195,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 16,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "importXml": {
@@ -1103,16 +1104,16 @@
           }
         },
         "lt": {
-          "file": "3f337f182c84",
+          "file": "997ad16b8830",
           "counts": {
-            "esri": 201,
+            "esri": 208,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 1,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "numStreetCity": {
@@ -1123,16 +1124,16 @@
           }
         },
         "lv": {
-          "file": "7ee3241230e7",
+          "file": "7b3bffeb0d3c",
           "counts": {
-            "esri": 202,
+            "esri": 209,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 1,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "numStreetCity": {
@@ -1143,16 +1144,16 @@
           }
         },
         "no": {
-          "file": "8bb484515d27",
+          "file": "f5942747360a",
           "counts": {
-            "esri": 201,
+            "esri": 208,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 3,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "snapGrid": {
@@ -1173,27 +1174,22 @@
           }
         },
         "nl": {
-          "file": "4d3159cc5f90",
+          "file": "18d53985b6e0",
           "counts": {
-            "esri": 198,
+            "esri": 206,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 5,
+            "machine": 4,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "snapFeature": {
               "t": "Feature-to-feature snapping",
               "src": "machine",
               "h": "def0d53c54a0"
-            },
-            "template": {
-              "t": "Sjabloon",
-              "src": "machine",
-              "h": "3ec1ae061c27"
             },
             "qaNulls": {
               "t": "Nulls",
@@ -1213,16 +1209,16 @@
           }
         },
         "pl": {
-          "file": "f068e060ac0d",
+          "file": "26d93559b5e5",
           "counts": {
-            "esri": 199,
+            "esri": 205,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 3,
+            "machine": 4,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "loadModeUpsert": {
@@ -1239,20 +1235,25 @@
               "t": "{num} {street}, {city}",
               "src": "machine",
               "h": "e1a6f40bf4bb"
+            },
+            "applyEditsUpdateError": {
+              "t": "applyEdits update error",
+              "src": "machine",
+              "h": "09cd6d1b8b7d"
             }
           }
         },
         "pt-br": {
-          "file": "db33e13b6006",
+          "file": "87147437fd9b",
           "counts": {
-            "esri": 201,
+            "esri": 208,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 2,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "qaNulls": {
@@ -1268,16 +1269,16 @@
           }
         },
         "pt-pt": {
-          "file": "1d119cee8efd",
+          "file": "e13e61f77040",
           "counts": {
-            "esri": 202,
+            "esri": 209,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 1,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "numStreetCity": {
@@ -1288,16 +1289,16 @@
           }
         },
         "ro": {
-          "file": "5c623b507175",
+          "file": "a9c67ebc82a8",
           "counts": {
-            "esri": 200,
+            "esri": 207,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 3,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "importXml": {
@@ -1318,16 +1319,16 @@
           }
         },
         "ru": {
-          "file": "842b884182ee",
+          "file": "2d210830cce4",
           "counts": {
-            "esri": 200,
+            "esri": 207,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 2,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "oosOutOfServiceActActive": {
@@ -1343,16 +1344,16 @@
           }
         },
         "sk": {
-          "file": "f3e880e9c5db",
+          "file": "ba4fa858ce02",
           "counts": {
-            "esri": 201,
+            "esri": 208,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 2,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "importXml": {
@@ -1368,16 +1369,16 @@
           }
         },
         "sl": {
-          "file": "34f9846cafb4",
+          "file": "aa74a913f84e",
           "counts": {
-            "esri": 201,
+            "esri": 208,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 2,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "qaNulls": {
@@ -1393,7 +1394,7 @@
           }
         },
         "sr": {
-          "file": "ebc0d2963d0a",
+          "file": "18995a066892",
           "counts": {
             "esri": 30,
             "esri-check": 1,
@@ -1402,21 +1403,21 @@
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 180
+            "missing": 181
           },
           "entries": {}
         },
         "sv": {
-          "file": "539d7435496f",
+          "file": "6e411bc7eb9a",
           "counts": {
-            "esri": 192,
+            "esri": 199,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 11,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "stepLoad": {
@@ -1477,16 +1478,16 @@
           }
         },
         "th": {
-          "file": "f105a6e9f6cd",
+          "file": "0d9d6f4ae5c0",
           "counts": {
-            "esri": 186,
+            "esri": 193,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 17,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "importXml": {
@@ -1577,16 +1578,16 @@
           }
         },
         "tr": {
-          "file": "61059743010c",
+          "file": "5d17656cd465",
           "counts": {
-            "esri": 188,
+            "esri": 195,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 15,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "_widgetLabel": {
@@ -1667,16 +1668,16 @@
           }
         },
         "zh-cn": {
-          "file": "a5f3130826ad",
+          "file": "54cbf2421725",
           "counts": {
-            "esri": 183,
+            "esri": 190,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 19,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "showOnMap": {
@@ -1777,30 +1778,30 @@
           }
         },
         "uk": {
-          "file": "02c9d4ce329e",
+          "file": "8cde395e2201",
           "counts": {
-            "esri": 202,
+            "esri": 209,
             "esri-check": 2,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 0,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {}
         },
         "vi": {
-          "file": "a6006fca60c6",
+          "file": "57fb8fbe8014",
           "counts": {
-            "esri": 202,
+            "esri": 209,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 1,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "stepN": {
@@ -1811,16 +1812,16 @@
           }
         },
         "zh-hk": {
-          "file": "649e2cabe590",
+          "file": "41fe61553907",
           "counts": {
-            "esri": 181,
+            "esri": 188,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 23,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "showOnMap": {
@@ -1941,16 +1942,16 @@
           }
         },
         "zh-tw": {
-          "file": "649e2cabe590",
+          "file": "41fe61553907",
           "counts": {
-            "esri": 181,
+            "esri": 188,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
             "machine": 23,
             "stale": 0,
-            "missing": 7
+            "missing": 1
           },
           "entries": {
             "showOnMap": {

@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Fora de serviço ACT=Active",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "O mapeamento é corrigido pelo autor do aplicativo.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "a transformação falhou",
+        queryFailed: "a pesquisa falhou",
+        applyEditsError: "aplicarEdita erro",
+        applyEditsUpdateError: "aplicarEdita erro de atualização",
+        applyEditsFailed: "applyEdits falhou",
+        unknownError: "erro desconhecido",
+        unserializableError: "erro inserializável",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

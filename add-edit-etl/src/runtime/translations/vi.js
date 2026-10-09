@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "Name",
         numStreetCity: "{num} {street}. {city}",
         mappingIsFixedByTheApp: "Tác giả phần mềm sửa soạn.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "biến đổi thất bại",
+        queryFailed: "truy vấn thất bại",
+        applyEditsError: "lỗi sửa",
+        applyEditsUpdateError: "áp dụng lỗi cập nhậtEdits",
+        applyEditsFailed: "áp dụngEdits thất bại",
+        unknownError: "lỗi không rõ",
+        unserializableError: "Lỗi không thể gửi đi được",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

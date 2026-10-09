@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Out of Service Act=Active",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Mapping נקבע על ידי מחבר האפליקציה.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "שינוי נכשל",
+        queryFailed: "השאילתה נכשלה",
+        applyEditsError: "יישום שגיאות",
+        applyEditsUpdateError: "עדכון שגיאות",
+        applyEditsFailed: "תביעות נכשלות",
+        unknownError: "טעות לא ידועה",
+        unserializableError: "טעות בלתי אפשרית",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

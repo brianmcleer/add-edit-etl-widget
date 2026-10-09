@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS = iš tarnybos ACT = aktyvus",
         numStreetCity: "{num} {street}, {city}",
         mappingIsFixedByTheApp: "Programėlės autorius nustato žemėlapį.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "transformuoti nepavyko",
+        queryFailed: "Užklausti nepavyko",
+        applyEditsError: "appliyEdits klaida",
+        applyEditsUpdateError: "appliYEdits atnaujinimo klaida",
+        applyEditsFailed: "appliyEdits nepavyko",
+        unknownError: "nežinoma klaida",
+        unserializableError: "nenustatoma klaida",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }

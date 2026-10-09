@@ -207,13 +207,14 @@ System.register([], function (e) {
         oosOutOfServiceActActive: "OOS=Застосувати АКТ=Активний",
         numStreetCity: "{num} {street}й {city}",
         mappingIsFixedByTheApp: "Mapping фіксується автором додатка.",
-        transformFailed: "transform failed",
-        queryFailed: "query failed",
-        applyEditsError: "applyEdits error",
-        applyEditsUpdateError: "applyEdits update error",
-        applyEditsFailed: "applyEdits failed",
-        unknownError: "unknown error",
-        unserializableError: "unserializable error"
+        transformFailed: "не вдалося",
+        queryFailed: "не вдалося",
+        applyEditsError: "Застосувати помилки",
+        applyEditsUpdateError: "Застосувати помилки оновлення",
+        applyEditsFailed: "ПодатиРедагування не вдалося",
+        unknownError: "Невідома помилка",
+        unserializableError: "несеріалізована помилка",
+        layerReportsValue1: " [layer reports: {value1}]"
       })
     }
   }
