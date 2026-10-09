@@ -16,6 +16,7 @@ import { updateDataSourceAfterEdit } from '../../vendor/edit/runtime/components/
 import { transformRecord } from './transform-engine'
 import { buildGeometryForRecord } from './geometry'
 import type { FieldMappingConfig, Schema, LoadResult, SchemaField, TransformReportRow } from './types'
+import { __t, __tc } from '../i18n-t'
 
 export interface SourceRow {
   attributes: Record<string, unknown>
@@ -49,7 +50,7 @@ export async function buildAddFeatures (
       rowMap.push(i)
       reports.push({ index: i, ok: true })
     } catch (e) {
-      reports.push({ index: i, ok: false, error: (e as Error)?.message || 'transform failed' })
+      reports.push({ index: i, ok: false, error: (e as Error)?.message || __t("transformFailed") })
     }
   }
   return { graphics, rowMap, reports }
@@ -171,7 +172,7 @@ export async function loadIntoTarget (
       const keys = graphics.map(g => (g as any).attributes?.[keyField])
       existing = await fetchExistingKeys(layer, keyField, keys, options.keyIsString !== false)
     } catch (e) {
-      const msg = 'Could not query existing features by key: ' + ((e as Error)?.message || 'query failed')
+      const msg = 'Could not query existing features by key: ' + ((e as Error)?.message || __t("queryFailed"))
       rowMap.forEach(srcIdx => {
         const rep = reports.find(r => r.index === srcIdx)
         if (rep) { rep.ok = false; rep.error = msg } else reports.push({ index: srcIdx, ok: false, error: msg })
@@ -232,7 +233,7 @@ export async function loadIntoTarget (
         const sourceIndex = addRows[idx]
         const rep = reports.find(r => r.index === sourceIndex)
         if (ar.error) {
-          if (rep) { rep.ok = false; rep.error = (ar.error.message || 'applyEdits error') + hint }
+          if (rep) { rep.ok = false; rep.error = (__tc(ar.error.message, "applyEditsError")) + hint }
           failed++
         } else {
           if (ar.objectId != null) addedObjectIds.push(ar.objectId)
@@ -245,7 +246,7 @@ export async function loadIntoTarget (
         const sourceIndex = updateRows[idx]
         const rep = reports.find(r => r.index === sourceIndex)
         if (ur.error) {
-          if (rep) { rep.ok = false; rep.error = (ur.error.message || 'applyEdits update error') + hint }
+          if (rep) { rep.ok = false; rep.error = (__tc(ur.error.message, "applyEditsUpdateError")) + hint }
           failed++
         } else {
           if (ur.objectId != null) addedObjectIds.push(ur.objectId)
@@ -258,7 +259,7 @@ export async function loadIntoTarget (
       const affected = [...addRows, ...updateRows]
       affected.forEach(sourceIndex => {
         const rep = reports.find(r => r.index === sourceIndex)
-        if (rep) { rep.ok = false; rep.error = ((e as Error)?.message || 'applyEdits failed') + hint }
+        if (rep) { rep.ok = false; rep.error = ((e as Error)?.message || __t("applyEditsFailed")) + hint }
       })
       failed += affected.length
     }

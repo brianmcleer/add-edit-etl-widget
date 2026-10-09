@@ -206,7 +206,14 @@ System.register([], function (e) {
         helpTips3: "Once the rules are right, press Export XML. Next time you can press Import XML instead of building them again.",
         oosOutOfServiceActActive: "OOS=Out of Service ACT=Active",
         numStreetCity: "{num} {street}, {city}",
-        mappingIsFixedByTheApp: "Mapping is fixed by the app author."
+        mappingIsFixedByTheApp: "Mapping is fixed by the app author.",
+        transformFailed: "transform failed",
+        queryFailed: "query failed",
+        applyEditsError: "applyEdits error",
+        applyEditsUpdateError: "applyEdits update error",
+        applyEditsFailed: "applyEdits failed",
+        unknownError: "unknown error",
+        unserializableError: "unserializable error"
       })
     }
   }

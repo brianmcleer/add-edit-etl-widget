@@ -37,6 +37,7 @@ import LoadPanel from './components/load-panel'
 import SymbologyPanel from './components/symbology-panel'
 import { readSourceSchema, readTargetSchema, editableTargetFields, autoMatch, emptyMappingConfig } from './etl/schema'
 import type { FieldMappingConfig, Schema, SchemaField } from './etl/types'
+import { __setIntl } from './i18n-t'
 
 const { useState, useMemo, useEffect, useRef, useCallback } = React
 
@@ -45,6 +46,7 @@ const STEPS: Step[] = ['add', 'map', 'load', 'edit']
 const stepIndex = (s: Step) => STEPS.indexOf(s)
 
 const Widget = (props: AllWidgetProps<IMConfig>) => {
+  __setIntl((props as any).intl)
   const { id, portalUrl, config, useMapWidgetIds } = props
   const translate = hooks.useTranslation(jimuUIMessages, defaultMessages)
   const rootRef = useRef<HTMLDivElement>(null)
