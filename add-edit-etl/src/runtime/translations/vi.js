@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "áp dụngEdits thất bại",
         unknownError: "lỗi không rõ",
         unserializableError: "Lỗi không thể gửi đi được",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "Người mua báo cáo: {value1}]"
       })
     }
   }

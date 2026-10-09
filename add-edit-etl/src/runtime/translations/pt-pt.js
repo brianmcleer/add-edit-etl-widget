@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "applyEdits falhou",
         unknownError: "erro desconhecido",
         unserializableError: "erro inserializável",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[relatos de camada: {value1}]"
       })
     }
   }

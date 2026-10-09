@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "Az alkalmazások szerkesztése sikertelen",
         unknownError: "ismeretlen hiba",
         unserializableError: "nem sorozható hiba",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[rétegjelentések: {value1}]"
       })
     }
   }

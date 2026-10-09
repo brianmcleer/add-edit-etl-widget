@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "תביעות נכשלות",
         unknownError: "טעות לא ידועה",
         unserializableError: "טעות בלתי אפשרית",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[דיווחים: {value1})"
       })
     }
   }

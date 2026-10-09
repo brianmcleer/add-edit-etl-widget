@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "A aplicaçãoEdits falhou",
         unknownError: "Erro desconhecido",
         unserializableError: "Erro inserializável",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[Layer relata: {value1}# #"
       })
     }
   }

@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "应用编辑失败",
         unknownError: "未知错误",
         unserializableError: "无序错误",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[层报: {value1}[ . ]"
       })
     }
   }

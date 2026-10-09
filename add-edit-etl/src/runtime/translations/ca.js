@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "ha fallat l' a aplicarEdits",
         unknownError: "error desconegut",
         unserializableError: "Error no llegible",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[informes de corders: {value1}]"
       })
     }
   }

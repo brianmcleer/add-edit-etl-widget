@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "applyEdits mislykkedes",
         unknownError: "ukendt fejl",
         unserializableError: "userialiserbar fejl",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[lagrapporter: {value1}]"
       })
     }
   }

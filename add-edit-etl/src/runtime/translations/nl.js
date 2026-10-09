@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "applyEdits is mislukt",
         unknownError: "onbekende fout",
         unserializableError: "onuitwisbare fout",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[layer reports: {value1}]"
       })
     }
   }

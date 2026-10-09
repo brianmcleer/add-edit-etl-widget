@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "applyEdits fehlgeschlagen",
         unknownError: "Unbekannter Fehler",
         unserializableError: "nichtialisierbarer Fehler",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[Schichtberichte: {value1}]"
       })
     }
   }

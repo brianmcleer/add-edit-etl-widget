@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "الطلبات فشلت",
         unknownError: "خطأ مجهول",
         unserializableError: "خطأ غير معقول",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[تقارير الأطفال: {value1}!"
       })
     }
   }

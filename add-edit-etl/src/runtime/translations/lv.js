@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "neizdevās",
         unknownError: "nezināma kļūda",
         unserializableError: "nepārspējama kļūda",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[slāņa ziņojumi: {value1}]"
       })
     }
   }

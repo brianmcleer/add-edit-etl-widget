@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "applicationEdits が失敗しました",
         unknownError: "未知のエラー",
         unserializableError: "unserializable エラー",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[レイヤーレポート] {value1}"
       })
     }
   }

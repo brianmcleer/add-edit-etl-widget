@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "Applicare le modifiche",
         unknownError: "errore sconosciuto",
         unserializableError: "errore non serializzabile",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[relazioni a strati: {value1}]"
       })
     }
   }

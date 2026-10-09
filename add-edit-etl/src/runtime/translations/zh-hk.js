@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "應用程式編輯失敗",
         unknownError: "未知的錯誤",
         unserializableError: "不串連的錯誤",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[層次報告 : {value1}[ [ ] ]"
       })
     }
   }

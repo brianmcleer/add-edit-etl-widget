@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "การแก้ไขโปรแกรมล้มเหลว",
         unknownError: "ข้อผิดพลาดไม่ทราบสาเหตุ",
         unserializableError: "ข้อผิดพลาดที่ไม่สามารถตรวจสอบได้",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[ผู้จัดการ: {value1})"
       })
     }
   }

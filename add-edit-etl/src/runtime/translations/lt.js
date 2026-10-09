@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "appliyEdits nepavyko",
         unknownError: "nežinoma klaida",
         unserializableError: "nenustatoma klaida",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[ataskaitos sluoksniais: {value1}]"
       })
     }
   }

@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "uporabljaEdits ni uspel",
         unknownError: "neznana napaka",
         unserializableError: "Neizvedljiva napaka",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[Poročila o sloju: {value1}]"
       })
     }
   }

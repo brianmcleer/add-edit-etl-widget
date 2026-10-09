@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "AppleEdits zlyhal",
         unknownError: "neznáma chyba",
         unserializableError: "neserializovateľná chyba",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[Hlavné správy: {value1}]"
       })
     }
   }

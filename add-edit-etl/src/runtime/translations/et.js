@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "appliedEdits nurjus",
         unknownError: "tundmatu viga",
         unserializableError: "seeriaviisiline viga",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[kihiaruanded: {value1}]"
       })
     }
   }

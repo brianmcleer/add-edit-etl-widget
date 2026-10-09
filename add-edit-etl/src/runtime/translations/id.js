@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "applyEdits gagal",
         unknownError: "galat tak dikenal",
         unserializableError: "kesalahan tidak serialisasi",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[Laporanlapisan: {value1}]"
       })
     }
   }

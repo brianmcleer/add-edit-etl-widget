@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "applyEdits epäonnistui",
         unknownError: "tuntematon virhe",
         unserializableError: "epätavallinen virhe",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[kerrosraportit: {value1}]"
       })
     }
   }

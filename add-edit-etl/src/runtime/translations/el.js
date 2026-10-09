@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "Η εφαρμογήΕπεξεργασίας απέτυχε",
         unknownError: "άγνωστο σφάλμα",
         unserializableError: "σφάλμα μη ανιχνεύσιμο",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[αναφορές στρωμάτων: {value1}]"
       })
     }
   }

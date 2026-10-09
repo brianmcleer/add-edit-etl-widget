@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "ПодатиРедагування не вдалося",
         unknownError: "Невідома помилка",
         unserializableError: "несеріалізована помилка",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[шарові звіти: {value1}до"
       })
     }
   }

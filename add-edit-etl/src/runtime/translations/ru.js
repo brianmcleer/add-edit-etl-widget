@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "AppEdits не удалось",
         unknownError: "Неизвестная ошибка",
         unserializableError: "несериализируемая ошибка",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[доклады по этапам: {value1}]"
       })
     }
   }

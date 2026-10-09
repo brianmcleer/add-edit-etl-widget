@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "Грешка при прилагане на Edits",
         unknownError: "неизвестна грешка",
         unserializableError: "несериозна грешка",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[доклади на убиеца: {value1}]"
       })
     }
   }

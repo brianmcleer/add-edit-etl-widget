@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "applyEdits a échoué",
         unknownError: "erreur inconnue",
         unserializableError: "Erreur non sérialisable",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[rapports de couche: {value1}- Oui"
       })
     }
   }

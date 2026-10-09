@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "Başvurular başarısız oldu",
         unknownError: "Bilinmeyen hata",
         unserializableError: "Başarısız olmayan hata",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[Bölüm raporları: {value1}]"
       })
     }
   }

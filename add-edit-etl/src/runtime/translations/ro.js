@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "Comment",
         unknownError: "Eroare necunoscută",
         unserializableError: "eroare inoperabilă",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[Raporturi pe teren: {value1}]"
       })
     }
   }

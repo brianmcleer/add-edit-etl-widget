@@ -214,7 +214,7 @@ System.register([], function (e) {
         applyEditsFailed: "applyEdits 실패",
         unknownError: "알 수없는 오류",
         unserializableError: "unserializable 오류",
-        layerReportsValue1: " [layer reports: {value1}]"
+        layerReportsValue1: "[레이어 보고서: {value1}·"
       })
     }
   }
