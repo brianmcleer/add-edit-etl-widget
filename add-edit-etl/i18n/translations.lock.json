@@ -366,18 +366,919 @@
           }
         },
         "bs": {
-          "file": "74001c4ad4ad",
+          "file": "82cae21e28a6",
           "counts": {
             "esri": 30,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 180,
             "stale": 0,
-            "missing": 181
+            "missing": 1
           },
-          "entries": {}
+          "entries": {
+            "_widgetLabel": {
+              "t": "Dodaj, mapiraj i izmjeni podatke",
+              "src": "machine",
+              "h": "3c1ca1b2a639"
+            },
+            "stepMap": {
+              "t": "Polja",
+              "src": "machine",
+              "h": "6d8e95848f1f"
+            },
+            "stepLoad": {
+              "t": "Opterećenje",
+              "src": "machine",
+              "h": "ddcb77ff769e"
+            },
+            "mapWidget": {
+              "t": "Mapa grafičkog elementa",
+              "src": "machine",
+              "h": "8b918e901bfa"
+            },
+            "showOnMap": {
+              "t": "Pokaži na karti & uvećanje za učitavanje",
+              "src": "machine",
+              "h": "2e0642953984"
+            },
+            "geometryEdit": {
+              "t": "Uključi izmjenu geometrije (potrebna mapa)",
+              "src": "machine",
+              "h": "a4402395ca5e"
+            },
+            "editingOptions": {
+              "t": "Opcije izmjene",
+              "src": "machine",
+              "h": "bac626727f6f"
+            },
+            "allowCreate": {
+              "t": "Dopusti dodavanje osobina",
+              "src": "machine",
+              "h": "55ae40ac6926"
+            },
+            "allowUpdate": {
+              "t": "Dopusti ažuriranje osobina",
+              "src": "machine",
+              "h": "a211fb02d1db"
+            },
+            "allowDelete": {
+              "t": "Dozvoli brisanje osobina",
+              "src": "machine",
+              "h": "ebfa7aaaf243"
+            },
+            "allowGeometryUpdate": {
+              "t": "Dopusti pomjeranje/oblikovanje geometrije",
+              "src": "machine",
+              "h": "59fd8618d371"
+            },
+            "enableTooltips": {
+              "t": "Opis alata za crtanje",
+              "src": "machine",
+              "h": "6df7a3e8cb92"
+            },
+            "templateFilter": {
+              "t": "Pokaži izabranika šablona",
+              "src": "machine",
+              "h": "b51afc6f6fc2"
+            },
+            "batchEditingOpt": {
+              "t": "Dopusti izmjenu serije",
+              "src": "machine",
+              "h": "27db04f7cb17"
+            },
+            "relatedRecords": {
+              "t": "Izmijeni sljedeće zapise",
+              "src": "machine",
+              "h": "b04af494dae0"
+            },
+            "editPermissions": {
+              "t": "Izmijeni dozvole",
+              "src": "machine",
+              "h": "376cd254eee5"
+            },
+            "toolsSection": {
+              "t": "Izmjeni alate",
+              "src": "machine",
+              "h": "0f26b0b2f1c6"
+            },
+            "editingBehavior": {
+              "t": "Izmjenjujem ponašanje",
+              "src": "machine",
+              "h": "e926844feed0"
+            },
+            "snapFeature": {
+              "t": "Snapping osobinama i osobinama",
+              "src": "machine",
+              "h": "def0d53c54a0"
+            },
+            "snapGrid": {
+              "t": "Skidanje mreže",
+              "src": "machine",
+              "h": "3730c907e2b5"
+            },
+            "toolSplit": {
+              "t": "Razdvoji alat",
+              "src": "machine",
+              "h": "855ed2860aef"
+            },
+            "toolMerge": {
+              "t": "Spajanje",
+              "src": "machine",
+              "h": "4e256074d5a1"
+            },
+            "toolCopyPaste": {
+              "t": "Kopiraj & umetni",
+              "src": "machine",
+              "h": "56fb3bda90b3"
+            },
+            "importXml": {
+              "t": "Uvezi...",
+              "src": "machine",
+              "h": "85b4016d27dc"
+            },
+            "exportXml": {
+              "t": "Uvezi XML",
+              "src": "machine",
+              "h": "f6a2de2384a3"
+            },
+            "importHint": {
+              "t": "Učitaj snimljeno mapiranje polja (.xml)",
+              "src": "machine",
+              "h": "c29dc9134891"
+            },
+            "exportHint": {
+              "t": "Snimi ovo mapiranje polja kao ponovo upotrebljivu .xml datoteku",
+              "src": "machine",
+              "h": "3a6483ba1046"
+            },
+            "importReadError": {
+              "t": "Nisam mogao pročitati izabranu datoteku",
+              "src": "machine",
+              "h": "ec63f7b5577c"
+            },
+            "stepsNav": {
+              "t": "Koraci s radnim tokom",
+              "src": "machine",
+              "h": "1c0924019c5b"
+            },
+            "ruleEnabled": {
+              "t": "Uključeno pravilo",
+              "src": "machine",
+              "h": "5b1cf16661ed"
+            },
+            "previewCaption": {
+              "t": "Pregled prvog transformisanog zapisa",
+              "src": "machine",
+              "h": "a5a1d78da972"
+            },
+            "zoomScale": {
+              "t": "Skala uvećanja (1: ..., 0 = stane)",
+              "src": "machine",
+              "h": "2323a68c173b"
+            },
+            "zoomToSelected": {
+              "t": "Uvećaj izabranu osobinu",
+              "src": "machine",
+              "h": "f0aaee929ec1"
+            },
+            "loadInto": {
+              "t": "Učitaj u (ciljni sloj)",
+              "src": "machine",
+              "h": "d246f43aef77"
+            },
+            "symbologyHint": {
+              "t": "Promijeni način iscrtavanja učitanih osobina na karti.",
+              "src": "machine",
+              "h": "346ee63aaf21"
+            },
+            "symbologyNoLayers": {
+              "t": "Još nema slojeva na mapi za stil.",
+              "src": "machine",
+              "h": "f584bf6fb2bc"
+            },
+            "dateFormat": {
+              "t": "Format datuma unosa",
+              "src": "machine",
+              "h": "1db54092bbe7"
+            },
+            "dateFormatHint": {
+              "t": "Tokeni: GGGG GG MM DD HH mm ss. Blank pokušava ISO, zatim opće parsiranje.",
+              "src": "machine",
+              "h": "5248445ae05f"
+            },
+            "valueMap": {
+              "t": "Karta vrijednosti (jedna po liniji, od=do)",
+              "src": "machine",
+              "h": "f4770c10cd51"
+            },
+            "valueMapHint": {
+              "t": "Dolazni vrijednosti na lijevoj strani, ciljne vrijednosti na desnoj strani.",
+              "src": "machine",
+              "h": "d737bf964e25"
+            },
+            "unmapped": {
+              "t": "Kada vrijednost nije u mapi",
+              "src": "machine",
+              "h": "527668819285"
+            },
+            "unmappedPassthrough": {
+              "t": "Zadrži prvobitnu vrijednost",
+              "src": "machine",
+              "h": "fe1c98297492"
+            },
+            "unmappedNull": {
+              "t": "Piši ništa",
+              "src": "machine",
+              "h": "f26308bd4537"
+            },
+            "unmappedDefault": {
+              "t": "_Uobičajeno",
+              "src": "machine",
+              "h": "76cf00611f51"
+            },
+            "factor": {
+              "t": "Pomnoži",
+              "src": "machine",
+              "h": "ec00877ab82d"
+            },
+            "offset": {
+              "t": "Zatim dodaj",
+              "src": "machine",
+              "h": "fd38928ac2dd"
+            },
+            "numberScaleHint": {
+              "t": "Izlaz = vrijednost x faktor + ofset. Primjer: stopala do metara koristi 0,3048.",
+              "src": "machine",
+              "h": "2140beb47730"
+            },
+            "templateHint": {
+              "t": "Koristi {fieldName} mjestodržača iz dodanih podataka.",
+              "src": "machine",
+              "h": "183ee4fbd657"
+            },
+            "loadMode": {
+              "t": "Način učitavanja",
+              "src": "machine",
+              "h": "c15b94951457"
+            },
+            "loadModeInsert": {
+              "t": "Ubaci (uvijek dodaj novo)",
+              "src": "machine",
+              "h": "43743638e546"
+            },
+            "loadModeUpdate": {
+              "t": "Samo ažuriraj (uparivanje po ključu)",
+              "src": "machine",
+              "h": "19e474d53059"
+            },
+            "loadModeUpsert": {
+              "t": "Ažuriraj (update meč, umetni novo)",
+              "src": "machine",
+              "h": "36aa5d933076"
+            },
+            "keyField": {
+              "t": "Polje ključeva",
+              "src": "machine",
+              "h": "4c06ca6c880a"
+            },
+            "keyFieldRequired": {
+              "t": "Izaberite ciljno polje koje identificira odgovarajuću osobinu.",
+              "src": "machine",
+              "h": "c5a507129a8e"
+            },
+            "qaCheck": {
+              "t": "Provjeri podatke",
+              "src": "machine",
+              "h": "6f69610af09d"
+            },
+            "qaTitle": {
+              "t": "Provjereni {rows} redovi, {warnings} upozorenja",
+              "src": "machine",
+              "h": "e897c9124522"
+            },
+            "qaClean": {
+              "t": "Nisu pronađeni problemi sa kvalitetom podataka.",
+              "src": "machine",
+              "h": "5b9ccef99ecb"
+            },
+            "qaCaption": {
+              "t": "Pitanja kvaliteta podataka po ciljnom polju",
+              "src": "machine",
+              "h": "f06072d4d63c"
+            },
+            "qaNulls": {
+              "t": "Nulls",
+              "src": "machine",
+              "h": "3d1fa2631019"
+            },
+            "qaCoercion": {
+              "t": "Loše vrijednosti",
+              "src": "machine",
+              "h": "1512964d1b15"
+            },
+            "qaTrunc": {
+              "t": "ISKLJUČENO",
+              "src": "machine",
+              "h": "969137441b20"
+            },
+            "qaDomain": {
+              "t": "Nije u domenu",
+              "src": "machine",
+              "h": "64f9e8ec8001"
+            },
+            "qaSamples": {
+              "t": "Uzorci",
+              "src": "machine",
+              "h": "0fb59422f600"
+            },
+            "qaDupKeys": {
+              "t": "{count} dvostruke vrijednosti ključa u dolazećim podacima",
+              "src": "machine",
+              "h": "635fae44ba3a"
+            },
+            "upsertCounts": {
+              "t": "{inserted} umetnuto, {updated} osvježeno",
+              "src": "machine",
+              "h": "864c1a4fc7d9"
+            },
+            "downloadFailed": {
+              "t": "Preuzimanje neuspjelih redova (CSV)",
+              "src": "machine",
+              "h": "f7960e59ec89"
+            },
+            "editExisting": {
+              "t": "Izmijeni postojeće podatke",
+              "src": "machine",
+              "h": "91df962f787f"
+            },
+            "editExistingHint": {
+              "t": "Preskoči učitavanje i izmjenu osobina već u ciljnom sloju.",
+              "src": "machine",
+              "h": "77a68431b3df"
+            },
+            "startOver": {
+              "t": "Dodaj & učitaj nove podatke",
+              "src": "machine",
+              "h": "37697a0a17fc"
+            },
+            "editUnavailable": {
+              "t": "Ciljni sloj nije mogao biti pripremljen za uređivanje.",
+              "src": "machine",
+              "h": "e1bffed24933"
+            },
+            "addPrompt": {
+              "t": "Dodajte podatke iz datoteke, URL-a ili ArcGIS sadržaja, zatim nastavite mapirati njena polja.",
+              "src": "machine",
+              "h": "9a4de6c3ef1c"
+            },
+            "noTarget": {
+              "t": "Nije podešen ciljni sloj. Postavite jedan u postavkama grafičkog elementa.",
+              "src": "machine",
+              "h": "6beedc018bd5"
+            },
+            "noSource": {
+              "t": "Dodaj prvo podatke, a zatim izaberi koji će dodati sloj za mapu.",
+              "src": "machine",
+              "h": "dc3ab650c55b"
+            },
+            "mappingTitle": {
+              "t": "Mapiranje polja",
+              "src": "machine",
+              "h": "eb217b68ed2b"
+            },
+            "target": {
+              "t": "Cilj:",
+              "src": "machine",
+              "h": "61ad50a9b918"
+            },
+            "cardinality": {
+              "t": "Kardinality",
+              "src": "machine",
+              "h": "404a27102147"
+            },
+            "addRule": {
+              "t": "Dodaj pravilo mapiranja",
+              "src": "machine",
+              "h": "2a289ce61b97"
+            },
+            "autoMatch": {
+              "t": "Automatsko poklapanje po imenu",
+              "src": "machine",
+              "h": "e14a5bf525c5"
+            },
+            "geometryPassthrough": {
+              "t": "Koristi geometriju izvora",
+              "src": "machine",
+              "h": "a0f13be70f1c"
+            },
+            "geometryFromXY": {
+              "t": "Izgradi tačku iz X/Y polja",
+              "src": "machine",
+              "h": "b54c3f5ee91c"
+            },
+            "geometryNone": {
+              "t": "Nema geometrije (tablica)",
+              "src": "machine",
+              "h": "980bf4b8ff3e"
+            },
+            "xField": {
+              "t": "X / Polje za dužinu",
+              "src": "machine",
+              "h": "7005c87922ae"
+            },
+            "yField": {
+              "t": "Y / Latitude polje",
+              "src": "machine",
+              "h": "1f6df9af0c03"
+            },
+            "zField": {
+              "t": "Z polje (opcionalno)",
+              "src": "machine",
+              "h": "65f0513a9ed1"
+            },
+            "sourceWkid": {
+              "t": "Izvorni koordinatni sistem (WKID)",
+              "src": "machine",
+              "h": "10af9b33f8d8"
+            },
+            "delimiter": {
+              "t": "Delimiter",
+              "src": "machine",
+              "h": "5e96ff2a317d"
+            },
+            "constant": {
+              "t": "Konstanta vrijednost",
+              "src": "machine",
+              "h": "5942571c67e3"
+            },
+            "regex": {
+              "t": "Regularni izraz",
+              "src": "machine",
+              "h": "cdfc76a8a310"
+            },
+            "previewRow": {
+              "t": "Pregled prve ploče",
+              "src": "machine",
+              "h": "09052252d614"
+            },
+            "validationErrors": {
+              "t": "Razriješi ovo prije učitavanja:",
+              "src": "machine",
+              "h": "97888f9a9665"
+            },
+            "validationWarnings": {
+              "t": "Upozorenja",
+              "src": "machine",
+              "h": "147d1c15fbcb"
+            },
+            "noIssues": {
+              "t": "Nisu pronađeni problemi.",
+              "src": "machine",
+              "h": "b280a146c8c5"
+            },
+            "load": {
+              "t": "Učitaj {count} zapise",
+              "src": "machine",
+              "h": "ad5e39c301e6"
+            },
+            "loading": {
+              "t": "Učitavam... {done}/{total}",
+              "src": "machine",
+              "h": "ccc43edd775b"
+            },
+            "phaseReading": {
+              "t": "Čitam izvorne zapise...",
+              "src": "machine",
+              "h": "5895e1256a22"
+            },
+            "phaseTransforming": {
+              "t": "Preoblikovanje zapisa...",
+              "src": "machine",
+              "h": "1b97e49f17c8"
+            },
+            "phaseWriting": {
+              "t": "Pisanje u ciljni sloj",
+              "src": "machine",
+              "h": "6256795e216e"
+            },
+            "phaseDonePrefix": {
+              "t": "Završavam...",
+              "src": "machine",
+              "h": "87dcf408ccbf"
+            },
+            "featuresOfTotal": {
+              "t": "{done} od {total} osobina",
+              "src": "machine",
+              "h": "517c39a9ab9f"
+            },
+            "loadDone": {
+              "t": "Učitano {ok} od {attempted} zapisa ({failed} nije uspjelo).",
+              "src": "machine",
+              "h": "03ff5e93caf5"
+            },
+            "reviewEdit": {
+              "t": "Izmijeni učitane zapise",
+              "src": "machine",
+              "h": "41e5e5e894e1"
+            },
+            "rulesCount": {
+              "t": "{count} pravila",
+              "src": "machine",
+              "h": "d137c1c25e1a"
+            },
+            "removeRule": {
+              "t": "_Ukloni pravilo:",
+              "src": "machine",
+              "h": "e0d4ffd03eb8"
+            },
+            "expressionHelp": {
+              "t": "Koristi $.FIELD za izvorne vrijednosti, npr. pomagači.upper($.NAME). Jedan izraz po meti.",
+              "src": "machine",
+              "h": "c771284be27e"
+            },
+            "helpIntro": {
+              "t": "Ovaj grafički element donosi vanjske podatke u sloj mape: dodajete podatke, poredate njegova polja sa poljima u sloju, zatim učitate zapise.",
+              "src": "machine",
+              "h": "da5addf8b08a"
+            },
+            "helpSearchPlaceholder": {
+              "t": "Pretraži vodič (pokušaj učitati ilipolja",
+              "src": "machine",
+              "h": "9ae87d164e12"
+            },
+            "helpNoMatches": {
+              "t": "Ništa u vodiču ne odgovara toj riječi.",
+              "src": "machine",
+              "h": "3fe179f75330"
+            },
+            "firstRunTitle": {
+              "t": "Novi ovdje?",
+              "src": "machine",
+              "h": "b81f2e17e001"
+            },
+            "firstRunBody": {
+              "t": "Dodajte podatke, poredajte polja sa ciljnim slojem, zatim učitajte zapise.",
+              "src": "machine",
+              "h": "7fef34676eb4"
+            },
+            "firstRunHelpLink": {
+              "t": "Otvori vodič.",
+              "src": "machine",
+              "h": "2447dd6134ea"
+            },
+            "firstRunDismiss": {
+              "t": "Otpust",
+              "src": "machine",
+              "h": "70afe9eff3f2"
+            },
+            "helpWayFile": {
+              "t": "datoteka sa vašeg računara",
+              "src": "machine",
+              "h": "5e4d1afd5157"
+            },
+            "helpWaySearch": {
+              "t": "stavka iz ArcGIS-a",
+              "src": "machine",
+              "h": "473b7113c7ea"
+            },
+            "helpStartTitle": {
+              "t": "Počnite ovdje: tri koraka",
+              "src": "machine",
+              "h": "789320b4831d"
+            },
+            "helpStart1": {
+              "t": "On Dodaj podatke, donesite podatke, zatim ih izaberite pod Source slojem. Možete koristiti {ways}.",
+              "src": "machine",
+              "h": "71d2ffca7662"
+            },
+            "helpStart1NoWays": {
+              "t": "Na Dodaj podatke, donesite podatke, a zatim ih izaberite pod Izvornim slojem.",
+              "src": "machine",
+              "h": "55b63c54df6c"
+            },
+            "helpStart2": {
+              "t": "Pritisnite pored da dođete do polja mape. Pročitajte svako pravilo i provjerite da li desno polje iz vaših podataka hrani pravo polje u sloju.",
+              "src": "machine",
+              "h": "d06147ea5faf"
+            },
+            "helpStart3": {
+              "t": "Pritisnite pored da dohvatite Učitaj. Pritisnite provjerene podatke, pogledajte šta je našao, zatim pritisnite Učitaj zapise.",
+              "src": "machine",
+              "h": "ebc8fcdaded5"
+            },
+            "helpAddTitle": {
+              "t": "Dodajem vaše podatke",
+              "src": "machine",
+              "h": "3ed6367d27d1"
+            },
+            "helpAddIntro": {
+              "t": "Korak dodavanja podataka je mjesto gdje vaši zapisi dolaze u.",
+              "src": "machine",
+              "h": "35618319c53f"
+            },
+            "helpAddFile": {
+              "t": "Fajl: CSV, zakopčani fajl oblika, GeoJSON ili KML sa vašeg računara.",
+              "src": "machine",
+              "h": "8619367794b4"
+            },
+            "helpAddUrl": {
+              "t": "Web adresa: zalijepi link na sloj ili uslugu.",
+              "src": "machine",
+              "h": "8ed337485e51"
+            },
+            "helpAddSearch": {
+              "t": "ArcGIS sadržaj: potraga za slojem koji je već objavljen.",
+              "src": "machine",
+              "h": "0f7c955679cc"
+            },
+            "helpAddList": {
+              "t": "Sve što donesete je upisano ispod dugmeta. Kanta za smeće pored imena ga vraća nazad.",
+              "src": "machine",
+              "h": "2ddc1296dfbf"
+            },
+            "helpAddSource": {
+              "t": "Izaberi jedan od njih pod izvornim slojem, to su podaci na kojima iduća dva koraka rade.",
+              "src": "machine",
+              "h": "cb7afe4fc8da"
+            },
+            "helpAddEditExisting": {
+              "t": "Uredi postojeće podatke na dnu preskače pravo na korak Izmijeni, za popravljanje zapisa koji su već u sloju.",
+              "src": "machine",
+              "h": "e347f05ad426"
+            },
+            "helpMapTitle": {
+              "t": "Poklapanje polja",
+              "src": "machine",
+              "h": "6e76aedd32f0"
+            },
+            "helpMapIntro": {
+              "t": "Pravilo kaže koje polje iz vaših podataka ispunjava polje u sloju.",
+              "src": "machine",
+              "h": "f97ce8012a02"
+            },
+            "helpMapTarget": {
+              "t": "Učitaj u (ciljni sloj) na vrhu bira sloj koji prima zapise.",
+              "src": "machine",
+              "h": "b5834faf32c2"
+            },
+            "helpMapFixed": {
+              "t": "Pravila postavlja autor aplikacije, tako da nema ništa za promjenu na ovom koraku. Pritisnite Sljedeći.",
+              "src": "machine",
+              "h": "f4950bf878d1"
+            },
+            "helpMapAuto": {
+              "t": "Auto-match po imenu gradi pravila za polja čija se imena već slažu. Pročitajte ih prije nego što krenete dalje. Očistite sve počinje ispočetka.",
+              "src": "machine",
+              "h": "c46caacf628d"
+            },
+            "helpMapCard": {
+              "t": "Svako pravilo je mala karta: oblik na lijevoj strani, način promjene vrijednosti pored nje, zatim Izvor i Meta ispod.",
+              "src": "machine",
+              "h": "e5e9f39e6f1e"
+            },
+            "helpMapShapes": {
+              "t": "Oblici su 1:1 za jedno polje u jedno polje, M:1 za spajanje nekoliko polja u jedno, 1:M za podjelu jednog polja na nekoliko, a M:M za ostalo.",
+              "src": "machine",
+              "h": "ac0ebdff6806"
+            },
+            "helpMapSwitch": {
+              "t": "Mali prekidač na kartici isključuje jedno pravilo bez da ga izgubi. Kanta za smeće ga uklanja zauvijek.",
+              "src": "machine",
+              "h": "5c41ff94ad71"
+            },
+            "helpMapExpression": {
+              "t": "Izbor izraza omogućava vam da napišete kratku formulu, kao što su pomoćnici.upper($.NAME). Napišite $.FIELD da pročitate vrijednost iz vaših podataka.",
+              "src": "machine",
+              "h": "487d0971ca2e"
+            },
+            "helpMapFiles": {
+              "t": "Izvezi XML snima pravila u datoteku. Uvezi XML ih vraća, tako da ne gradite ista pravila dvaput.",
+              "src": "machine",
+              "h": "d8314493f5b9"
+            },
+            "helpMapGeometry": {
+              "t": "Geometrija na dnu odlučuje gdje se zapisi spuštaju: Koristite geometriju izvora čuva oblike koje ste donijeli, Gradite tačku iz X/Y polja čini tačku iz dva brojevna polja, a Nema geometrije (table) opterećenja redova bez oblika uopće.",
+              "src": "machine",
+              "h": "97979eddb48d"
+            },
+            "helpLoadTitle": {
+              "t": "Provjera i učitavanje",
+              "src": "machine",
+              "h": "c7dd5268dcf8"
+            },
+            "helpLoadIntro": {
+              "t": "Korak utovara provjerava rad, zatim zapise upisuje u sloj.",
+              "src": "machine",
+              "h": "f463eab885d8"
+            },
+            "helpLoadCheck": {
+              "t": "Provjerite podatke čita vaše zapise i izvještava o praznim vrijednostima, vrijednostima koje ne odgovaraju polju, tekstu koji je predugačak i vrijednostima koje polje ne dozvoljava.",
+              "src": "machine",
+              "h": "0747ded518e6"
+            },
+            "helpLoadPreview": {
+              "t": "Pregled prvog zapisa pokazuje kako će izgledati prvi red nakon pokretanja pravila.",
+              "src": "machine",
+              "h": "260c33e1b9b2"
+            },
+            "helpLoadMode": {
+              "t": "Način učitavanja odlučuje šta će se desiti sa svakim zapisom: Umetni (uvek dodaj novo), Ažuriraj samo (upari samo po ključu), ili Upsert (upsate meč, umetni novo).",
+              "src": "machine",
+              "h": "4ef7181814d1"
+            },
+            "helpLoadKey": {
+              "t": "Ažuriranje samo i Upsert trebaju polje Ključa: polje u sloju koje govori grafičkom elementu dva zapisa su isti zapis.",
+              "src": "machine",
+              "h": "6a34cb0e8ad6"
+            },
+            "helpLoadRun": {
+              "t": "Učitajte zapise, bar pokazuje koliko je dugačak, velika datoteka traje, pa neka završi.",
+              "src": "machine",
+              "h": "06474f988c1a"
+            },
+            "helpLoadResult": {
+              "t": "Na kraju dobijate broj šta je ušlo i šta nije uspjelo. Preuzimanje neuspjelih redova (CSV) daje vam greške kako biste ih popravili.",
+              "src": "machine",
+              "h": "54ec5601752f"
+            },
+            "helpLoadZoom": {
+              "t": "Karta se kreće na nove ploče kada su u.",
+              "src": "machine",
+              "h": "b2a5eef8a854"
+            },
+            "helpLoadReview": {
+              "t": "Uredi učitane zapise otvara korak Uređivanje tako da možeš pospremiti ono što si upravo donio.",
+              "src": "machine",
+              "h": "4909103a25ea"
+            },
+            "helpEditTitle": {
+              "t": "Izmjenjujem zapise",
+              "src": "machine",
+              "h": "7692b8bcff1f"
+            },
+            "helpEditIntro": {
+              "t": "Korak Uredivanja radi na zapisima koji su već u sloju.",
+              "src": "machine",
+              "h": "c30205ca1048"
+            },
+            "helpEditForm": {
+              "t": "Izaberite zapis i promijenite njegove vrijednosti u obrascu. Svaka promjena je snimljena u sloju koji napravite.",
+              "src": "machine",
+              "h": "3cd4a0fa795c"
+            },
+            "helpEditCreate": {
+              "t": "Možete dodati potpuno novu ploču iz obrasca.",
+              "src": "machine",
+              "h": "a8d4ccc1d654"
+            },
+            "helpEditDelete": {
+              "t": "Možete obrisati zapis iz obrasca. Nema poništenja, pa provjerite prije nego što to učinite.",
+              "src": "machine",
+              "h": "04dc7d7c5a75"
+            },
+            "helpEditGeometry": {
+              "t": "Sa mapom u aplikaciji možete pomjeriti osobine i preoblikovati ih.",
+              "src": "machine",
+              "h": "84548d0abaab"
+            },
+            "helpEditSymbology": {
+              "t": "Simbologija mijenja način iscrtavanja sloja na karti. Izaberite sloj, izaberite simbol, a karta precrtava.",
+              "src": "machine",
+              "h": "87f2730bd4e6"
+            },
+            "helpEditStartOver": {
+              "t": "Dodaj i učitaj nove podatke vraća vas na prvi korak.",
+              "src": "machine",
+              "h": "76f7749c303c"
+            },
+            "helpTroubleTitle": {
+              "t": "Ako nešto nije u redu",
+              "src": "machine",
+              "h": "6f7fec3ff1e0"
+            },
+            "helpTroubleNoTarget": {
+              "t": "Upozorenje kaže da ciljni sloj nije podešen: autor aplikacije nije odabrao sloj u koji će se učitati. Kontaktirajte GIS diviziju.",
+              "src": "machine",
+              "h": "8b9b00c2038a"
+            },
+            "helpTroubleNext": {
+              "t": "Sljedeći ostaje siv: nijedan izvorni sloj se još ne bira, ili se sloj u koji se ubacujete još uvijek otvara. Odaberite izvor i dajte mu trenutak.",
+              "src": "machine",
+              "h": "9cdabb45d73f"
+            },
+            "helpTroubleErrors": {
+              "t": "Crvene poruke na koraku učitavanja: tačka pravila na polju koje nije tu ili je potrebno polje prazno. Pritisnite Nazad i popravite pravila imena poruka.",
+              "src": "machine",
+              "h": "6e8659914dce"
+            },
+            "helpTroubleFailed": {
+              "t": "Neki zapisi nisu uspjeli: njihove vrijednosti nisu odgovarale poljima u sloju. Koristite neuspješne redove preuzimanja (CSV), popravite te redove i ponovo ih učitajte.",
+              "src": "machine",
+              "h": "8201fbc004ff"
+            },
+            "helpTroubleDates": {
+              "t": "Datumi dolaze prazni ili pogrešni: tekst datuma nije u obliku koji je očekivani grafički element. Na tom pravilu izaberite datumParse i ispunite format datuma unosa, na primjer MM/DD/GGGG.",
+              "src": "machine",
+              "h": "8118df4b072a"
+            },
+            "helpTroubleXY": {
+              "t": "Tačke slijeću na pogrešno mjesto: brojevi nisu u koordinatnom sistemu koje pravilo pretpostavlja. Provjerite Izvorni koordinatni sistem (WKID) pod Geometry.",
+              "src": "machine",
+              "h": "75797f633da6"
+            },
+            "helpTroubleDuplicates": {
+              "t": "Isti rekordi su išli u dva puta: Način učitavanja je bio Umetni (uvijek dodaj nove). Odaberite Upsert (upsate meč, umetni novi) i postavite polje za ključeve.",
+              "src": "machine",
+              "h": "95ae6c910d52"
+            },
+            "helpTroubleNoEdit": {
+              "t": "Korak izmjene kaže da sloj nije mogao biti pripremljen: sloj se možda ne može mijenjati ili se ne možete prijaviti sa pravima izmjene. Prijavite se i pokušajte ponovo.",
+              "src": "machine",
+              "h": "19210f41691f"
+            },
+            "helpTroubleContact": {
+              "t": "Još uvijek zapeo? Kontaktirajte odjel GIS-a i spomenite Add Edit ETL grafički element i ovu aplikaciju.",
+              "src": "machine",
+              "h": "edec6fd5fdd4"
+            },
+            "helpTipsTitle": {
+              "t": "Dobro je znati.",
+              "src": "machine",
+              "h": "79fc372dc790"
+            },
+            "helpTips1": {
+              "t": "Provjeri podatke prije svakog učitavanja.",
+              "src": "machine",
+              "h": "42ceb91b0f63"
+            },
+            "helpTips2": {
+              "t": "Pokušajte prvo nekoliko redova, pogledajte rezultat, a zatim učitajte cijelu datoteku.",
+              "src": "machine",
+              "h": "3dbb04f778ea"
+            },
+            "helpTips3": {
+              "t": "Kada su pravila ispravna, pritisnite Export XML. Sljedeći put možete pritisnuti Import XML umjesto da ih ponovo napravite.",
+              "src": "machine",
+              "h": "8ecbc7eccc4b"
+            },
+            "oosOutOfServiceActActive": {
+              "t": "OOS=Izvan servisa ACT=Aktivno",
+              "src": "machine",
+              "h": "c5b62f2c693c"
+            },
+            "numStreetCity": {
+              "t": "{num} {street}, {city}",
+              "src": "machine",
+              "h": "e1a6f40bf4bb"
+            },
+            "mappingIsFixedByTheApp": {
+              "t": "Mapiranje je fiksirano od strane autora aplikacije.",
+              "src": "machine",
+              "h": "3dea9b9e9e6e"
+            },
+            "transformFailed": {
+              "t": "transformator nije uspio",
+              "src": "machine",
+              "h": "89a29bca53c3"
+            },
+            "queryFailed": {
+              "t": "upit nije uspio",
+              "src": "machine",
+              "h": "2216814590a1"
+            },
+            "applyEditsError": {
+              "t": "greška pri primjeniEdits",
+              "src": "machine",
+              "h": "d380d5e11059"
+            },
+            "applyEditsUpdateError": {
+              "t": "applieEdits greška u ažuriranju",
+              "src": "machine",
+              "h": "09cd6d1b8b7d"
+            },
+            "applyEditsFailed": {
+              "t": "aplikacijaEdits nije uspjela",
+              "src": "machine",
+              "h": "cba928a1e6a6"
+            },
+            "unknownError": {
+              "t": "nepoznata greška",
+              "src": "machine",
+              "h": "af6321ca7a8b"
+            },
+            "unserializableError": {
+              "t": "Neserijalizacijska greška",
+              "src": "machine",
+              "h": "76e73551597a"
+            },
+            "layerReportsValue1": {
+              "t": "[slojevi izvještaja: {value1}",
+              "src": "machine",
+              "h": "2e04973cbc6d"
+            }
+          }
         },
         "ca": {
           "file": "ae934165f61b",
@@ -800,18 +1701,919 @@
           }
         },
         "hr": {
-          "file": "74001c4ad4ad",
+          "file": "929924ff1da4",
           "counts": {
             "esri": 30,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 180,
             "stale": 0,
-            "missing": 181
+            "missing": 1
           },
-          "entries": {}
+          "entries": {
+            "_widgetLabel": {
+              "t": "Dodaj, mapiraj i uredi podatke",
+              "src": "machine",
+              "h": "3c1ca1b2a639"
+            },
+            "stepMap": {
+              "t": "Polja mape",
+              "src": "machine",
+              "h": "6d8e95848f1f"
+            },
+            "stepLoad": {
+              "t": "_Učitaj",
+              "src": "machine",
+              "h": "ddcb77ff769e"
+            },
+            "mapWidget": {
+              "t": "Grafički element mape",
+              "src": "machine",
+              "h": "8b918e901bfa"
+            },
+            "showOnMap": {
+              "t": "Prikaži na karti & uvećanje za učitavanje",
+              "src": "machine",
+              "h": "2e0642953984"
+            },
+            "geometryEdit": {
+              "t": "Omogući uređivanje geometrije (potrebna karta)",
+              "src": "machine",
+              "h": "a4402395ca5e"
+            },
+            "editingOptions": {
+              "t": "Odrednice ispisa",
+              "src": "machine",
+              "h": "bac626727f6f"
+            },
+            "allowCreate": {
+              "t": "Dopusti dodavanje osobina",
+              "src": "machine",
+              "h": "55ae40ac6926"
+            },
+            "allowUpdate": {
+              "t": "Dopusti ažuriranje osobina",
+              "src": "machine",
+              "h": "a211fb02d1db"
+            },
+            "allowDelete": {
+              "t": "Dopusti brisanje osobina",
+              "src": "machine",
+              "h": "ebfa7aaaf243"
+            },
+            "allowGeometryUpdate": {
+              "t": "Dopusti pomicanje / preoblikovanje geometrije",
+              "src": "machine",
+              "h": "59fd8618d371"
+            },
+            "enableTooltips": {
+              "t": "Prikaži savjete crtanja",
+              "src": "machine",
+              "h": "6df7a3e8cb92"
+            },
+            "templateFilter": {
+              "t": "Prikaži izbornik predložaka",
+              "src": "machine",
+              "h": "b51afc6f6fc2"
+            },
+            "batchEditingOpt": {
+              "t": "Dopusti uređivanje serije",
+              "src": "machine",
+              "h": "27db04f7cb17"
+            },
+            "relatedRecords": {
+              "t": "Uredi povezane zapise",
+              "src": "machine",
+              "h": "b04af494dae0"
+            },
+            "editPermissions": {
+              "t": "Dozvole",
+              "src": "machine",
+              "h": "376cd254eee5"
+            },
+            "toolsSection": {
+              "t": "Alat za uređivanje",
+              "src": "machine",
+              "h": "0f26b0b2f1c6"
+            },
+            "editingBehavior": {
+              "t": "Uređivanje ponašanja",
+              "src": "machine",
+              "h": "e926844feed0"
+            },
+            "snapFeature": {
+              "t": "Snapping u odnosu na značajke",
+              "src": "machine",
+              "h": "def0d53c54a0"
+            },
+            "snapGrid": {
+              "t": "Mreža snapping",
+              "src": "machine",
+              "h": "3730c907e2b5"
+            },
+            "toolSplit": {
+              "t": "Razdijeli alat",
+              "src": "machine",
+              "h": "855ed2860aef"
+            },
+            "toolMerge": {
+              "t": "Alat za spajanje",
+              "src": "machine",
+              "h": "4e256074d5a1"
+            },
+            "toolCopyPaste": {
+              "t": "Kopiraj & zalijepi",
+              "src": "machine",
+              "h": "56fb3bda90b3"
+            },
+            "importXml": {
+              "t": "Uvezi XML",
+              "src": "machine",
+              "h": "85b4016d27dc"
+            },
+            "exportXml": {
+              "t": "Izvezi XML",
+              "src": "machine",
+              "h": "f6a2de2384a3"
+            },
+            "importHint": {
+              "t": "Učitaj spremljeno mapiranje polja (.xml)",
+              "src": "machine",
+              "h": "c29dc9134891"
+            },
+            "exportHint": {
+              "t": "Spremi ovo mapiranje polja kao ponovo upotrebljivu .xml datoteku",
+              "src": "machine",
+              "h": "3a6483ba1046"
+            },
+            "importReadError": {
+              "t": "Ne mogu pročitati odabranu datoteku.",
+              "src": "machine",
+              "h": "ec63f7b5577c"
+            },
+            "stepsNav": {
+              "t": "Koraci radnog toka",
+              "src": "machine",
+              "h": "1c0924019c5b"
+            },
+            "stepN": {
+              "t": "Korak {n}",
+              "src": "machine",
+              "h": "6706d4ba55e5"
+            },
+            "ruleEnabled": {
+              "t": "Pravilo omogućeno",
+              "src": "machine",
+              "h": "5b1cf16661ed"
+            },
+            "previewCaption": {
+              "t": "Pregled prvog transformiranog zapisa",
+              "src": "machine",
+              "h": "a5a1d78da972"
+            },
+            "zoomScale": {
+              "t": "Ljestvica uvećanja (1: ..., 0 = fit)",
+              "src": "machine",
+              "h": "2323a68c173b"
+            },
+            "zoomToSelected": {
+              "t": "Uvećaj odabranu osobinu",
+              "src": "machine",
+              "h": "f0aaee929ec1"
+            },
+            "loadInto": {
+              "t": "Učitaj u (ciljni sloj)",
+              "src": "machine",
+              "h": "d246f43aef77"
+            },
+            "symbologyHint": {
+              "t": "Promijeni način na koji su učitane značajke nacrtane na karti.",
+              "src": "machine",
+              "h": "346ee63aaf21"
+            },
+            "symbologyNoLayers": {
+              "t": "Nema značajke slojeva na karti za stil još.",
+              "src": "machine",
+              "h": "f584bf6fb2bc"
+            },
+            "dateFormat": {
+              "t": "Format datuma unosa",
+              "src": "machine",
+              "h": "1db54092bbe7"
+            },
+            "dateFormatHint": {
+              "t": "Tokeni: GGGG GG MM DD HH mm ss. Blank pokušava ISO, zatim opće parsiranje.",
+              "src": "machine",
+              "h": "5248445ae05f"
+            },
+            "valueMap": {
+              "t": "Karta vrijednosti (jedna po liniji, od=do)",
+              "src": "machine",
+              "h": "f4770c10cd51"
+            },
+            "valueMapHint": {
+              "t": "Dolazni vrijednosti na lijevoj strani, ciljne vrijednosti na desnoj strani.",
+              "src": "machine",
+              "h": "d737bf964e25"
+            },
+            "unmapped": {
+              "t": "Kada vrijednost nije na karti",
+              "src": "machine",
+              "h": "527668819285"
+            },
+            "unmappedPassthrough": {
+              "t": "Zadrži izvornu vrijednost",
+              "src": "machine",
+              "h": "fe1c98297492"
+            },
+            "unmappedNull": {
+              "t": "Zapiši ništa",
+              "src": "machine",
+              "h": "f26308bd4537"
+            },
+            "unmappedDefault": {
+              "t": "Zadano",
+              "src": "machine",
+              "h": "76cf00611f51"
+            },
+            "factor": {
+              "t": "Pomnoži",
+              "src": "machine",
+              "h": "ec00877ab82d"
+            },
+            "offset": {
+              "t": "Zatim dodaj",
+              "src": "machine",
+              "h": "fd38928ac2dd"
+            },
+            "numberScaleHint": {
+              "t": "Izlaz = vrijednost x faktor + pomak. Primjer: stopa do metara koristi 0,3048.",
+              "src": "machine",
+              "h": "2140beb47730"
+            },
+            "templateHint": {
+              "t": "Koristi {fieldName} mjesta držača iz dodanih podataka.",
+              "src": "machine",
+              "h": "183ee4fbd657"
+            },
+            "loadMode": {
+              "t": "Način učitavanja",
+              "src": "machine",
+              "h": "c15b94951457"
+            },
+            "loadModeInsert": {
+              "t": "Umetni (uvijek dodaj novu)",
+              "src": "machine",
+              "h": "43743638e546"
+            },
+            "loadModeUpdate": {
+              "t": "Samo ažuriranje (uparivanje po ključu)",
+              "src": "machine",
+              "h": "19e474d53059"
+            },
+            "loadModeUpsert": {
+              "t": "Ažuriraj (update meč, umetni novi)",
+              "src": "machine",
+              "h": "36aa5d933076"
+            },
+            "keyField": {
+              "t": "Polje ključeva",
+              "src": "machine",
+              "h": "4c06ca6c880a"
+            },
+            "keyFieldRequired": {
+              "t": "Odaberite ciljno polje koje identificira odgovarajuću osobinu.",
+              "src": "machine",
+              "h": "c5a507129a8e"
+            },
+            "qaCheck": {
+              "t": "Provjeri podatke",
+              "src": "machine",
+              "h": "6f69610af09d"
+            },
+            "qaClean": {
+              "t": "Nisu pronađeni problemi s kvalitetom podataka.",
+              "src": "machine",
+              "h": "5b9ccef99ecb"
+            },
+            "qaCaption": {
+              "t": "Problemi kvalitete podataka prema ciljnom polju",
+              "src": "machine",
+              "h": "f06072d4d63c"
+            },
+            "qaNulls": {
+              "t": "Nule",
+              "src": "machine",
+              "h": "3d1fa2631019"
+            },
+            "qaCoercion": {
+              "t": "Loše vrijednosti",
+              "src": "machine",
+              "h": "1512964d1b15"
+            },
+            "qaTrunc": {
+              "t": "Izbrisano",
+              "src": "machine",
+              "h": "969137441b20"
+            },
+            "qaDomain": {
+              "t": "Nije u domeni",
+              "src": "machine",
+              "h": "64f9e8ec8001"
+            },
+            "qaSamples": {
+              "t": "Uzorci",
+              "src": "machine",
+              "h": "0fb59422f600"
+            },
+            "qaDupKeys": {
+              "t": "{count} dvostruke ključne vrijednosti u dolazećim podacima",
+              "src": "machine",
+              "h": "635fae44ba3a"
+            },
+            "upsertCounts": {
+              "t": "{inserted} umetnut, {updated} ažuriran",
+              "src": "machine",
+              "h": "864c1a4fc7d9"
+            },
+            "downloadFailed": {
+              "t": "Preuzimanje neuspjelih redova (CSV)",
+              "src": "machine",
+              "h": "f7960e59ec89"
+            },
+            "editExisting": {
+              "t": "Uredi postojeće podatke",
+              "src": "machine",
+              "h": "91df962f787f"
+            },
+            "editExistingHint": {
+              "t": "Preskoči učitavanje i uređivanje značajki već u ciljnom sloju.",
+              "src": "machine",
+              "h": "77a68431b3df"
+            },
+            "startOver": {
+              "t": "& Učitaj nove podatke",
+              "src": "machine",
+              "h": "37697a0a17fc"
+            },
+            "editUnavailable": {
+              "t": "Ciljni sloj nije se mogao pripremiti za uređivanje.",
+              "src": "machine",
+              "h": "e1bffed24933"
+            },
+            "addPrompt": {
+              "t": "Dodajte podatke iz datoteke, URL ili ArcGIS sadržaja, a zatim nastavite mapirati njegova polja.",
+              "src": "machine",
+              "h": "9a4de6c3ef1c"
+            },
+            "noTarget": {
+              "t": "Ciljni sloj nije podešen. Postavite jedan u postavkama widgeta.",
+              "src": "machine",
+              "h": "6beedc018bd5"
+            },
+            "noSource": {
+              "t": "Dodajte prvo podatke, a zatim odaberite koji dodani sloj za kartu.",
+              "src": "machine",
+              "h": "dc3ab650c55b"
+            },
+            "mappingTitle": {
+              "t": "Mapiranje polja",
+              "src": "machine",
+              "h": "eb217b68ed2b"
+            },
+            "target": {
+              "t": "Cilj:",
+              "src": "machine",
+              "h": "61ad50a9b918"
+            },
+            "cardinality": {
+              "t": "Kardinalnost",
+              "src": "machine",
+              "h": "404a27102147"
+            },
+            "addRule": {
+              "t": "Dodaj pravilo mapiranja",
+              "src": "machine",
+              "h": "2a289ce61b97"
+            },
+            "autoMatch": {
+              "t": "Automatsko poklapanje po imenu",
+              "src": "machine",
+              "h": "e14a5bf525c5"
+            },
+            "geometryPassthrough": {
+              "t": "Koristi geometriju izvora",
+              "src": "machine",
+              "h": "a0f13be70f1c"
+            },
+            "geometryFromXY": {
+              "t": "Izgradnja točke iz X/Y polja",
+              "src": "machine",
+              "h": "b54c3f5ee91c"
+            },
+            "geometryNone": {
+              "t": "Nema geometrije (tablica)",
+              "src": "machine",
+              "h": "980bf4b8ff3e"
+            },
+            "xField": {
+              "t": "Polje X / Dužina",
+              "src": "machine",
+              "h": "7005c87922ae"
+            },
+            "yField": {
+              "t": "Polje za y / geografsku širinu",
+              "src": "machine",
+              "h": "1f6df9af0c03"
+            },
+            "zField": {
+              "t": "Z polje (nije obvezno)",
+              "src": "machine",
+              "h": "65f0513a9ed1"
+            },
+            "sourceWkid": {
+              "t": "Izvorni koordinatni sustav (WKID)",
+              "src": "machine",
+              "h": "10af9b33f8d8"
+            },
+            "delimiter": {
+              "t": "Razgraničivač",
+              "src": "machine",
+              "h": "5e96ff2a317d"
+            },
+            "constant": {
+              "t": "Stalna vrijednost",
+              "src": "machine",
+              "h": "5942571c67e3"
+            },
+            "regex": {
+              "t": "Regularni izraz",
+              "src": "machine",
+              "h": "cdfc76a8a310"
+            },
+            "previewRow": {
+              "t": "Pregled prve ploče",
+              "src": "machine",
+              "h": "09052252d614"
+            },
+            "validationErrors": {
+              "t": "Riješite ovo prije učitavanja:",
+              "src": "machine",
+              "h": "97888f9a9665"
+            },
+            "validationWarnings": {
+              "t": "Upozorenja",
+              "src": "machine",
+              "h": "147d1c15fbcb"
+            },
+            "noIssues": {
+              "t": "Nisu pronađeni problemi.",
+              "src": "machine",
+              "h": "b280a146c8c5"
+            },
+            "load": {
+              "t": "Učitaj {count} zapise",
+              "src": "machine",
+              "h": "ad5e39c301e6"
+            },
+            "loading": {
+              "t": "Učitavanje... {done}/{total}",
+              "src": "machine",
+              "h": "ccc43edd775b"
+            },
+            "phaseReading": {
+              "t": "Čitam izvorne zapise...",
+              "src": "machine",
+              "h": "5895e1256a22"
+            },
+            "phaseTransforming": {
+              "t": "Preoblikovanje zapisa...",
+              "src": "machine",
+              "h": "1b97e49f17c8"
+            },
+            "phaseWriting": {
+              "t": "Zapis u ciljni sloj",
+              "src": "machine",
+              "h": "6256795e216e"
+            },
+            "phaseDonePrefix": {
+              "t": "Završavam...",
+              "src": "machine",
+              "h": "87dcf408ccbf"
+            },
+            "featuresOfTotal": {
+              "t": "{done} od {total} obilježja",
+              "src": "machine",
+              "h": "517c39a9ab9f"
+            },
+            "loadDone": {
+              "t": "Učitano {ok} od {attempted} zapisa ({failed} nije uspjelo).",
+              "src": "machine",
+              "h": "03ff5e93caf5"
+            },
+            "reviewEdit": {
+              "t": "Uredi učitane zapise",
+              "src": "machine",
+              "h": "41e5e5e894e1"
+            },
+            "rulesCount": {
+              "t": "{count} pravila",
+              "src": "machine",
+              "h": "d137c1c25e1a"
+            },
+            "removeRule": {
+              "t": "Ukloni pravilo",
+              "src": "machine",
+              "h": "e0d4ffd03eb8"
+            },
+            "expressionHelp": {
+              "t": "Koristite $.FIELD za izvorne vrijednosti, npr. pomagači.upper($.NAME). Jedan izraz po meti.",
+              "src": "machine",
+              "h": "c771284be27e"
+            },
+            "helpIntro": {
+              "t": "Ovaj widget donosi vanjske podatke u sloj karte: dodajete podatke, poredate njegova polja s poljima u sloju, zatim učitate zapise.",
+              "src": "machine",
+              "h": "da5addf8b08a"
+            },
+            "helpSearchPlaceholder": {
+              "t": "Pretraži vodič (pokušajte učitati ilipolja",
+              "src": "machine",
+              "h": "9ae87d164e12"
+            },
+            "helpNoMatches": {
+              "t": "Ništa u vodiču ne odgovara toj riječi. Pokušajte drugi, ili otvorite dijelove iznad.",
+              "src": "machine",
+              "h": "3fe179f75330"
+            },
+            "firstRunTitle": {
+              "t": "Novi ovdje?",
+              "src": "machine",
+              "h": "b81f2e17e001"
+            },
+            "firstRunBody": {
+              "t": "Dodajte podatke, poredajte polja s ciljnim slojem, zatim učitajte zapise.",
+              "src": "machine",
+              "h": "7fef34676eb4"
+            },
+            "firstRunHelpLink": {
+              "t": "Otvori vodič.",
+              "src": "machine",
+              "h": "2447dd6134ea"
+            },
+            "firstRunDismiss": {
+              "t": "Otpust",
+              "src": "machine",
+              "h": "70afe9eff3f2"
+            },
+            "helpWayFile": {
+              "t": "datoteka s vašeg računala",
+              "src": "machine",
+              "h": "5e4d1afd5157"
+            },
+            "helpWaySearch": {
+              "t": "stavka iz ArcGIS-a",
+              "src": "machine",
+              "h": "473b7113c7ea"
+            },
+            "helpStartTitle": {
+              "t": "Počnite ovdje: tri koraka",
+              "src": "machine",
+              "h": "789320b4831d"
+            },
+            "helpStart1": {
+              "t": "Na Dodaj podatke, unesite svoje podatke, a zatim ih odaberite pod Izvornim slojem. Možete koristiti {ways}.",
+              "src": "machine",
+              "h": "71d2ffca7662"
+            },
+            "helpStart1NoWays": {
+              "t": "Na Dodaj podatke, unesite svoje podatke, a zatim ih odaberite pod Izvornim slojem.",
+              "src": "machine",
+              "h": "55b63c54df6c"
+            },
+            "helpStart2": {
+              "t": "Pritisnite Sljedeća do Mapa polja. Pročitajte svako pravilo i provjerite je li pravo polje iz vaših podataka hrani pravo polje u sloju.",
+              "src": "machine",
+              "h": "d06147ea5faf"
+            },
+            "helpStart3": {
+              "t": "Pritisnite Sljedeća do učitavanja. Pritisnite Check podatke, pogledajte što je pronašao, a zatim pritisnite Load zapise.",
+              "src": "machine",
+              "h": "ebc8fcdaded5"
+            },
+            "helpAddTitle": {
+              "t": "Dodavanje vaših podataka",
+              "src": "machine",
+              "h": "3ed6367d27d1"
+            },
+            "helpAddIntro": {
+              "t": "Korak dodavanja podataka je mjesto gdje vaši zapisi dolaze u.",
+              "src": "machine",
+              "h": "35618319c53f"
+            },
+            "helpAddFile": {
+              "t": "Datoteka: CSV, zipped format file, GeoJSON ili KML s vašeg računala.",
+              "src": "machine",
+              "h": "8619367794b4"
+            },
+            "helpAddUrl": {
+              "t": "Web adresa: zalijepite link na sloj ili uslugu.",
+              "src": "machine",
+              "h": "8ed337485e51"
+            },
+            "helpAddSearch": {
+              "t": "ArcGIS sadržaj: potraga za slojem koji je već objavljen.",
+              "src": "machine",
+              "h": "0f7c955679cc"
+            },
+            "helpAddList": {
+              "t": "Sve što donesete je upisano pod gumb. Kanta za smeće pored imena ga vraća van.",
+              "src": "machine",
+              "h": "2ddc1296dfbf"
+            },
+            "helpAddSource": {
+              "t": "Izaberi jedan od njih ispod Izvornog sloja. To su podaci na kojima iduća dva koraka rade.",
+              "src": "machine",
+              "h": "cb7afe4fc8da"
+            },
+            "helpAddEditExisting": {
+              "t": "Uredi postojeće podatke na dnu preskače ravno na korak Uredi, za popravljanje zapisa koji su već u sloju.",
+              "src": "machine",
+              "h": "e347f05ad426"
+            },
+            "helpMapTitle": {
+              "t": "Usklađivanje polja",
+              "src": "machine",
+              "h": "6e76aedd32f0"
+            },
+            "helpMapIntro": {
+              "t": "Pravilo kaže koje polje iz vaših podataka ispunjava polje u sloju.",
+              "src": "machine",
+              "h": "f97ce8012a02"
+            },
+            "helpMapTarget": {
+              "t": "Učitaj u (ciljni sloj) na vrhu odabire sloj koji prima zapise.",
+              "src": "machine",
+              "h": "b5834faf32c2"
+            },
+            "helpMapFixed": {
+              "t": "Pravila postavlja autor aplikacije, tako da nema ništa za promjenu na ovom koraku. Pritisnite Sljedeći.",
+              "src": "machine",
+              "h": "f4950bf878d1"
+            },
+            "helpMapAuto": {
+              "t": "Auto-match po imenu gradi pravila za polja čija se imena već slažu. Pročitajte ih prije nego što krenete dalje. Očistite sve počinje ispočetka.",
+              "src": "machine",
+              "h": "c46caacf628d"
+            },
+            "helpMapCard": {
+              "t": "Svako pravilo je mala karta: oblik na lijevoj strani, način da se promijeni vrijednost pored nje, zatim Izvor i Meta ispod.",
+              "src": "machine",
+              "h": "e5e9f39e6f1e"
+            },
+            "helpMapShapes": {
+              "t": "Oblici su 1:1 za jedno polje u jedno polje, M:1 za spajanje nekoliko polja u jedno, 1:M za podjelu jednog polja na nekoliko, a M:M za ostalo.",
+              "src": "machine",
+              "h": "ac0ebdff6806"
+            },
+            "helpMapSwitch": {
+              "t": "Mali prekidač na kartici isključuje jedno pravilo bez da ga izgubi. Kanta za smeće ga uklanja zauvijek.",
+              "src": "machine",
+              "h": "5c41ff94ad71"
+            },
+            "helpMapExpression": {
+              "t": "Izbor izraza omogućuje vam da napišete kratku formulu, kao što su pomagači.upper($.NAME). Napišite $.FIELD pročitati vrijednost iz vaših podataka.",
+              "src": "machine",
+              "h": "487d0971ca2e"
+            },
+            "helpMapFiles": {
+              "t": "Izvoz XML sprema pravila u datoteku. Uvoz XML ih vraća, tako da ne gradite ista pravila dvaput.",
+              "src": "machine",
+              "h": "d8314493f5b9"
+            },
+            "helpMapGeometry": {
+              "t": "Geometrija na dnu odlučuje gdje zapisi slijeću: Koristite izvornu geometriju čuva oblike koje ste donijeli, Graditi točku iz X/Y polja čini točku iz dva broj polja, i nema geometrija (tablica) opterećenja redovi bez oblika na sve.",
+              "src": "machine",
+              "h": "97979eddb48d"
+            },
+            "helpLoadTitle": {
+              "t": "Provjera i učitavanje",
+              "src": "machine",
+              "h": "c7dd5268dcf8"
+            },
+            "helpLoadIntro": {
+              "t": "Korak utovara provjerava rad, a zatim zapise upisuje u sloj.",
+              "src": "machine",
+              "h": "f463eab885d8"
+            },
+            "helpLoadCheck": {
+              "t": "Provjerite podatke čita vaše zapise i izvještava o praznim vrijednostima, vrijednostima koje ne odgovaraju polju, tekstu koji je predugačak, a vrijednosti koje polje ne dopušta.",
+              "src": "machine",
+              "h": "0747ded518e6"
+            },
+            "helpLoadPreview": {
+              "t": "Pregled prvog zapisa pokazuje kako će izgledati prvi red nakon pokretanja pravila.",
+              "src": "machine",
+              "h": "260c33e1b9b2"
+            },
+            "helpLoadMode": {
+              "t": "Način učitavanja odlučuje što će se dogoditi sa svakim zapisom: Umetnite (uvijek dodajte novo), Ažurirajte samo (uparite ključem), ili Upsert (update meč, umetnite novo).",
+              "src": "machine",
+              "h": "4ef7181814d1"
+            },
+            "helpLoadKey": {
+              "t": "Ažuriranje samo i Upsert treba Key polje: polje u sloju koji govori widget dva zapisa su isti zapis.",
+              "src": "machine",
+              "h": "6a34cb0e8ad6"
+            },
+            "helpLoadRun": {
+              "t": "Učitajte zapise piše u. Bar pokazuje koliko je daleko. Veliki datoteka traje neko vrijeme, pa neka ga završiti.",
+              "src": "machine",
+              "h": "06474f988c1a"
+            },
+            "helpLoadResult": {
+              "t": "Na kraju dobijete broj od onoga što je otišao u i što nije uspjelo. Download neuspjeli redovi (CSV) vam daje neuspjehe tako da ih možete popraviti.",
+              "src": "machine",
+              "h": "54ec5601752f"
+            },
+            "helpLoadZoom": {
+              "t": "Karta se kreće na nove ploče nakon što su u.",
+              "src": "machine",
+              "h": "b2a5eef8a854"
+            },
+            "helpLoadReview": {
+              "t": "Uredi učitane ploče otvara Uređivanje korak tako da možete počistiti ono što ste upravo donijeli u.",
+              "src": "machine",
+              "h": "4909103a25ea"
+            },
+            "helpEditTitle": {
+              "t": "Uređivanje zapisa",
+              "src": "machine",
+              "h": "7692b8bcff1f"
+            },
+            "helpEditIntro": {
+              "t": "Korak Uredivanja radi na zapisima koji su već u sloju.",
+              "src": "machine",
+              "h": "c30205ca1048"
+            },
+            "helpEditForm": {
+              "t": "Odaberite zapis i promijenite njegove vrijednosti u obliku. Svaka promjena je spremljena u sloj dok ga pravite.",
+              "src": "machine",
+              "h": "3cd4a0fa795c"
+            },
+            "helpEditCreate": {
+              "t": "Možete dodati potpuno novu ploču iz obrasca.",
+              "src": "machine",
+              "h": "a8d4ccc1d654"
+            },
+            "helpEditDelete": {
+              "t": "Možete obrisati zapis iz obrasca. Nema poništenja, tako da provjerite prije nego što to učinite.",
+              "src": "machine",
+              "h": "04dc7d7c5a75"
+            },
+            "helpEditGeometry": {
+              "t": "Uz kartu u aplikaciji možete premjestiti značajke i preoblikovati ih.",
+              "src": "machine",
+              "h": "84548d0abaab"
+            },
+            "helpEditSymbology": {
+              "t": "Simbologija mijenja način na koji je sloj iscrtan na karti. Odaberite Sloj, odaberite simbol, a karta precrtava.",
+              "src": "machine",
+              "h": "87f2730bd4e6"
+            },
+            "helpEditStartOver": {
+              "t": "Dodaj & učitaj nove podatke vraća te na prvi korak.",
+              "src": "machine",
+              "h": "76f7749c303c"
+            },
+            "helpTroubleTitle": {
+              "t": "Ako nešto izgleda loše",
+              "src": "machine",
+              "h": "6f7fec3ff1e0"
+            },
+            "helpTroubleNoTarget": {
+              "t": "Upozorenje kaže da ciljni sloj nije konfiguriran: autor aplikacije nije odabrao sloj u koji će se učitati. Kontaktirajte GIS diviziju.",
+              "src": "machine",
+              "h": "8b9b00c2038a"
+            },
+            "helpTroubleNext": {
+              "t": "Sljedeći ostaje siva: ne Izvorni sloj je izabran još, ili sloj ste se utovaruju u još uvijek otvara. Odaberite izvor i dati mu trenutak.",
+              "src": "machine",
+              "h": "9cdabb45d73f"
+            },
+            "helpTroubleErrors": {
+              "t": "Crvene poruke na koraku učitavanja: pravila pokazuju na polju koje nije tu, ili je potrebno polje ostavljeno prazno. Pritisnite unatrag i popravite pravila imena poruka.",
+              "src": "machine",
+              "h": "6e8659914dce"
+            },
+            "helpTroubleFailed": {
+              "t": "Neki zapisi nisu uspjeli: njihove vrijednosti nisu odgovarale poljima u sloju. Koristite neispravne redove za preuzimanje (CSV), popravite te redove i ponovno ih učitajte.",
+              "src": "machine",
+              "h": "8201fbc004ff"
+            },
+            "helpTroubleDates": {
+              "t": "Datumi dolaze prazni ili pogrešni: tekst datuma nije u obliku koji se očekuje. Na tom pravilu odaberite datumParse i popunite format datuma unosa, na primjer MM/DD/GGGG.",
+              "src": "machine",
+              "h": "8118df4b072a"
+            },
+            "helpTroubleXY": {
+              "t": "Točke slijeću na pogrešno mjesto: brojevi nisu u koordinatnom sustavu pravila pretpostavlja. Provjerite Izvorni koordinatni sustav (WKID) pod Geometry.",
+              "src": "machine",
+              "h": "75797f633da6"
+            },
+            "helpTroubleDuplicates": {
+              "t": "Isti zapisi su išli u dva puta: Način učitavanja je bio Umetni (uvijek dodajte nove). Odaberite Upsert (upsate meč, umetni novi) i postavite polje ključa.",
+              "src": "machine",
+              "h": "95ae6c910d52"
+            },
+            "helpTroubleNoEdit": {
+              "t": "Korak Uredivanja kaže da se sloj nije mogao pripremiti: sloj se možda ne može uređivati, ili se možda nećete upisati s pravima da ga uredite. Prijavite se i pokušajte ponovno.",
+              "src": "machine",
+              "h": "19210f41691f"
+            },
+            "helpTroubleContact": {
+              "t": "Još uvijek zaglavi? Kontaktirajte GIS Division i spomenuti Dodaj Edit ETL widget i ovu aplikaciju.",
+              "src": "machine",
+              "h": "edec6fd5fdd4"
+            },
+            "helpTipsTitle": {
+              "t": "Dobro je znati.",
+              "src": "machine",
+              "h": "79fc372dc790"
+            },
+            "helpTips1": {
+              "t": "Pokrenite provjeru podataka prije svakog opterećenja. To je brzo, i to hvata većinu problema.",
+              "src": "machine",
+              "h": "42ceb91b0f63"
+            },
+            "helpTips2": {
+              "t": "Prvo pokušajte nekoliko redova, pogledajte rezultat, a zatim učitajte cijelu datoteku.",
+              "src": "machine",
+              "h": "3dbb04f778ea"
+            },
+            "helpTips3": {
+              "t": "Kada su pravila ispravna, pritisnite Export XML. Sljedeći put možete pritisnuti Uvoz XML umjesto da ih ponovno izgradite.",
+              "src": "machine",
+              "h": "8ecbc7eccc4b"
+            },
+            "oosOutOfServiceActActive": {
+              "t": "OOS=Izvan službe ACT=Aktivno",
+              "src": "machine",
+              "h": "c5b62f2c693c"
+            },
+            "numStreetCity": {
+              "t": "{num} {street}, {city}",
+              "src": "machine",
+              "h": "e1a6f40bf4bb"
+            },
+            "mappingIsFixedByTheApp": {
+              "t": "Mapiranje je fiksirano od strane autora aplikacije.",
+              "src": "machine",
+              "h": "3dea9b9e9e6e"
+            },
+            "transformFailed": {
+              "t": "transformacija nije uspjela",
+              "src": "machine",
+              "h": "89a29bca53c3"
+            },
+            "queryFailed": {
+              "t": "upit nije uspio",
+              "src": "machine",
+              "h": "2216814590a1"
+            },
+            "applyEditsError": {
+              "t": "aplicirajEdits error",
+              "src": "machine",
+              "h": "d380d5e11059"
+            },
+            "applyEditsUpdateError": {
+              "t": "aplicirajEdits greška ažuriranja",
+              "src": "machine",
+              "h": "09cd6d1b8b7d"
+            },
+            "applyEditsFailed": {
+              "t": "aplikacijaEdits nije uspjela",
+              "src": "machine",
+              "h": "cba928a1e6a6"
+            },
+            "unknownError": {
+              "t": "nepoznata greška",
+              "src": "machine",
+              "h": "af6321ca7a8b"
+            },
+            "unserializableError": {
+              "t": "Neserijalizacijska greška",
+              "src": "machine",
+              "h": "76e73551597a"
+            },
+            "layerReportsValue1": {
+              "t": "[slojevi izvještaja: {value1}",
+              "src": "machine",
+              "h": "2e04973cbc6d"
+            }
+          }
         },
         "hu": {
           "file": "3bc4f318c095",
@@ -1399,18 +3201,924 @@
           }
         },
         "sr": {
-          "file": "18995a066892",
+          "file": "33d26d7b6883",
           "counts": {
             "esri": 30,
             "esri-check": 1,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 181,
             "stale": 0,
-            "missing": 181
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "_widgetLabel": {
+              "t": "Додавање, мапа и уређивање података",
+              "src": "machine",
+              "h": "3c1ca1b2a639"
+            },
+            "stepMap": {
+              "t": "Polja mape",
+              "src": "machine",
+              "h": "6d8e95848f1f"
+            },
+            "stepLoad": {
+              "t": "Učitaj",
+              "src": "machine",
+              "h": "ddcb77ff769e"
+            },
+            "mapWidget": {
+              "t": "Мапа виџетаQShortcut",
+              "src": "machine",
+              "h": "8b918e901bfa"
+            },
+            "showOnMap": {
+              "t": "Прикажи на мапи & увећај за учитавање",
+              "src": "machine",
+              "h": "2e0642953984"
+            },
+            "geometryEdit": {
+              "t": "Uključi uređivanje geometrije (potrebna mapa)",
+              "src": "machine",
+              "h": "a4402395ca5e"
+            },
+            "editingOptions": {
+              "t": "Uređivanje opcija",
+              "src": "machine",
+              "h": "bac626727f6f"
+            },
+            "allowCreate": {
+              "t": "Dozvoli dodavanje osobina",
+              "src": "machine",
+              "h": "55ae40ac6926"
+            },
+            "allowUpdate": {
+              "t": "Dozvoli ažuriranje osobina",
+              "src": "machine",
+              "h": "a211fb02d1db"
+            },
+            "allowDelete": {
+              "t": "Dozvoli brisanje osobina",
+              "src": "machine",
+              "h": "ebfa7aaaf243"
+            },
+            "allowGeometryUpdate": {
+              "t": "Dozvoli pomicanje / preoblikovanje geometrije",
+              "src": "machine",
+              "h": "59fd8618d371"
+            },
+            "enableTooltips": {
+              "t": "Прикажи обавлаке за цртање@ info: whatsthis",
+              "src": "machine",
+              "h": "6df7a3e8cb92"
+            },
+            "templateFilter": {
+              "t": "Prikaži birač šablona",
+              "src": "machine",
+              "h": "b51afc6f6fc2"
+            },
+            "batchEditingOpt": {
+              "t": "Dozvoli uređivanje serije",
+              "src": "machine",
+              "h": "27db04f7cb17"
+            },
+            "relatedRecords": {
+              "t": "Uredi povezane zapise",
+              "src": "machine",
+              "h": "b04af494dae0"
+            },
+            "editPermissions": {
+              "t": "Izmijeni dozvole",
+              "src": "machine",
+              "h": "376cd254eee5"
+            },
+            "toolsSection": {
+              "t": "Alati za uređivanje",
+              "src": "machine",
+              "h": "0f26b0b2f1c6"
+            },
+            "editingBehavior": {
+              "t": "Uređivanje ponašanja",
+              "src": "machine",
+              "h": "e926844feed0"
+            },
+            "snapFeature": {
+              "t": "Snapping od znaèaja do osobine",
+              "src": "machine",
+              "h": "def0d53c54a0"
+            },
+            "snapGrid": {
+              "t": "Mreža se lomi.",
+              "src": "machine",
+              "h": "3730c907e2b5"
+            },
+            "toolSplit": {
+              "t": "Razdvoji alat",
+              "src": "machine",
+              "h": "855ed2860aef"
+            },
+            "toolMerge": {
+              "t": "Alat za spajanje",
+              "src": "machine",
+              "h": "4e256074d5a1"
+            },
+            "toolCopyPaste": {
+              "t": "Копирај & пастуве",
+              "src": "machine",
+              "h": "56fb3bda90b3"
+            },
+            "importXml": {
+              "t": "Увези ~@ ¦ИксМЛ¦XML¦",
+              "src": "machine",
+              "h": "85b4016d27dc"
+            },
+            "exportXml": {
+              "t": "Извези ~@ ¦ИксМЛ¦XML¦",
+              "src": "machine",
+              "h": "f6a2de2384a3"
+            },
+            "importHint": {
+              "t": "Учитај сачувано мапирање поља (.xml)",
+              "src": "machine",
+              "h": "c29dc9134891"
+            },
+            "exportHint": {
+              "t": "Sačuvaj ovo mapiranje polja kao ponovo upotrebljivu .xml datoteku",
+              "src": "machine",
+              "h": "3a6483ba1046"
+            },
+            "importReadError": {
+              "t": "Ne mogu da pročitam odabranu datoteku.",
+              "src": "machine",
+              "h": "ec63f7b5577c"
+            },
+            "stepsNav": {
+              "t": "Koraci radnog toka",
+              "src": "machine",
+              "h": "1c0924019c5b"
+            },
+            "stepN": {
+              "t": "Korak {n}",
+              "src": "machine",
+              "h": "6706d4ba55e5"
+            },
+            "ruleEnabled": {
+              "t": "Pravilo omoguæeno.",
+              "src": "machine",
+              "h": "5b1cf16661ed"
+            },
+            "previewCaption": {
+              "t": "Pregled prvog transformisanog zapisa",
+              "src": "machine",
+              "h": "a5a1d78da972"
+            },
+            "zoomScale": {
+              "t": "Zoom skala (1: ..., 0 = fit)",
+              "src": "machine",
+              "h": "2323a68c173b"
+            },
+            "zoomToSelected": {
+              "t": "Uvećaj odabranu osobinu",
+              "src": "machine",
+              "h": "f0aaee929ec1"
+            },
+            "loadInto": {
+              "t": "Učitaj u (ciljni sloj)",
+              "src": "machine",
+              "h": "d246f43aef77"
+            },
+            "symbologyHint": {
+              "t": "Promeni način na koji se učitane osobine iscrtavaju na mapi.",
+              "src": "machine",
+              "h": "346ee63aaf21"
+            },
+            "symbologyNoLayers": {
+              "t": "Na mapi još nema slojeva za stil.",
+              "src": "machine",
+              "h": "f584bf6fb2bc"
+            },
+            "dateFormat": {
+              "t": "Format datuma unosa",
+              "src": "machine",
+              "h": "1db54092bbe7"
+            },
+            "dateFormatHint": {
+              "t": "Tokeni: GGGG GG MM DD HH mm ss. Blank pokušava ISO, zatim generalno parsing.",
+              "src": "machine",
+              "h": "5248445ae05f"
+            },
+            "valueMap": {
+              "t": "Мапа вредности (једна по линији, од= до)",
+              "src": "machine",
+              "h": "f4770c10cd51"
+            },
+            "valueMapHint": {
+              "t": "Nadolazeæe vrednosti levo, mete desno.",
+              "src": "machine",
+              "h": "d737bf964e25"
+            },
+            "unmapped": {
+              "t": "Kada vrednost nije u mapi",
+              "src": "machine",
+              "h": "527668819285"
+            },
+            "unmappedPassthrough": {
+              "t": "Zadrži originalnu vrednost",
+              "src": "machine",
+              "h": "fe1c98297492"
+            },
+            "unmappedNull": {
+              "t": "Piši ništa.",
+              "src": "machine",
+              "h": "f26308bd4537"
+            },
+            "unmappedDefault": {
+              "t": "Napisati podrazumevano",
+              "src": "machine",
+              "h": "76cf00611f51"
+            },
+            "factor": {
+              "t": "Pomnoži sa",
+              "src": "machine",
+              "h": "ec00877ab82d"
+            },
+            "offset": {
+              "t": "Onda dodaj",
+              "src": "machine",
+              "h": "fd38928ac2dd"
+            },
+            "numberScaleHint": {
+              "t": "Izlaz = vrednost x faktor + ofset. Primer: stopa do metara koristi 0,3048.",
+              "src": "machine",
+              "h": "2140beb47730"
+            },
+            "templateHint": {
+              "t": "Koristite {fieldName} mestodržače iz dodatih podataka.",
+              "src": "machine",
+              "h": "183ee4fbd657"
+            },
+            "loadMode": {
+              "t": "Режим учитавањаQShortcut",
+              "src": "machine",
+              "h": "c15b94951457"
+            },
+            "loadModeInsert": {
+              "t": "Уметни (увек додати ново)",
+              "src": "machine",
+              "h": "43743638e546"
+            },
+            "loadModeUpdate": {
+              "t": "Samo ažuriranje (poklapa se sa ključem)",
+              "src": "machine",
+              "h": "19e474d53059"
+            },
+            "loadModeUpsert": {
+              "t": "Upsert (update metch, inserte new)",
+              "src": "machine",
+              "h": "36aa5d933076"
+            },
+            "keyField": {
+              "t": "Polje kljuèeva",
+              "src": "machine",
+              "h": "4c06ca6c880a"
+            },
+            "keyFieldRequired": {
+              "t": "Izaberi ciljno polje koje identifikuje odgovarajuæu osobinu.",
+              "src": "machine",
+              "h": "c5a507129a8e"
+            },
+            "qaCheck": {
+              "t": "Proveri podatke",
+              "src": "machine",
+              "h": "6f69610af09d"
+            },
+            "qaTitle": {
+              "t": "Provereno {rows} redova, {warnings} upozorenja",
+              "src": "machine",
+              "h": "e897c9124522"
+            },
+            "qaClean": {
+              "t": "Nema problema sa kvalitetom podataka.",
+              "src": "machine",
+              "h": "5b9ccef99ecb"
+            },
+            "qaCaption": {
+              "t": "Problemi kvaliteta podataka po ciljnom polju",
+              "src": "machine",
+              "h": "f06072d4d63c"
+            },
+            "qaNulls": {
+              "t": "Nule",
+              "src": "machine",
+              "h": "3d1fa2631019"
+            },
+            "qaCoercion": {
+              "t": "Loše vrednosti",
+              "src": "machine",
+              "h": "1512964d1b15"
+            },
+            "qaTrunc": {
+              "t": "ISKLJUÈENO",
+              "src": "machine",
+              "h": "969137441b20"
+            },
+            "qaDomain": {
+              "t": "Nije u domenu",
+              "src": "machine",
+              "h": "64f9e8ec8001"
+            },
+            "qaSamples": {
+              "t": "Uzorak",
+              "src": "machine",
+              "h": "0fb59422f600"
+            },
+            "qaDupKeys": {
+              "t": "{count} duplikat ključnih vrednosti u dolazećim podacima",
+              "src": "machine",
+              "h": "635fae44ba3a"
+            },
+            "upsertCounts": {
+              "t": "{inserted} umetnut, {updated} ažuriran",
+              "src": "machine",
+              "h": "864c1a4fc7d9"
+            },
+            "downloadFailed": {
+              "t": "Preuzimanje neuspjelih redova (CSV)",
+              "src": "machine",
+              "h": "f7960e59ec89"
+            },
+            "editExisting": {
+              "t": "Uredi postojeće podatke",
+              "src": "machine",
+              "h": "91df962f787f"
+            },
+            "editExistingHint": {
+              "t": "Preskoèi učitavanje i uređivanje osobina veæ u ciljnom sloju.",
+              "src": "machine",
+              "h": "77a68431b3df"
+            },
+            "startOver": {
+              "t": "& Учитај нове податке",
+              "src": "machine",
+              "h": "37697a0a17fc"
+            },
+            "editUnavailable": {
+              "t": "Ciljni sloj nije mogao biti pripremljen za uređivanje.",
+              "src": "machine",
+              "h": "e1bffed24933"
+            },
+            "addPrompt": {
+              "t": "Dodajte podatke iz fajla, URL ili ArcGIS sadržaja, zatim nastavite da mapirate njegova polja.",
+              "src": "machine",
+              "h": "9a4de6c3ef1c"
+            },
+            "noTarget": {
+              "t": "Ni jedan ciljni sloj nije konfigurisan. Postavite jedan u podešavanjima grafičkog elementa.",
+              "src": "machine",
+              "h": "6beedc018bd5"
+            },
+            "noSource": {
+              "t": "Dodajte prvo podatke, a zatim izaberite koji dodat sloj da mapirate.",
+              "src": "machine",
+              "h": "dc3ab650c55b"
+            },
+            "mappingTitle": {
+              "t": "Mapiranje polja",
+              "src": "machine",
+              "h": "eb217b68ed2b"
+            },
+            "target": {
+              "t": "Meta.",
+              "src": "machine",
+              "h": "61ad50a9b918"
+            },
+            "cardinality": {
+              "t": "Kardinalnost",
+              "src": "machine",
+              "h": "404a27102147"
+            },
+            "addRule": {
+              "t": "Dodaj pravilo mapiranja",
+              "src": "machine",
+              "h": "2a289ce61b97"
+            },
+            "autoMatch": {
+              "t": "Auto-metch po imenu",
+              "src": "machine",
+              "h": "e14a5bf525c5"
+            },
+            "geometryPassthrough": {
+              "t": "Koristi geometriju izvora",
+              "src": "machine",
+              "h": "a0f13be70f1c"
+            },
+            "geometryFromXY": {
+              "t": "Sagradi tačku iz X/Y polja",
+              "src": "machine",
+              "h": "b54c3f5ee91c"
+            },
+            "geometryNone": {
+              "t": "Nema geometrije (tablica)",
+              "src": "machine",
+              "h": "980bf4b8ff3e"
+            },
+            "xField": {
+              "t": "X / поље дужине",
+              "src": "machine",
+              "h": "7005c87922ae"
+            },
+            "yField": {
+              "t": "Y / Latitude polje",
+              "src": "machine",
+              "h": "1f6df9af0c03"
+            },
+            "zField": {
+              "t": "Z polje (opcionalno)",
+              "src": "machine",
+              "h": "65f0513a9ed1"
+            },
+            "sourceWkid": {
+              "t": "Изворни координатни систем (WKID)",
+              "src": "machine",
+              "h": "10af9b33f8d8"
+            },
+            "delimiter": {
+              "t": "Delimiter",
+              "src": "machine",
+              "h": "5e96ff2a317d"
+            },
+            "constant": {
+              "t": "Nepromjenjiva vrednost",
+              "src": "machine",
+              "h": "5942571c67e3"
+            },
+            "regex": {
+              "t": "Regularni izraz",
+              "src": "machine",
+              "h": "cdfc76a8a310"
+            },
+            "previewRow": {
+              "t": "Pregled prvog zapisa",
+              "src": "machine",
+              "h": "09052252d614"
+            },
+            "validationErrors": {
+              "t": "Rešite ovo pre utovara:",
+              "src": "machine",
+              "h": "97888f9a9665"
+            },
+            "validationWarnings": {
+              "t": "Upozorenja:",
+              "src": "machine",
+              "h": "147d1c15fbcb"
+            },
+            "noIssues": {
+              "t": "Nisu pronaðeni problemi.",
+              "src": "machine",
+              "h": "b280a146c8c5"
+            },
+            "load": {
+              "t": "Учитај {count} записе",
+              "src": "machine",
+              "h": "ad5e39c301e6"
+            },
+            "loading": {
+              "t": "Учитавам... {done}/{total}",
+              "src": "machine",
+              "h": "ccc43edd775b"
+            },
+            "phaseReading": {
+              "t": "Èitam izvorne zapise...",
+              "src": "machine",
+              "h": "5895e1256a22"
+            },
+            "phaseTransforming": {
+              "t": "Preoblikovanje zapisa...",
+              "src": "machine",
+              "h": "1b97e49f17c8"
+            },
+            "phaseWriting": {
+              "t": "Pisanje do ciljanog sloja",
+              "src": "machine",
+              "h": "6256795e216e"
+            },
+            "phaseDonePrefix": {
+              "t": "Završavam...",
+              "src": "machine",
+              "h": "87dcf408ccbf"
+            },
+            "featuresOfTotal": {
+              "t": "{done} od {total} osobina",
+              "src": "machine",
+              "h": "517c39a9ab9f"
+            },
+            "loadDone": {
+              "t": "Učitano {ok} od {attempted} zapisa ({failed} nije uspjelo).",
+              "src": "machine",
+              "h": "03ff5e93caf5"
+            },
+            "reviewEdit": {
+              "t": "Uredi učitane zapise",
+              "src": "machine",
+              "h": "41e5e5e894e1"
+            },
+            "rulesCount": {
+              "t": "{count} pravila",
+              "src": "machine",
+              "h": "d137c1c25e1a"
+            },
+            "removeRule": {
+              "t": "Уклони правилоQShortcut",
+              "src": "machine",
+              "h": "e0d4ffd03eb8"
+            },
+            "expressionHelp": {
+              "t": "Користи $.FIELD за изворне вредности, нпр. pomagači.upper($.NAME). један израз по циљу.",
+              "src": "machine",
+              "h": "c771284be27e"
+            },
+            "helpIntro": {
+              "t": "Ovaj grafički element donosi spoljne podatke u sloj mape: dodajete podatke, poredate njihova polja sa poljima u sloju, zatim učitate zapise.",
+              "src": "machine",
+              "h": "da5addf8b08a"
+            },
+            "helpSearchPlaceholder": {
+              "t": "Тражи водич (pokušaj učiтавање илипоља",
+              "src": "machine",
+              "h": "9ae87d164e12"
+            },
+            "helpNoMatches": {
+              "t": "Ništa u vodièu ne odgovara toj reèi.",
+              "src": "machine",
+              "h": "3fe179f75330"
+            },
+            "firstRunTitle": {
+              "t": "Novi ovde?",
+              "src": "machine",
+              "h": "b81f2e17e001"
+            },
+            "firstRunBody": {
+              "t": "Dodajte podatke, poredajte polja sa ciljnim slojem, zatim uèitajte zapise.",
+              "src": "machine",
+              "h": "7fef34676eb4"
+            },
+            "firstRunHelpLink": {
+              "t": "Otvori vodiè.",
+              "src": "machine",
+              "h": "2447dd6134ea"
+            },
+            "firstRunDismiss": {
+              "t": "Otpust.",
+              "src": "machine",
+              "h": "70afe9eff3f2"
+            },
+            "helpWayFile": {
+              "t": "fajl sa tvog kompjutera.",
+              "src": "machine",
+              "h": "5e4d1afd5157"
+            },
+            "helpWaySearch": {
+              "t": "stavka iz ArcGIS-a",
+              "src": "machine",
+              "h": "473b7113c7ea"
+            },
+            "helpStartTitle": {
+              "t": "Poènite ovde: tri koraka.",
+              "src": "machine",
+              "h": "789320b4831d"
+            },
+            "helpStart1": {
+              "t": "Na Dodaj podatke, donesite svoje podatke, a zatim ih izaberite pod Izvornim slojem. Možete koristiti {ways}.",
+              "src": "machine",
+              "h": "71d2ffca7662"
+            },
+            "helpStart1NoWays": {
+              "t": "Na Dodaj podatke, donesi svoje podatke, a onda ih izaberi pod Izvornim slojem.",
+              "src": "machine",
+              "h": "55b63c54df6c"
+            },
+            "helpStart2": {
+              "t": "Pritisnite pored polja mape.Pročitaj svako pravilo i pobrinite se da desno polje iz vaših podataka hrani pravo polje u sloju.",
+              "src": "machine",
+              "h": "d06147ea5faf"
+            },
+            "helpStart3": {
+              "t": "Pritisnite pored da dostignete Učitaj. Pritisnite Proverite podatke, pogledajte šta je našao, zatim pritisnite Učitaj zapise.",
+              "src": "machine",
+              "h": "ebc8fcdaded5"
+            },
+            "helpAddTitle": {
+              "t": "Dodavanje vaših podataka",
+              "src": "machine",
+              "h": "3ed6367d27d1"
+            },
+            "helpAddIntro": {
+              "t": "Korak sa podacima je tamo gde tvoji podaci dolaze.",
+              "src": "machine",
+              "h": "35618319c53f"
+            },
+            "helpAddFile": {
+              "t": "Fajl: CSV, zakopèani fajl oblika, GeoJSON ili KML sa tvog kompjutera.",
+              "src": "machine",
+              "h": "8619367794b4"
+            },
+            "helpAddUrl": {
+              "t": "Web adresa: zalijepite link na sloj ili uslugu.",
+              "src": "machine",
+              "h": "8ed337485e51"
+            },
+            "helpAddSearch": {
+              "t": "ArcGIS sadržaj: potraga za slojem koji je već objavljen.",
+              "src": "machine",
+              "h": "0f7c955679cc"
+            },
+            "helpAddList": {
+              "t": "Sve što doneseš je upisano ispod dugmeta.",
+              "src": "machine",
+              "h": "2ddc1296dfbf"
+            },
+            "helpAddSource": {
+              "t": "To su podaci na kojima iduæa dva koraka rade.",
+              "src": "machine",
+              "h": "cb7afe4fc8da"
+            },
+            "helpAddEditExisting": {
+              "t": "Uređivanje postojećih podataka na dnu preskače pravo na korak Edit, za popravljanje zapisa koji su već u sloju.",
+              "src": "machine",
+              "h": "e347f05ad426"
+            },
+            "helpMapTitle": {
+              "t": "Poklapaju se sa poljima.",
+              "src": "machine",
+              "h": "6e76aedd32f0"
+            },
+            "helpMapIntro": {
+              "t": "Pravilo kaže koje polje iz vaših podataka ispunjava polje u sloju.",
+              "src": "machine",
+              "h": "f97ce8012a02"
+            },
+            "helpMapTarget": {
+              "t": "Učitaj u (ciljni sloj) na vrhu bira sloj koji prima zapise.",
+              "src": "machine",
+              "h": "b5834faf32c2"
+            },
+            "helpMapFixed": {
+              "t": "Pravila postavlja autor aplikacije, tako da nema šta da se promeni na ovom koraku.",
+              "src": "machine",
+              "h": "f4950bf878d1"
+            },
+            "helpMapAuto": {
+              "t": "Auto-match po imenu gradi pravila za polja èija se imena veæ slažu. Proèitajte ih pre nego što krenete dalje.",
+              "src": "machine",
+              "h": "c46caacf628d"
+            },
+            "helpMapCard": {
+              "t": "Svako pravilo je mala karta: oblik sa leve strane, način da se promeni vrednost pored nje, zatim Izvor i Meta ispod.",
+              "src": "machine",
+              "h": "e5e9f39e6f1e"
+            },
+            "helpMapShapes": {
+              "t": "Oblici su 1:1 za jedno polje u jedno polje, M:1 za spajanje nekoliko polja u jedno, 1:M za podelu jednog polja na nekoliko, a M:M za ostalo.",
+              "src": "machine",
+              "h": "ac0ebdff6806"
+            },
+            "helpMapSwitch": {
+              "t": "Mali prekidaè na kartici iskljuèuje jedno pravilo, a da ga ne izgubi.",
+              "src": "machine",
+              "h": "5c41ff94ad71"
+            },
+            "helpMapExpression": {
+              "t": "Izbor izraza omogućava vam da napišete kratku formulu, kao što su pomagači.upper($.NAME). Napišite $.FIELD da pročitate vrednost iz vaših podataka.",
+              "src": "machine",
+              "h": "487d0971ca2e"
+            },
+            "helpMapFiles": {
+              "t": "Izvoz XML sprema pravila u datoteku. Uvoz XML ih vraća, tako da ne pravite ista pravila dva puta.",
+              "src": "machine",
+              "h": "d8314493f5b9"
+            },
+            "helpMapGeometry": {
+              "t": "Geometrija na dnu odlučuje gde se zapisi sleću: Upotreba geometrije izvora čuva oblike koje ste doneli, Građa tačke sa X/Y polja čini tačku iz dva brojevna polja, a Nema geometrije (table) opterećenja redova bez oblika uopšte.",
+              "src": "machine",
+              "h": "97979eddb48d"
+            },
+            "helpLoadTitle": {
+              "t": "Provjera i učitavanje",
+              "src": "machine",
+              "h": "c7dd5268dcf8"
+            },
+            "helpLoadIntro": {
+              "t": "Korak utovara proverava rad, a zatim zapise upisuje u sloj.",
+              "src": "machine",
+              "h": "f463eab885d8"
+            },
+            "helpLoadCheck": {
+              "t": "Provjera podataka čita vaše zapise i izvještava o praznim vrijednostima, vrijednostima koje ne odgovaraju polju, tekstu koji je predugačak, a vrijednosti koje polje ne dopušta.",
+              "src": "machine",
+              "h": "0747ded518e6"
+            },
+            "helpLoadPreview": {
+              "t": "Pregled prvog rekorda pokazuje kako će izgledati prvi red nakon pokretanja pravila.",
+              "src": "machine",
+              "h": "260c33e1b9b2"
+            },
+            "helpLoadMode": {
+              "t": "Režim učitavanja odlučuje šta će se desiti sa svakim zapisom: Umetni (uvek dodaj novo), Ažuriraj samo (upari se ključem), ili Upsert (update meč, umetni novo).",
+              "src": "machine",
+              "h": "4ef7181814d1"
+            },
+            "helpLoadKey": {
+              "t": "Ažuriranje samo i Upsert treba polje Ključa: polje u sloju koje govori vidžetu dva zapisa su isti zapis.",
+              "src": "machine",
+              "h": "6a34cb0e8ad6"
+            },
+            "helpLoadRun": {
+              "t": "Uèitaj zapise, bar pokazuje koliko je dugaèak, veliki dosije traje, pa neka završi.",
+              "src": "machine",
+              "h": "06474f988c1a"
+            },
+            "helpLoadResult": {
+              "t": "Na kraju dobijate broj od onoga što je ušlo i šta nije uspelo. Preuzimanje neuspelih redova (CSV) daje vam neuspehe kako biste ih popravili.",
+              "src": "machine",
+              "h": "54ec5601752f"
+            },
+            "helpLoadZoom": {
+              "t": "Karta se prebacuje na nove ploèe kad stignu.",
+              "src": "machine",
+              "h": "b2a5eef8a854"
+            },
+            "helpLoadReview": {
+              "t": "Uredi uèitane zapise otvara korak Edit-a da bi mogao da poèistiš ono što si upravo doneo.",
+              "src": "machine",
+              "h": "4909103a25ea"
+            },
+            "helpEditTitle": {
+              "t": "Uređivanje zapisa",
+              "src": "machine",
+              "h": "7692b8bcff1f"
+            },
+            "helpEditIntro": {
+              "t": "Stepenica Edit radi na zapisima koji su već u sloju.",
+              "src": "machine",
+              "h": "c30205ca1048"
+            },
+            "helpEditForm": {
+              "t": "Izaberite zapis i promenite njegove vrednosti u obliku. Svaka promena je saèuvana u sloju dok ga pravite.",
+              "src": "machine",
+              "h": "3cd4a0fa795c"
+            },
+            "helpEditCreate": {
+              "t": "Možete dodati potpuno novu ploèu iz obrasca.",
+              "src": "machine",
+              "h": "a8d4ccc1d654"
+            },
+            "helpEditDelete": {
+              "t": "Možete da obrišete zapis iz obrasca.",
+              "src": "machine",
+              "h": "04dc7d7c5a75"
+            },
+            "helpEditGeometry": {
+              "t": "Sa mapom u aplikaciji takođe možete da pomerate osobine i da ih preoblikujete.",
+              "src": "machine",
+              "h": "84548d0abaab"
+            },
+            "helpEditSymbology": {
+              "t": "Simbologija menja način na koji se sloj iscrtava na mapi. Odaberite sloj, izaberite simbol, a mapa precrtava.",
+              "src": "machine",
+              "h": "87f2730bd4e6"
+            },
+            "helpEditStartOver": {
+              "t": "Dodavanje i učitavanje novih podataka vraća vas na prvi korak.",
+              "src": "machine",
+              "h": "76f7749c303c"
+            },
+            "helpTroubleTitle": {
+              "t": "Ako nešto nije u redu",
+              "src": "machine",
+              "h": "6f7fec3ff1e0"
+            },
+            "helpTroubleNoTarget": {
+              "t": "Upozorenje kaže da ciljni sloj nije konfigurisan: autor aplikacije nije izabrao sloj u koji će se učitati. Kontaktirajte GIS diviziju.",
+              "src": "machine",
+              "h": "8b9b00c2038a"
+            },
+            "helpTroubleNext": {
+              "t": "Sledeća ostaje siva: nijedan izvorni sloj se još nije ubrao, ili se sloj u koji se ubacujete još uvek otvara. Odaberite izvor i dajte mu trenutak.",
+              "src": "machine",
+              "h": "9cdabb45d73f"
+            },
+            "helpTroubleErrors": {
+              "t": "Crvene poruke na koraku učitavanja: pravilo pokazuje na polju koje nije tu, ili je potrebno polje prazno. Pritisnite unazad i popravite pravila imena poruka.",
+              "src": "machine",
+              "h": "6e8659914dce"
+            },
+            "helpTroubleFailed": {
+              "t": "Neki zapisi nisu uspeli: njihove vrednosti nisu odgovarale poljima u sloju. Koristite neuspele redove za preuzimanje (CSV), popravite te redove i ponovo ih učitajte.",
+              "src": "machine",
+              "h": "8201fbc004ff"
+            },
+            "helpTroubleDates": {
+              "t": "Datumi dolaze prazni ili pogrešni: tekst datuma nije u obliku koji se očekuje. Na tom pravilu odaberite datumParse i popunite format datuma unosa, na primer MM/DD/GGGG.",
+              "src": "machine",
+              "h": "8118df4b072a"
+            },
+            "helpTroubleXY": {
+              "t": "Tačke sleću na pogrešno mesto: brojevi nisu u koordinatnom sistemu koje pravilo pretpostavlja. Check Source coordinate system (WKID) pod Geometry.",
+              "src": "machine",
+              "h": "75797f633da6"
+            },
+            "helpTroubleDuplicates": {
+              "t": "Isti rekordi su išli u dva puta: Način učitavanja je bio Umetni (uvek dodaj nove). Odaberite Upsert (update meč, umetni novi) i postavite polje ključa.",
+              "src": "machine",
+              "h": "95ae6c910d52"
+            },
+            "helpTroubleNoEdit": {
+              "t": "Korak Uređivanja kaže da sloj nije mogao biti pripremljen: sloj možda neće biti uređivan, ili možda nećete imati prava da ga uređujete. Prijavite se i pokušajte ponovo.",
+              "src": "machine",
+              "h": "19210f41691f"
+            },
+            "helpTroubleContact": {
+              "t": "Još uvek zaglavio? Kontaktirajte GIS Division i pomenite Add Edit ETL widget i ovu aplikaciju.",
+              "src": "machine",
+              "h": "edec6fd5fdd4"
+            },
+            "helpTipsTitle": {
+              "t": "Dobro je znati.",
+              "src": "machine",
+              "h": "79fc372dc790"
+            },
+            "helpTips1": {
+              "t": "Proveri podatke pre svakog utovara.",
+              "src": "machine",
+              "h": "42ceb91b0f63"
+            },
+            "helpTips2": {
+              "t": "Probajte prvo nekoliko redova, pogledajte rezultat, a onda uèitajte ceo fajl.",
+              "src": "machine",
+              "h": "3dbb04f778ea"
+            },
+            "helpTips3": {
+              "t": "Kada su pravila tačna, pritisnite Export XML. Sledeći put možete pritisnuti Import XML umesto da ih ponovo napravite.",
+              "src": "machine",
+              "h": "8ecbc7eccc4b"
+            },
+            "oosOutOfServiceActActive": {
+              "t": "OOS=Izvan službe ACT=Aktivno",
+              "src": "machine",
+              "h": "c5b62f2c693c"
+            },
+            "numStreetCity": {
+              "t": "{num} {street}, {city}",
+              "src": "machine",
+              "h": "e1a6f40bf4bb"
+            },
+            "mappingIsFixedByTheApp": {
+              "t": "Mapiranje je fiksirano od strane autora aplikacije.",
+              "src": "machine",
+              "h": "3dea9b9e9e6e"
+            },
+            "transformFailed": {
+              "t": "transformacija nije uspjela",
+              "src": "machine",
+              "h": "89a29bca53c3"
+            },
+            "queryFailed": {
+              "t": "upit nije uspio",
+              "src": "machine",
+              "h": "2216814590a1"
+            },
+            "applyEditsError": {
+              "t": "applieEdits greška",
+              "src": "machine",
+              "h": "d380d5e11059"
+            },
+            "applyEditsUpdateError": {
+              "t": "applieEdits greška ažuriranja",
+              "src": "machine",
+              "h": "09cd6d1b8b7d"
+            },
+            "applyEditsFailed": {
+              "t": "primeneEdits neuspjelo",
+              "src": "machine",
+              "h": "cba928a1e6a6"
+            },
+            "unknownError": {
+              "t": "nepoznata greška",
+              "src": "machine",
+              "h": "af6321ca7a8b"
+            },
+            "unserializableError": {
+              "t": "Neserijalizacijska greška",
+              "src": "machine",
+              "h": "76e73551597a"
+            },
+            "layerReportsValue1": {
+              "t": "[Layer reports: {value1}",
+              "src": "machine",
+              "h": "2e04973cbc6d"
+            }
+          }
         },
         "sv": {
           "file": "5fd87a1cf00b",
@@ -2228,18 +4936,344 @@
           "entries": {}
         },
         "bs": {
-          "file": "845568ba3719",
+          "file": "bfe80f6ae7a0",
           "counts": {
             "esri": 19,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 65,
             "stale": 0,
-            "missing": 65
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "_widgetLabel": {
+              "t": "Dodaj, mapiraj i izmjeni podatke",
+              "src": "machine",
+              "h": "3c1ca1b2a639"
+            },
+            "stepMap": {
+              "t": "Polja",
+              "src": "machine",
+              "h": "6d8e95848f1f"
+            },
+            "stepLoad": {
+              "t": "Učitaj & izmjenu",
+              "src": "machine",
+              "h": "89ec3875ff87"
+            },
+            "addPrompt": {
+              "t": "Dodajte podatke iz datoteke, URL-a ili ArcGIS sadržaja, zatim nastavite mapirati njena polja.",
+              "src": "machine",
+              "h": "9a4de6c3ef1c"
+            },
+            "noTarget": {
+              "t": "Nije podešen ciljni sloj. Postavite jedan u postavkama grafičkog elementa.",
+              "src": "machine",
+              "h": "6beedc018bd5"
+            },
+            "noSource": {
+              "t": "Dodaj prvo podatke, a zatim izaberi koji će dodati sloj za mapu.",
+              "src": "machine",
+              "h": "dc3ab650c55b"
+            },
+            "mappingTitle": {
+              "t": "Mapiranje polja",
+              "src": "machine",
+              "h": "eb217b68ed2b"
+            },
+            "target": {
+              "t": "Cilj:",
+              "src": "machine",
+              "h": "61ad50a9b918"
+            },
+            "cardinality": {
+              "t": "Kardinality",
+              "src": "machine",
+              "h": "404a27102147"
+            },
+            "addRule": {
+              "t": "Dodaj pravilo mapiranja",
+              "src": "machine",
+              "h": "2a289ce61b97"
+            },
+            "autoMatch": {
+              "t": "Automatsko poklapanje po imenu",
+              "src": "machine",
+              "h": "e14a5bf525c5"
+            },
+            "geometryPassthrough": {
+              "t": "Koristi geometriju izvora",
+              "src": "machine",
+              "h": "a0f13be70f1c"
+            },
+            "geometryFromXY": {
+              "t": "Izgradi tačku iz X/Y polja",
+              "src": "machine",
+              "h": "b54c3f5ee91c"
+            },
+            "geometryNone": {
+              "t": "Nema geometrije (tablica)",
+              "src": "machine",
+              "h": "980bf4b8ff3e"
+            },
+            "xField": {
+              "t": "X / Polje za dužinu",
+              "src": "machine",
+              "h": "7005c87922ae"
+            },
+            "yField": {
+              "t": "Y / Latitude polje",
+              "src": "machine",
+              "h": "1f6df9af0c03"
+            },
+            "zField": {
+              "t": "Z polje (opcionalno)",
+              "src": "machine",
+              "h": "65f0513a9ed1"
+            },
+            "sourceWkid": {
+              "t": "Izvorni koordinatni sistem (WKID)",
+              "src": "machine",
+              "h": "10af9b33f8d8"
+            },
+            "delimiter": {
+              "t": "Delimiter",
+              "src": "machine",
+              "h": "5e96ff2a317d"
+            },
+            "constant": {
+              "t": "Konstanta vrijednost",
+              "src": "machine",
+              "h": "5942571c67e3"
+            },
+            "regex": {
+              "t": "Regularni izraz",
+              "src": "machine",
+              "h": "cdfc76a8a310"
+            },
+            "previewRow": {
+              "t": "Pregled prve ploče",
+              "src": "machine",
+              "h": "09052252d614"
+            },
+            "validationErrors": {
+              "t": "Razriješi ovo prije učitavanja:",
+              "src": "machine",
+              "h": "97888f9a9665"
+            },
+            "validationWarnings": {
+              "t": "Upozorenja",
+              "src": "machine",
+              "h": "147d1c15fbcb"
+            },
+            "noIssues": {
+              "t": "Nisu pronađeni problemi.",
+              "src": "machine",
+              "h": "b280a146c8c5"
+            },
+            "load": {
+              "t": "Učitaj {count} zapise",
+              "src": "machine",
+              "h": "ad5e39c301e6"
+            },
+            "loading": {
+              "t": "Učitavam... {done}/{total}",
+              "src": "machine",
+              "h": "ccc43edd775b"
+            },
+            "loadDone": {
+              "t": "Učitano {ok} od {attempted} zapisa ({failed} nije uspjelo).",
+              "src": "machine",
+              "h": "03ff5e93caf5"
+            },
+            "reviewEdit": {
+              "t": "Izmijeni učitane zapise",
+              "src": "machine",
+              "h": "41e5e5e894e1"
+            },
+            "mapWidget": {
+              "t": "Mapa grafičkog elementa",
+              "src": "machine",
+              "h": "8b918e901bfa"
+            },
+            "showOnMap": {
+              "t": "Pokaži na karti & uvećanje za učitavanje",
+              "src": "machine",
+              "h": "2e0642953984"
+            },
+            "geometryEdit": {
+              "t": "Uključi izmjenu geometrije (potrebna mapa)",
+              "src": "machine",
+              "h": "a4402395ca5e"
+            },
+            "editingOptions": {
+              "t": "Opcije izmjene",
+              "src": "machine",
+              "h": "bac626727f6f"
+            },
+            "allowCreate": {
+              "t": "Dopusti dodavanje osobina",
+              "src": "machine",
+              "h": "55ae40ac6926"
+            },
+            "allowUpdate": {
+              "t": "Dopusti ažuriranje osobina",
+              "src": "machine",
+              "h": "a211fb02d1db"
+            },
+            "allowDelete": {
+              "t": "Dozvoli brisanje osobina",
+              "src": "machine",
+              "h": "ebfa7aaaf243"
+            },
+            "allowGeometryUpdate": {
+              "t": "Dopusti pomjeranje/oblikovanje geometrije",
+              "src": "machine",
+              "h": "59fd8618d371"
+            },
+            "enableTooltips": {
+              "t": "Opis alata za crtanje",
+              "src": "machine",
+              "h": "6df7a3e8cb92"
+            },
+            "templateFilter": {
+              "t": "Pokaži izabranika šablona",
+              "src": "machine",
+              "h": "b51afc6f6fc2"
+            },
+            "batchEditingOpt": {
+              "t": "Dopusti izmjenu serije",
+              "src": "machine",
+              "h": "27db04f7cb17"
+            },
+            "relatedRecords": {
+              "t": "Izmijeni sljedeće zapise",
+              "src": "machine",
+              "h": "b04af494dae0"
+            },
+            "editPermissions": {
+              "t": "Izmijeni dozvole",
+              "src": "machine",
+              "h": "376cd254eee5"
+            },
+            "toolsSection": {
+              "t": "Izmjeni alate",
+              "src": "machine",
+              "h": "0f26b0b2f1c6"
+            },
+            "editingBehavior": {
+              "t": "Izmjenjujem ponašanje",
+              "src": "machine",
+              "h": "e926844feed0"
+            },
+            "snapFeature": {
+              "t": "Snapping osobinama i osobinama",
+              "src": "machine",
+              "h": "def0d53c54a0"
+            },
+            "snapGrid": {
+              "t": "Skidanje mreže",
+              "src": "machine",
+              "h": "3730c907e2b5"
+            },
+            "toolSplit": {
+              "t": "Razdvoji alat",
+              "src": "machine",
+              "h": "855ed2860aef"
+            },
+            "toolMerge": {
+              "t": "Spajanje",
+              "src": "machine",
+              "h": "4e256074d5a1"
+            },
+            "toolCopyPaste": {
+              "t": "Kopiraj & umetni",
+              "src": "machine",
+              "h": "56fb3bda90b3"
+            },
+            "zoomScale": {
+              "t": "Skala uvećanja (1: ..., 0 = stane)",
+              "src": "machine",
+              "h": "2323a68c173b"
+            },
+            "zoomToSelected": {
+              "t": "Uvećaj izabranu osobinu",
+              "src": "machine",
+              "h": "f0aaee929ec1"
+            },
+            "targetMultiHint": {
+              "t": "Dodaj jedan ili više slojeva koji se mogu mijenjati. Kada je postavljeno više od jednog, korisnik bira u koje će se učitati.",
+              "src": "machine",
+              "h": "88cafa288469"
+            },
+            "allowSymbology": {
+              "t": "Dopusti mijenjanje simbola",
+              "src": "machine",
+              "h": "c8c1e9fd40df"
+            },
+            "allowUpsert": {
+              "t": "Dopusti modove ažuriranja i ažuriranja opterećenja",
+              "src": "machine",
+              "h": "4fc7c573423d"
+            },
+            "editExisting": {
+              "t": "Pokreni u modu za izmjenu",
+              "src": "machine",
+              "h": "796eb3c2f0b1"
+            },
+            "rulesCount": {
+              "t": "{count} pravila",
+              "src": "machine",
+              "h": "d137c1c25e1a"
+            },
+            "removeRule": {
+              "t": "_Ukloni pravilo:",
+              "src": "machine",
+              "h": "e0d4ffd03eb8"
+            },
+            "expressionHelp": {
+              "t": "Koristi $.FIELD za izvorne vrijednosti, npr. pomagači.upper($.NAME). Jedan izraz po meti.",
+              "src": "machine",
+              "h": "c771284be27e"
+            },
+            "allowUrl": {
+              "t": "Dopusti URL",
+              "src": "machine",
+              "h": "30e3c41c935b"
+            },
+            "allowFileUpload": {
+              "t": "Dopusti upload datoteka",
+              "src": "machine",
+              "h": "3f1318d7a469"
+            },
+            "letUserEditTheMapping": {
+              "t": "Dozvoli korisniku da izmijeni mapiranje",
+              "src": "machine",
+              "h": "7e8e71077f57"
+            },
+            "allowExpressionTransforms": {
+              "t": "Dopusti transformacije izraza",
+              "src": "machine",
+              "h": "ccd4b428e191"
+            },
+            "loadChunkSize": {
+              "t": "Veličina dijela opterećenja",
+              "src": "machine",
+              "h": "741f74fbbf91"
+            },
+            "showHelpGuide": {
+              "t": "Pokaži vodič za pomoć",
+              "src": "machine",
+              "h": "03e9f0b81336"
+            },
+            "showTheQuestionMarkButtonThat": {
+              "t": "Pokaži dugme sa znakom pitanja koje otvara vodič za pomoć grafičkog elementa",
+              "src": "machine",
+              "h": "62c4e81a84ca"
+            }
+          }
         },
         "ca": {
           "file": "70a4e09322f5",
@@ -2484,18 +5518,344 @@
           }
         },
         "hr": {
-          "file": "845568ba3719",
+          "file": "2f6516c43476",
           "counts": {
             "esri": 19,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 65,
             "stale": 0,
-            "missing": 65
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "_widgetLabel": {
+              "t": "Dodaj, mapiraj i uredi podatke",
+              "src": "machine",
+              "h": "3c1ca1b2a639"
+            },
+            "stepMap": {
+              "t": "Polja mape",
+              "src": "machine",
+              "h": "6d8e95848f1f"
+            },
+            "stepLoad": {
+              "t": "Učitaj & uređivanje",
+              "src": "machine",
+              "h": "89ec3875ff87"
+            },
+            "addPrompt": {
+              "t": "Dodajte podatke iz datoteke, URL ili ArcGIS sadržaja, a zatim nastavite mapirati njegova polja.",
+              "src": "machine",
+              "h": "9a4de6c3ef1c"
+            },
+            "noTarget": {
+              "t": "Ciljni sloj nije podešen. Postavite jedan u postavkama widgeta.",
+              "src": "machine",
+              "h": "6beedc018bd5"
+            },
+            "noSource": {
+              "t": "Dodajte prvo podatke, a zatim odaberite koji dodani sloj za kartu.",
+              "src": "machine",
+              "h": "dc3ab650c55b"
+            },
+            "mappingTitle": {
+              "t": "Mapiranje polja",
+              "src": "machine",
+              "h": "eb217b68ed2b"
+            },
+            "target": {
+              "t": "Cilj:",
+              "src": "machine",
+              "h": "61ad50a9b918"
+            },
+            "cardinality": {
+              "t": "Kardinalnost",
+              "src": "machine",
+              "h": "404a27102147"
+            },
+            "addRule": {
+              "t": "Dodaj pravilo mapiranja",
+              "src": "machine",
+              "h": "2a289ce61b97"
+            },
+            "autoMatch": {
+              "t": "Automatsko poklapanje po imenu",
+              "src": "machine",
+              "h": "e14a5bf525c5"
+            },
+            "geometryPassthrough": {
+              "t": "Koristi geometriju izvora",
+              "src": "machine",
+              "h": "a0f13be70f1c"
+            },
+            "geometryFromXY": {
+              "t": "Izgradnja točke iz X/Y polja",
+              "src": "machine",
+              "h": "b54c3f5ee91c"
+            },
+            "geometryNone": {
+              "t": "Nema geometrije (tablica)",
+              "src": "machine",
+              "h": "980bf4b8ff3e"
+            },
+            "xField": {
+              "t": "Polje X / Dužina",
+              "src": "machine",
+              "h": "7005c87922ae"
+            },
+            "yField": {
+              "t": "Polje za y / geografsku širinu",
+              "src": "machine",
+              "h": "1f6df9af0c03"
+            },
+            "zField": {
+              "t": "Z polje (nije obvezno)",
+              "src": "machine",
+              "h": "65f0513a9ed1"
+            },
+            "sourceWkid": {
+              "t": "Izvorni koordinatni sustav (WKID)",
+              "src": "machine",
+              "h": "10af9b33f8d8"
+            },
+            "delimiter": {
+              "t": "Razgraničivač",
+              "src": "machine",
+              "h": "5e96ff2a317d"
+            },
+            "constant": {
+              "t": "Stalna vrijednost",
+              "src": "machine",
+              "h": "5942571c67e3"
+            },
+            "regex": {
+              "t": "Regularni izraz",
+              "src": "machine",
+              "h": "cdfc76a8a310"
+            },
+            "previewRow": {
+              "t": "Pregled prve ploče",
+              "src": "machine",
+              "h": "09052252d614"
+            },
+            "validationErrors": {
+              "t": "Riješite ovo prije učitavanja:",
+              "src": "machine",
+              "h": "97888f9a9665"
+            },
+            "validationWarnings": {
+              "t": "Upozorenja",
+              "src": "machine",
+              "h": "147d1c15fbcb"
+            },
+            "noIssues": {
+              "t": "Nisu pronađeni problemi.",
+              "src": "machine",
+              "h": "b280a146c8c5"
+            },
+            "load": {
+              "t": "Učitaj {count} zapise",
+              "src": "machine",
+              "h": "ad5e39c301e6"
+            },
+            "loading": {
+              "t": "Učitavanje... {done}/{total}",
+              "src": "machine",
+              "h": "ccc43edd775b"
+            },
+            "loadDone": {
+              "t": "Učitano {ok} od {attempted} zapisa ({failed} nije uspjelo).",
+              "src": "machine",
+              "h": "03ff5e93caf5"
+            },
+            "reviewEdit": {
+              "t": "Uredi učitane zapise",
+              "src": "machine",
+              "h": "41e5e5e894e1"
+            },
+            "mapWidget": {
+              "t": "Grafički element mape",
+              "src": "machine",
+              "h": "8b918e901bfa"
+            },
+            "showOnMap": {
+              "t": "Prikaži na karti & uvećanje za učitavanje",
+              "src": "machine",
+              "h": "2e0642953984"
+            },
+            "geometryEdit": {
+              "t": "Omogući uređivanje geometrije (potrebna karta)",
+              "src": "machine",
+              "h": "a4402395ca5e"
+            },
+            "editingOptions": {
+              "t": "Odrednice ispisa",
+              "src": "machine",
+              "h": "bac626727f6f"
+            },
+            "allowCreate": {
+              "t": "Dopusti dodavanje osobina",
+              "src": "machine",
+              "h": "55ae40ac6926"
+            },
+            "allowUpdate": {
+              "t": "Dopusti ažuriranje osobina",
+              "src": "machine",
+              "h": "a211fb02d1db"
+            },
+            "allowDelete": {
+              "t": "Dopusti brisanje osobina",
+              "src": "machine",
+              "h": "ebfa7aaaf243"
+            },
+            "allowGeometryUpdate": {
+              "t": "Dopusti pomicanje / preoblikovanje geometrije",
+              "src": "machine",
+              "h": "59fd8618d371"
+            },
+            "enableTooltips": {
+              "t": "Prikaži savjete crtanja",
+              "src": "machine",
+              "h": "6df7a3e8cb92"
+            },
+            "templateFilter": {
+              "t": "Prikaži izbornik predložaka",
+              "src": "machine",
+              "h": "b51afc6f6fc2"
+            },
+            "batchEditingOpt": {
+              "t": "Dopusti uređivanje serije",
+              "src": "machine",
+              "h": "27db04f7cb17"
+            },
+            "relatedRecords": {
+              "t": "Uredi povezane zapise",
+              "src": "machine",
+              "h": "b04af494dae0"
+            },
+            "editPermissions": {
+              "t": "Dozvole",
+              "src": "machine",
+              "h": "376cd254eee5"
+            },
+            "toolsSection": {
+              "t": "Alat za uređivanje",
+              "src": "machine",
+              "h": "0f26b0b2f1c6"
+            },
+            "editingBehavior": {
+              "t": "Uređivanje ponašanja",
+              "src": "machine",
+              "h": "e926844feed0"
+            },
+            "snapFeature": {
+              "t": "Snapping u odnosu na značajke",
+              "src": "machine",
+              "h": "def0d53c54a0"
+            },
+            "snapGrid": {
+              "t": "Mreža snapping",
+              "src": "machine",
+              "h": "3730c907e2b5"
+            },
+            "toolSplit": {
+              "t": "Razdijeli alat",
+              "src": "machine",
+              "h": "855ed2860aef"
+            },
+            "toolMerge": {
+              "t": "Alat za spajanje",
+              "src": "machine",
+              "h": "4e256074d5a1"
+            },
+            "toolCopyPaste": {
+              "t": "Kopiraj & zalijepi",
+              "src": "machine",
+              "h": "56fb3bda90b3"
+            },
+            "zoomScale": {
+              "t": "Ljestvica uvećanja (1: ..., 0 = fit)",
+              "src": "machine",
+              "h": "2323a68c173b"
+            },
+            "zoomToSelected": {
+              "t": "Uvećaj odabranu osobinu",
+              "src": "machine",
+              "h": "f0aaee929ec1"
+            },
+            "targetMultiHint": {
+              "t": "Dodaj jedan ili više uređivanje slojeva. Kada je više od jednog postavljeno, korisnik bira u koje će se učitati.",
+              "src": "machine",
+              "h": "88cafa288469"
+            },
+            "allowSymbology": {
+              "t": "Dopusti mijenjanje simbola",
+              "src": "machine",
+              "h": "c8c1e9fd40df"
+            },
+            "allowUpsert": {
+              "t": "Dopusti ažuriranje i ažuriranje načina učitavanja",
+              "src": "machine",
+              "h": "4fc7c573423d"
+            },
+            "editExisting": {
+              "t": "Pokreni u načinu uređivanja",
+              "src": "machine",
+              "h": "796eb3c2f0b1"
+            },
+            "rulesCount": {
+              "t": "{count} pravila",
+              "src": "machine",
+              "h": "d137c1c25e1a"
+            },
+            "removeRule": {
+              "t": "Ukloni pravilo",
+              "src": "machine",
+              "h": "e0d4ffd03eb8"
+            },
+            "expressionHelp": {
+              "t": "Koristite $.FIELD za izvorne vrijednosti, npr. pomagači.upper($.NAME). Jedan izraz po meti.",
+              "src": "machine",
+              "h": "c771284be27e"
+            },
+            "allowUrl": {
+              "t": "Dopusti URL",
+              "src": "machine",
+              "h": "30e3c41c935b"
+            },
+            "allowFileUpload": {
+              "t": "Dopusti upload datotekaa",
+              "src": "machine",
+              "h": "3f1318d7a469"
+            },
+            "letUserEditTheMapping": {
+              "t": "Dopusti korisniku da uredi mapiranje",
+              "src": "machine",
+              "h": "7e8e71077f57"
+            },
+            "allowExpressionTransforms": {
+              "t": "Dopusti transformacije izraza",
+              "src": "machine",
+              "h": "ccd4b428e191"
+            },
+            "loadChunkSize": {
+              "t": "Učitaj veličinu dijela",
+              "src": "machine",
+              "h": "741f74fbbf91"
+            },
+            "showHelpGuide": {
+              "t": "Prikaži vodič pomoći",
+              "src": "machine",
+              "h": "03e9f0b81336"
+            },
+            "showTheQuestionMarkButtonThat": {
+              "t": "Prikaži gumb s upitnikom koji otvara vodič za pomoć widgetu",
+              "src": "machine",
+              "h": "62c4e81a84ca"
+            }
+          }
         },
         "hu": {
           "file": "85bf1325e38d",
@@ -2829,18 +6189,344 @@
           "entries": {}
         },
         "sr": {
-          "file": "bfc8782692f2",
+          "file": "bf4607a9cbbb",
           "counts": {
             "esri": 19,
             "esri-check": 0,
             "community": 0,
             "manual": 0,
             "existing": 0,
-            "machine": 0,
+            "machine": 65,
             "stale": 0,
-            "missing": 65
+            "missing": 0
           },
-          "entries": {}
+          "entries": {
+            "_widgetLabel": {
+              "t": "Додавање, мапа и уређивање података",
+              "src": "machine",
+              "h": "3c1ca1b2a639"
+            },
+            "stepMap": {
+              "t": "Polja mape",
+              "src": "machine",
+              "h": "6d8e95848f1f"
+            },
+            "stepLoad": {
+              "t": "Учитај & уређивање",
+              "src": "machine",
+              "h": "89ec3875ff87"
+            },
+            "addPrompt": {
+              "t": "Dodajte podatke iz fajla, URL ili ArcGIS sadržaja, zatim nastavite da mapirate njegova polja.",
+              "src": "machine",
+              "h": "9a4de6c3ef1c"
+            },
+            "noTarget": {
+              "t": "Ni jedan ciljni sloj nije konfigurisan. Postavite jedan u podešavanjima grafičkog elementa.",
+              "src": "machine",
+              "h": "6beedc018bd5"
+            },
+            "noSource": {
+              "t": "Dodajte prvo podatke, a zatim izaberite koji dodat sloj da mapirate.",
+              "src": "machine",
+              "h": "dc3ab650c55b"
+            },
+            "mappingTitle": {
+              "t": "Mapiranje polja",
+              "src": "machine",
+              "h": "eb217b68ed2b"
+            },
+            "target": {
+              "t": "Meta.",
+              "src": "machine",
+              "h": "61ad50a9b918"
+            },
+            "cardinality": {
+              "t": "Kardinalnost",
+              "src": "machine",
+              "h": "404a27102147"
+            },
+            "addRule": {
+              "t": "Dodaj pravilo mapiranja",
+              "src": "machine",
+              "h": "2a289ce61b97"
+            },
+            "autoMatch": {
+              "t": "Auto-metch po imenu",
+              "src": "machine",
+              "h": "e14a5bf525c5"
+            },
+            "geometryPassthrough": {
+              "t": "Koristi geometriju izvora",
+              "src": "machine",
+              "h": "a0f13be70f1c"
+            },
+            "geometryFromXY": {
+              "t": "Sagradi tačku iz X/Y polja",
+              "src": "machine",
+              "h": "b54c3f5ee91c"
+            },
+            "geometryNone": {
+              "t": "Nema geometrije (tablica)",
+              "src": "machine",
+              "h": "980bf4b8ff3e"
+            },
+            "xField": {
+              "t": "X / поље дужине",
+              "src": "machine",
+              "h": "7005c87922ae"
+            },
+            "yField": {
+              "t": "Y / Latitude polje",
+              "src": "machine",
+              "h": "1f6df9af0c03"
+            },
+            "zField": {
+              "t": "Z polje (opcionalno)",
+              "src": "machine",
+              "h": "65f0513a9ed1"
+            },
+            "sourceWkid": {
+              "t": "Изворни координатни систем (WKID)",
+              "src": "machine",
+              "h": "10af9b33f8d8"
+            },
+            "delimiter": {
+              "t": "Delimiter",
+              "src": "machine",
+              "h": "5e96ff2a317d"
+            },
+            "constant": {
+              "t": "Nepromjenjiva vrednost",
+              "src": "machine",
+              "h": "5942571c67e3"
+            },
+            "regex": {
+              "t": "Regularni izraz",
+              "src": "machine",
+              "h": "cdfc76a8a310"
+            },
+            "previewRow": {
+              "t": "Pregled prvog zapisa",
+              "src": "machine",
+              "h": "09052252d614"
+            },
+            "validationErrors": {
+              "t": "Rešite ovo pre utovara:",
+              "src": "machine",
+              "h": "97888f9a9665"
+            },
+            "validationWarnings": {
+              "t": "Upozorenja:",
+              "src": "machine",
+              "h": "147d1c15fbcb"
+            },
+            "noIssues": {
+              "t": "Nisu pronaðeni problemi.",
+              "src": "machine",
+              "h": "b280a146c8c5"
+            },
+            "load": {
+              "t": "Учитај {count} записе",
+              "src": "machine",
+              "h": "ad5e39c301e6"
+            },
+            "loading": {
+              "t": "Учитавам... {done}/{total}",
+              "src": "machine",
+              "h": "ccc43edd775b"
+            },
+            "loadDone": {
+              "t": "Učitano {ok} od {attempted} zapisa ({failed} nije uspjelo).",
+              "src": "machine",
+              "h": "03ff5e93caf5"
+            },
+            "reviewEdit": {
+              "t": "Uredi učitane zapise",
+              "src": "machine",
+              "h": "41e5e5e894e1"
+            },
+            "mapWidget": {
+              "t": "Мапа виџетаQShortcut",
+              "src": "machine",
+              "h": "8b918e901bfa"
+            },
+            "showOnMap": {
+              "t": "Прикажи на мапи & увећај за учитавање",
+              "src": "machine",
+              "h": "2e0642953984"
+            },
+            "geometryEdit": {
+              "t": "Uključi uređivanje geometrije (potrebna mapa)",
+              "src": "machine",
+              "h": "a4402395ca5e"
+            },
+            "editingOptions": {
+              "t": "Uređivanje opcija",
+              "src": "machine",
+              "h": "bac626727f6f"
+            },
+            "allowCreate": {
+              "t": "Dozvoli dodavanje osobina",
+              "src": "machine",
+              "h": "55ae40ac6926"
+            },
+            "allowUpdate": {
+              "t": "Dozvoli ažuriranje osobina",
+              "src": "machine",
+              "h": "a211fb02d1db"
+            },
+            "allowDelete": {
+              "t": "Dozvoli brisanje osobina",
+              "src": "machine",
+              "h": "ebfa7aaaf243"
+            },
+            "allowGeometryUpdate": {
+              "t": "Dozvoli pomicanje / preoblikovanje geometrije",
+              "src": "machine",
+              "h": "59fd8618d371"
+            },
+            "enableTooltips": {
+              "t": "Прикажи обавлаке за цртање@ info: whatsthis",
+              "src": "machine",
+              "h": "6df7a3e8cb92"
+            },
+            "templateFilter": {
+              "t": "Prikaži birač šablona",
+              "src": "machine",
+              "h": "b51afc6f6fc2"
+            },
+            "batchEditingOpt": {
+              "t": "Dozvoli uređivanje serije",
+              "src": "machine",
+              "h": "27db04f7cb17"
+            },
+            "relatedRecords": {
+              "t": "Uredi povezane zapise",
+              "src": "machine",
+              "h": "b04af494dae0"
+            },
+            "editPermissions": {
+              "t": "Izmijeni dozvole",
+              "src": "machine",
+              "h": "376cd254eee5"
+            },
+            "toolsSection": {
+              "t": "Alati za uređivanje",
+              "src": "machine",
+              "h": "0f26b0b2f1c6"
+            },
+            "editingBehavior": {
+              "t": "Uređivanje ponašanja",
+              "src": "machine",
+              "h": "e926844feed0"
+            },
+            "snapFeature": {
+              "t": "Snapping od znaèaja do osobine",
+              "src": "machine",
+              "h": "def0d53c54a0"
+            },
+            "snapGrid": {
+              "t": "Mreža se lomi.",
+              "src": "machine",
+              "h": "3730c907e2b5"
+            },
+            "toolSplit": {
+              "t": "Razdvoji alat",
+              "src": "machine",
+              "h": "855ed2860aef"
+            },
+            "toolMerge": {
+              "t": "Alat za spajanje",
+              "src": "machine",
+              "h": "4e256074d5a1"
+            },
+            "toolCopyPaste": {
+              "t": "Копирај & пастуве",
+              "src": "machine",
+              "h": "56fb3bda90b3"
+            },
+            "zoomScale": {
+              "t": "Zoom skala (1: ..., 0 = fit)",
+              "src": "machine",
+              "h": "2323a68c173b"
+            },
+            "zoomToSelected": {
+              "t": "Uvećaj odabranu osobinu",
+              "src": "machine",
+              "h": "f0aaee929ec1"
+            },
+            "targetMultiHint": {
+              "t": "Dodajte jedan ili više slojeva koji se mogu uređivati. Kada je više od jednog postavljeno, korisnik bira u koje će se učitati.",
+              "src": "machine",
+              "h": "88cafa288469"
+            },
+            "allowSymbology": {
+              "t": "Dozvoli promenu simbologije",
+              "src": "machine",
+              "h": "c8c1e9fd40df"
+            },
+            "allowUpsert": {
+              "t": "Дозволи ажурирање и упсерт режиме учитавања",
+              "src": "machine",
+              "h": "4fc7c573423d"
+            },
+            "editExisting": {
+              "t": "Покрени у режиму уређивањаQShortcut",
+              "src": "machine",
+              "h": "796eb3c2f0b1"
+            },
+            "rulesCount": {
+              "t": "{count} pravila",
+              "src": "machine",
+              "h": "d137c1c25e1a"
+            },
+            "removeRule": {
+              "t": "Уклони правилоQShortcut",
+              "src": "machine",
+              "h": "e0d4ffd03eb8"
+            },
+            "expressionHelp": {
+              "t": "Користи $.FIELD за изворне вредности, нпр. pomagači.upper($.NAME). један израз по циљу.",
+              "src": "machine",
+              "h": "c771284be27e"
+            },
+            "allowUrl": {
+              "t": "Дозволи URLQShortcut",
+              "src": "machine",
+              "h": "30e3c41c935b"
+            },
+            "allowFileUpload": {
+              "t": "Dozvoli upload datoteka",
+              "src": "machine",
+              "h": "3f1318d7a469"
+            },
+            "letUserEditTheMapping": {
+              "t": "Dozvoli korisniku da edituje mapiranje",
+              "src": "machine",
+              "h": "7e8e71077f57"
+            },
+            "allowExpressionTransforms": {
+              "t": "Dozvoli da se izraz transformiše",
+              "src": "machine",
+              "h": "ccd4b428e191"
+            },
+            "loadChunkSize": {
+              "t": "Величина учитавања",
+              "src": "machine",
+              "h": "741f74fbbf91"
+            },
+            "showHelpGuide": {
+              "t": "Pokaži vodič za pomoć",
+              "src": "machine",
+              "h": "03e9f0b81336"
+            },
+            "showTheQuestionMarkButtonThat": {
+              "t": "Prikaži dugme sa znakom pitanja koje otvara vodič za pomoć grafičkom elementu",
+              "src": "machine",
+              "h": "62c4e81a84ca"
+            }
+          }
         },
         "sv": {
           "file": "170fc182f56a",
