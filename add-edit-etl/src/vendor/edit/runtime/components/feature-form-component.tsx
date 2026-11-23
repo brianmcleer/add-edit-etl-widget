@@ -4,10 +4,12 @@ import {
   SupportedLayerServiceTypes, useIntl
 } from 'jimu-core'
 import { type ButtonProps, defaultMessages as jimuUIMessages, Loading, LoadingType, Paper, Typography } from 'jimu-ui'
-import FormTemplate from 'esri/form/FormTemplate'
+import FormTemplate from '@arcgis/core/form/FormTemplate'
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import type SubtypeSublayer from '@arcgis/core/layers/support/SubtypeSublayer'
 import { type LayersConfig, LayerHonorModeType } from '../../config'
 import defaultMessages from '../translations/default'
-import { getDataSourceById, getDsPrivileges, getEditDataSource, getEditHiddenFields } from '../../utils'
+import { getDataSourceById, getDsPrivileges, getEditDataSource, getEditHiddenFields, getFlatFormElements } from '../../utils'
 import {
   constructFormElements, type EditFeatures, flatMapArray, getDsAccessibleInfo, getIsAdvancedPermission, getDisplayField,
   featureFormStyle,
@@ -42,7 +44,7 @@ export type FormPriviledges = 'full' | 'none' | 'normal'
 export interface LayerInfo {
   id: string
   dataSource: FeatureLayerDataSource | SubtypeSublayerDataSource
-  layer: __esri.FeatureLayer | __esri.SubtypeSublayer
+  layer: FeatureLayer | SubtypeSublayer
   formTemplate: FormTemplate
   isPublic: boolean
   privilege: FormPriviledges
@@ -233,7 +235,7 @@ const FeatureFormComponent = (props: FeatureFormComponentProps) => {
     try {
       const ds = getDataSourceById(dsId)
       const dataSource = getEditDataSource(ds)
-      const layer = await dataSource.createJSAPILayerByDataSource() as __esri.FeatureLayer | __esri.SubtypeSublayer
+      const layer = await dataSource.createJSAPILayerByDataSource() as FeatureLayer | SubtypeSublayer
       let formTemplate: FormTemplate
       const layerConfig = layersConfig.filter(l => l.id === dsId)[0]
       if (!layerConfig) return
@@ -241,7 +243,7 @@ const FeatureFormComponent = (props: FeatureFormComponentProps) => {
         formTemplate = layer.formTemplate
       } else {
         const hiddenFields = getEditHiddenFields(dataSource.getLayerDefinition())
-        const fieldElements = (layer.formTemplate?.elements || []).filter(e => e.type === 'field')
+        const fieldElements = getFlatFormElements(layer.formTemplate?.elements).filter(e => e.type === 'field')
         const elements = constructFormElements(layerConfig.groupedFields.asMutable({ deep: true }), hiddenFields, fieldElements)
         const expressionInfos = constructExpressionInfos(layer.formTemplate?.expressionInfos)
         formTemplate = layer.formTemplate ? layer.formTemplate.clone() : new FormTemplate()

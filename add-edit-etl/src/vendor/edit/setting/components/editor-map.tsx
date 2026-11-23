@@ -13,7 +13,6 @@ interface EditorMapProps {
   mapEmpty: boolean
   jimuMapViews: JimuMapView[]
   mapViewsConfig: ImmutableObject<MapViewsConfig>
-  batchEditing: boolean
   onChange: (mapViewId: string, mapViewConfig: ImmutableObject<MapViewConfig>) => void
 }
 

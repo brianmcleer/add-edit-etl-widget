@@ -6,6 +6,8 @@ import { SettingSection, SettingRow } from 'jimu-ui/advanced/setting-components'
 import { TextInput, defaultMessages as jimuUIMessages, LoadingType, Loading } from 'jimu-ui'
 import { DataSourceSelector } from 'jimu-ui/advanced/data-source-selector'
 import type { ILayerDefinition } from '@esri/arcgis-rest-feature-service'
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import type SubtypeSublayer from '@arcgis/core/layers/support/SubtypeSublayer'
 import type { LayersConfig } from '../../config'
 import defaultMessages from '../translations/default'
 import { constructConfig, getEditDataSource, type SupportedDataSource, supportedDsTypes } from '../../utils'
@@ -55,7 +57,7 @@ const LayerConfig = (props: LayerConfigProps) => {
       setTempUseDs(Immutable(useDss))
       const ds = await DataSourceManager.getInstance().createDataSourceByUseDataSource(useDs) as SupportedDataSource
       const dataSource = getEditDataSource(ds)
-      const layer = (await dataSource.createJSAPILayerByDataSource()) as __esri.FeatureLayer | __esri.SubtypeSublayer
+      const layer = (await dataSource.createJSAPILayerByDataSource()) as FeatureLayer | SubtypeSublayer
       const newLayerConfig = constructConfig(dataSource, layer)
       onChange(Immutable(newLayerConfig))
     } catch (err) {

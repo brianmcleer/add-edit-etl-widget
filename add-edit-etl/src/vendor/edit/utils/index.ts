@@ -4,6 +4,13 @@ import {
   DataSourceManager, JSAPILayerTypes
 } from 'jimu-core'
 import type { ILayerDefinition } from '@esri/arcgis-rest-feature-service'
+import type { AttachmentElement, FieldElement, RelationshipElement, TextElement, UtilityNetworkAssociationsElement } from '@arcgis/core/form/elements'
+import type FormTemplate from '@arcgis/core/form/FormTemplate'
+import type BuildingComponentSublayer from '@arcgis/core/layers/buildingSublayers/BuildingComponentSublayer'
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import type OrientedImageryLayer from '@arcgis/core/layers/OrientedImageryLayer'
+import type SceneLayer from '@arcgis/core/layers/SceneLayer'
+import type SubtypeSublayer from '@arcgis/core/layers/support/SubtypeSublayer'
 import { LayerHonorModeType, type LayersConfig } from '../config'
 
 
@@ -26,11 +33,11 @@ export const SUPPORTED_JIMU_LAYER_TYPES = [
 ]
 
 export type SupportedLayer =
-  __esri.FeatureLayer |
-  __esri.SceneLayer |
-  __esri.BuildingComponentSublayer |
-  __esri.OrientedImageryLayer |
-  __esri.SubtypeSublayer
+  FeatureLayer |
+  SceneLayer |
+  BuildingComponentSublayer |
+  OrientedImageryLayer |
+  SubtypeSublayer
 
 export const supportedDsTypes = Immutable([
   DataSourceTypes.FeatureLayer,
@@ -89,13 +96,13 @@ export function getEditHiddenFields (layerDefinition: ILayerDefinition): string[
   return [objectIdField, creationDateField, creatorField, editDateField, editorField, shapeAreaFieldName, shapeLengthFieldName].filter(Boolean)
 }
 
-export type NonGroupElement = __esri.AttachmentElement
-  | __esri.FieldElement
-  | __esri.RelationshipElement
-  | __esri.TextElement
-  | __esri.UtilityNetworkAssociationsElement
+export type NonGroupElement = AttachmentElement
+  | FieldElement
+  | RelationshipElement
+  | TextElement
+  | UtilityNetworkAssociationsElement
 
-export const getFlatFormElements = (formElements: __esri.FormTemplate['elements']): NonGroupElement[] => {
+export const getFlatFormElements = (formElements: FormTemplate['elements']): NonGroupElement[] => {
   const flatElements: NonGroupElement[] = []
   formElements?.forEach(ele => {
     if (ele.type === 'group') {
@@ -107,7 +114,7 @@ export const getFlatFormElements = (formElements: __esri.FormTemplate['elements'
   return flatElements
 }
 
-export const constructConfig = (ds: SupportedDataSource, layer: __esri.FeatureLayer | __esri.SubtypeSublayer) => {
+export const constructConfig = (ds: SupportedDataSource, layer: FeatureLayer | SubtypeSublayer) => {
   // Init capabilities
   const layerDefinition = ds.getLayerDefinition()
   const {allowGeometryUpdates, create, update, deletable} = getDsPrivileges(layerDefinition)

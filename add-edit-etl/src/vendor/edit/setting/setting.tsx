@@ -19,7 +19,7 @@ export interface JimuMapViews {
 
 const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
   const { id: widgetId, config, useDataSources, useMapWidgetIds, onSettingChange } = props
-  const { editMode, layersConfig = Immutable([]), mapViewsConfig = Immutable({}) as ImmutableObject<MapViewsConfig>, batchEditing = false } = config
+  const { editMode, layersConfig = Immutable([]), mapViewsConfig = Immutable({}) as ImmutableObject<MapViewsConfig> } = config
 
   const [changeModeConfirmOpen, setChangeModeConfirmOpen] = React.useState(false)
   const [mapEmpty, setMapEmpty] = React.useState(true)
@@ -151,7 +151,6 @@ const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
             mapEmpty={mapEmpty}
             jimuMapViews={jimuMapViews}
             mapViewsConfig={mapViewsConfig}
-            batchEditing={batchEditing}
             onChange={handleMapViewConfigChange}
           />
         }

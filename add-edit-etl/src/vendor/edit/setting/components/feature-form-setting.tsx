@@ -8,6 +8,8 @@ import { SettingRow, SidePopper } from 'jimu-ui/advanced/setting-components'
 import type { SettingChangeFunction } from 'jimu-for-builder'
 import { PlusOutlined } from 'jimu-icons/outlined/editor/plus'
 import type { ILayerDefinition } from '@esri/arcgis-rest-feature-service'
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import type SubtypeSublayer from '@arcgis/core/layers/support/SubtypeSublayer'
 import type { IMConfig, LayersConfig } from '../../config'
 import defaultMessages from '../translations/default'
 import FeatureFormList from './feature-form-list'
@@ -35,7 +37,7 @@ const newLayerConfigId = 'NEW_LAYER_CONFIG_ID'
 export interface LayerInfo {
   id: string
   dataSource: FeatureLayerDataSource | SubtypeSublayerDataSource
-  layer: __esri.FeatureLayer | __esri.SubtypeSublayer
+  layer: FeatureLayer | SubtypeSublayer
   layerDefinition: ILayerDefinition
   layerEditingEnabled: boolean
 }
@@ -94,26 +96,7 @@ const FeatureFormSetting = (props: FeatureFormSettingProps) => {
     const promises = supportedDss.map(ds => serviceManager.fetchArcGISServerInfo(ds.url))
     await Promise.allSettled(promises)
     onShowLayerPanel(newLayerConfigId, true)
-    const dsManager = DataSourceManager.getInstance()
-    dsManager.createAllDataSources().then(()=>{
-        if (props.useDataSources.length >= 1) {
-            for (let i = 0; i < props.useDataSources.length; i++) {
-                const dsSource = props.useDataSources[i]
-                const ogds = dsManager.getDataSource(dsSource.dataSourceId)
-                const ogJson = ogds.getDataSourceJson()
-
-                //New ID
-                const newid = dsSource.dataSourceId + '_copy_' + Date.now()
-
-                //Create New Datasource
-                dsManager.createDataSource({
-                    id: newid,
-                    dataSourceJson: ogJson
-                })
-            }
-        }
-    })
-  }, [onShowLayerPanel, props.useDataSources])
+  }, [onShowLayerPanel])
 
   const onCloseLayerPanel = React.useCallback(() => {
     setShowLayerPanel(false)
@@ -182,7 +165,7 @@ const FeatureFormSetting = (props: FeatureFormSettingProps) => {
       setFailedDataSourceIds((old) => [...old, dataSourceId].filter(dsId => dsIdsInConfig.includes(dsId)))
     } else {
       const dataSource = getEditDataSource(ds)
-      const layer = await dataSource.createJSAPILayerByDataSource() as __esri.FeatureLayer | __esri.SubtypeSublayer
+      const layer = await dataSource.createJSAPILayerByDataSource() as FeatureLayer | SubtypeSublayer
       const newLayerInfo = {
         id: dataSourceId,
         dataSource,

@@ -1,7 +1,6 @@
 import { Immutable, type extensionSpec, type IMAppConfig, type ImmutableArray, type ImmutableObject } from 'jimu-core'
 import { defaultMessages as jimuUiMessages } from 'jimu-ui'
 import { EditModeType, LayerHonorModeType, type LayersConfig, type IMConfig, type MapViewConfig } from '../config'
-import defaultMessages from '../setting/translations/default'
 
 export default class BuilderOperations implements extensionSpec.BuilderOperationsExtension {
   id = 'edit-builder-operation'
@@ -54,15 +53,17 @@ export function getKeysInLayersConfig (layersConfig: ImmutableArray<LayersConfig
   layersConfig.forEach((layerConfig, layerIndex) => {
     const layerName = layerConfig.name
     const layerPath = `${path}.layersConfig[${layerIndex}]`
+    const layerChildrenKeys: extensionSpec.TranslationKey[] = []
     if (includeLabel) {
-      keys.push({
+      layerChildrenKeys.push({
         keyType: 'value',
         key: `${layerPath}.name`,
+        groupKey: layerPath,
         label: {
-          key: 'layerLabel',
-          enLabel: defaultMessages.layerLabel
+          key: 'i18nLabelFor',
+          values: { value: layerName },
+          enLabel: `Label for "${layerName}"`
         },
-        nav: layerName,
         valueType: 'text'
       })
     }
@@ -70,48 +71,63 @@ export function getKeysInLayersConfig (layersConfig: ImmutableArray<LayersConfig
       layerConfig.groupedFields.forEach((item, itemIndex) => {
         const itemPath = `${layerPath}.groupedFields[${itemIndex}]`
         const itemName = item.alias || item.jimuName || item.name
-        const layerItemName = `${layerName} / ${itemName}`
         const isGroup = !!item.groupKey
         if (isGroup) {
-          keys.push({
+          layerChildrenKeys.push({
+            keyType: 'group',
+            key: itemPath,
+            groupKey: layerPath,
+            label: itemName
+          })
+          layerChildrenKeys.push({
             keyType: 'value',
             key: `${itemPath}.name`,
+            groupKey: itemPath,
             label: {
               key: 'fieldGroupLabel',
-              enLabel: defaultMessages.fieldGroupLabel
+              values: { value: itemName },
+              enLabel: `Label for group "${itemName}"`
             },
-            nav: layerItemName,
             valueType: 'text'
           })
+          if (item.subDescription) {
+            layerChildrenKeys.push(getItemDescriptionKey(itemPath, itemPath, itemName, true))
+          }
           if (item.children.length > 0) {
             item.children.forEach((childItem, childIndex) => {
               const childItemName = childItem.alias || childItem.jimuName || childItem.name
-              const layerChildItemName = `${layerName} / ${itemName} / ${childItemName}`
               if (childItem.subDescription) {
-                keys.push(getItemDescriptionKey(layerChildItemName, `${itemPath}.children[${childIndex}]`, false))
+                layerChildrenKeys.push(getItemDescriptionKey(`${itemPath}.children[${childIndex}]`, itemPath, childItemName, false))
               }
             })
           }
-        }
-        if (item.subDescription) {
-          keys.push(getItemDescriptionKey(layerItemName, itemPath, isGroup))
+        } else if (item.subDescription) {
+          layerChildrenKeys.push(getItemDescriptionKey(itemPath, isGroup ? itemPath : layerPath, itemName, false))
         }
       })
+    }
+    if (layerChildrenKeys.length > 0) {
+      keys.push({
+        keyType: 'group',
+        key: layerPath,
+        label: layerName
+      })
+      keys.push(...layerChildrenKeys)
     }
   })
   return keys
 }
 
-function getItemDescriptionKey (layerItemName: string, path: string, isGroup: boolean): extensionSpec.TranslationKey {
-  const translateKey = isGroup ? 'groupDescription' : 'fieldDescription'
+function getItemDescriptionKey (path: string, groupKey: string, itemName: string, isGroup: boolean): extensionSpec.TranslationKey {
   return {
     keyType: 'value',
     key: `${path}.subDescription`,
+    groupKey,
     label: {
-      key: translateKey,
-      enLabel: defaultMessages[translateKey]
+      key: isGroup ? 'groupDescription' : 'fieldDescription',
+      values: { value: itemName },
+      enLabel: isGroup ? `Description for group "${itemName}"` : `Description for field "${itemName}"`
     },
-    nav: layerItemName,
     valueType: 'textarea'
   }
 }

@@ -57,26 +57,24 @@ const EditorGeneral = (props: EditorGeneralProps) => {
         </Label>
       </SettingRow>
     }
-    {isActiveScene && <React.Fragment>
-      <SettingRow tag='label' label={translate('segmentLabel')}>
-        <Switch
-          checked={segmentLabel}
-          onChange={evt => { onSegmentLabelToggle(evt.target.checked) }}
-        />
+    <SettingRow tag='label' label={translate('segmentLabel')}>
+      <Switch
+        checked={segmentLabel}
+        onChange={evt => { onSegmentLabelToggle(evt.target.checked) }}
+      />
+    </SettingRow>
+    {segmentLabel &&
+      <SettingRow>
+        <Label className='d-flex align-items-center'>
+          <Checkbox
+            checked={defaultSegmentLabelEnabled}
+            className='mr-1'
+            onChange={evt => { onPropertyChange('defaultSegmentLabelEnabled', evt.target.checked) }}
+          />
+          {translate('defaultEnabled')}
+        </Label>
       </SettingRow>
-      {segmentLabel &&
-        <SettingRow>
-          <Label className='d-flex align-items-center'>
-            <Checkbox
-              checked={defaultSegmentLabelEnabled}
-              className='mr-1'
-              onChange={evt => { onPropertyChange('defaultSegmentLabelEnabled', evt.target.checked) }}
-            />
-            {translate('defaultEnabled')}
-          </Label>
-        </SettingRow>
-      }
-    </React.Fragment>}
+    }
     <SettingRow tag='label' label={translate('templateFilter')}>
       <Switch
         checked={templateFilter}

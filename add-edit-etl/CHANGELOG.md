@@ -2,6 +2,12 @@
 
 Newest first.
 
+## 1.23.0 (2026-11-23)
+
+- Changed: the vendored Esri Edit widget source (`src/vendor/edit`) is updated to the copy that ships with Experience Builder 1.21. The geometry editor now runs on the `<arcgis-editor>` web component instead of the `Editor` widget class. Copy and paste uses the component's events. No settings change, no config change.
+- Not changed: the attribute form still uses the SDK `FeatureForm` and `BatchAttributeForm` classes, because Esri's own 1.21 Edit widget still does. Those move when Esri moves them.
+- Reason: Esri deprecated the widgets in the ArcGIS Maps SDK for JavaScript at version 5.0 and plans to remove them as early as Q1 2027. Web components replace them. See [Deprecation: Widgets in ArcGIS Maps SDK for JavaScript](https://support.esri.com/en-us/knowledge-base/deprecation-widgets-in-arcgis-maps-sdk-for-javascript-000040437).
+
 ## 1.22.3 (2026-09-18)
 
 - Settings: a **Show help guide** option. Turn it off and the question-mark button and the first-run hint both disappear; the guide itself is untouched. Undefined means on, so apps configured before this release keep their help button.

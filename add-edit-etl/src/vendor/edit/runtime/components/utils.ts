@@ -7,13 +7,22 @@ import {
 import { hooks as uiHooks } from 'jimu-ui'
 import type { JimuMapView, JimuLayerView } from 'jimu-arcgis'
 import type { IItem } from '@esri/arcgis-rest-portal'
-import Query from 'esri/rest/support/Query'
-import FieldElement from 'esri/form/elements/FieldElement'
-import GroupElement from 'esri/form/elements/GroupElement'
-import FormTemplate from 'esri/form/FormTemplate'
-import ExpressionInfo from 'esri/form/ExpressionInfo'
+import Query from '@arcgis/core/rest/support/Query'
+import FieldElement from '@arcgis/core/form/elements/FieldElement'
+import GroupElement from '@arcgis/core/form/elements/GroupElement'
+import FormTemplate from '@arcgis/core/form/FormTemplate'
+import ExpressionInfo from '@arcgis/core/form/ExpressionInfo'
+import type { LayerInfo as EditorLayerInfo } from '@arcgis/core/widgets/Editor/types'
+import type Graphic from '@arcgis/core/Graphic'
+import type { Edits } from '@arcgis/core/editing/types'
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import type SubtypeSublayer from '@arcgis/core/layers/support/SubtypeSublayer'
+import type FeatureSet from '@arcgis/core/rest/support/FeatureSet'
+import type FeatureTemplate from '@arcgis/core/layers/support/FeatureTemplate'
+import type SharedTemplate from '@arcgis/core/editing/sharedTemplates/SharedTemplate'
+import type Field from '@arcgis/core/layers/support/Field'
 import { type LayersConfig, type TreeFields, LayerHonorModeType } from '../../config'
-import { type SupportedLayer, type SupportedDataSource, constructConfig, getEditHiddenFields, getDsPrivileges } from '../../utils'
+import { type SupportedLayer, type SupportedDataSource, constructConfig, getEditHiddenFields, getDsPrivileges, getFlatFormElements } from '../../utils'
 import type { LayerInfo } from './feature-form-component'
 import { useTheme } from 'jimu-theme'
 
@@ -54,7 +63,7 @@ export function isEditableLayerView (
   const isDrawMeasurements = layer.id.toString().includes('jimu-draw-measurements-layer')
   const notEditable = layer[ExBAddedJSAPIProperties.EXB_NOT_EDITABLE]
   const isFromRuntime = layerView.fromRuntime
-  let shouldShow = true
+  let shouldShow
   if (isFromRuntime) {
     shouldShow = liveDataEditing
   } else {
@@ -157,7 +166,7 @@ function buildFeatureTitleMap (
 }
 
 export const useFeatureTitleMap = (records: FeatureDataRecord[], dataSource: FeatureLayerDataSource | SubtypeSublayerDataSource) => {
-  const [featureTitleMap, setFeatureTitleMap] = React.useState<Map<number | string, string>>(new Map())
+  const [featureTitleMap, setFeatureTitleMap] = React.useState(new Map<number | string, string>())
 
   React.useEffect(() => {
     if (!dataSource || records.length === 0) {
@@ -165,7 +174,7 @@ export const useFeatureTitleMap = (records: FeatureDataRecord[], dataSource: Fea
       return
     }
     const layer = dataSource.layer as any
-    const features = records.map(r => r.feature as __esri.Graphic)
+    const features = records.map(r => r.feature as Graphic)
     if (typeof layer?.getFeatureTitles === 'function') {
       layer.getFeatureTitles(features, {
         fetchMissingFields: true,
@@ -192,22 +201,24 @@ export const constructUneditableInfo = (layer: SupportedLayer) => {
     attributeUpdatesEnabled: false,
     geometryUpdatesEnabled: false,
     attachmentsOnUpdateEnabled: false,
-  } as __esri.EditorLayerInfo
+  } as EditorLayerInfo
 }
 
-export const constructFormElements = (groupedFields: TreeFields[], hiddenFields: string[], fieldElements: __esri.FieldElement[]): Array<FieldElement | GroupElement> => {
+export const constructFormElements = (groupedFields: TreeFields[], hiddenFields: string[], fieldElements: FieldElement[]): Array<FieldElement | GroupElement> => {
   const elements = groupedFields.filter(f => !hiddenFields.includes(f.jimuName)).map(item => {
     if (item.children) {
       return new GroupElement({
         label: item.name,
         description: item.subDescription || item?.description,
         elements: item.children.filter(f => !hiddenFields.includes(f.jimuName)).map(ele => {
-          return new FieldElement({
+          const existElement = fieldElements.find(e => e.fieldName === ele.jimuName)
+          const fieldElement = existElement ? existElement.clone() : new FieldElement({
             fieldName: ele.jimuName,
-            label: ele.alias || ele.name,
-            description: ele.subDescription || ele.description,
-            editableExpression: ele.editAuthority ? 'editableTrue' : 'editableFalse'
+            label: ele.alias || ele.name
           })
+          fieldElement.description = ele.subDescription || ele.description
+          fieldElement.editableExpression = ele.editAuthority && !fieldElement.valueExpression ? 'editableTrue' : 'editableFalse'
+          return fieldElement
         })
       })
     } else {
@@ -224,15 +235,15 @@ export const constructFormElements = (groupedFields: TreeFields[], hiddenFields:
   return elements
 }
 
-export const constructExpressionInfos = (expressionInfos: __esri.ExpressionInfo[]) => {
-  const infos: __esri.ExpressionInfo[] = [...(expressionInfos || [])]
+export const constructExpressionInfos = (expressionInfos: ExpressionInfo[]) => {
+  const infos: ExpressionInfo[] = [...(expressionInfos || [])]
   infos.push(new ExpressionInfo({ name: 'editableTrue', expression: 'true' }))
   infos.push(new ExpressionInfo({ name: 'editableFalse', expression: 'false' }))
   return infos
 }
 
 const constructFormTemplate = (
-  editorUseLayer: __esri.FeatureLayer | __esri.SubtypeSublayer,
+  editorUseLayer: FeatureLayer | SubtypeSublayer,
   layerConfig: LayersConfig,
   relatedRecords: boolean,
   hiddenFields: string[]
@@ -240,7 +251,7 @@ const constructFormTemplate = (
   const { groupedFields, layerHonorMode } = layerConfig
   const originalFormTemplate = editorUseLayer.formTemplate
   const editorFormTemplate: FormTemplate = originalFormTemplate ? originalFormTemplate.clone() : new FormTemplate()
-  const fieldElements = (originalFormTemplate?.elements || []).filter(e => e.type === 'field')
+  const fieldElements = getFlatFormElements(originalFormTemplate?.elements).filter((e): e is FieldElement => e.type === 'field')
   let expressionInfosConstructed = false
   if (layerHonorMode === LayerHonorModeType.Custom) {
     editorFormTemplate.expressionInfos = constructExpressionInfos(editorFormTemplate.expressionInfos)
@@ -248,10 +259,12 @@ const constructFormTemplate = (
     editorFormTemplate.elements = constructFormElements(groupedFields, hiddenFields, fieldElements)
   }
   if (!relatedRecords && editorFormTemplate.elements) {
-    for (const element of editorFormTemplate.elements) {
+    const flatElements = getFlatFormElements(editorFormTemplate.elements)
+    for (const element of flatElements) {
       if (element.type === 'relationship') {
         if (!expressionInfosConstructed) {
           editorFormTemplate.expressionInfos = constructExpressionInfos(editorFormTemplate.expressionInfos)
+          expressionInfosConstructed = true
         }
         element.editableExpression = 'editableFalse'
       }
@@ -262,7 +275,7 @@ const constructFormTemplate = (
 }
 
 export const queryFullFeatures = async (jimuMapView: JimuMapView, features: EditFeatures) => {
-  const promises: Array<Promise<__esri.FeatureSet>> = []
+  const promises: Array<Promise<FeatureSet>> = []
   for (const dsId in features) {
     const layerFeaturesArray = features[dsId]
     if (layerFeaturesArray?.length > 0) {
@@ -279,7 +292,7 @@ export const queryFullFeatures = async (jimuMapView: JimuMapView, features: Edit
     }
   }
   const results = await Promise.all(promises)
-  const fullFeatures = results.reduce<__esri.Graphic[]>((prev, cur) => {
+  const fullFeatures = results.reduce<Graphic[]>((prev, cur) => {
     if (Array.isArray(cur.features)) {
       return prev.concat(cur.features)
     } else {
@@ -297,8 +310,8 @@ export const getEditorLayerInfo = async (
   canEditFeature: boolean
 ) => {
   let showUpdateBtn = false
-  let editorLayerInfo: __esri.EditorLayerInfo
-  const editorUseLayer = jimuLayerView.layer as __esri.FeatureLayer | __esri.SubtypeSublayer
+  let editorLayerInfo: EditorLayerInfo
+  const editorUseLayer = jimuLayerView.layer as FeatureLayer | SubtypeSublayer
   const fullEditingPrivileges = (editorUseLayer as any)?.userHasFullEditingPrivileges
   const isAdvancedPermission = await getIsAdvancedPermission(dataSource)
   const layerEditingEnabled = editorUseLayer.editingEnabled
@@ -349,7 +362,7 @@ export const getEditorLayerInfo = async (
   return { showUpdateBtn, editorLayerInfo }
 }
 
-export const updateDataSourceAfterEdit = (dataSource: DataSource, edits: __esri.FeatureLayerApplyEditsEdits) => {
+export const updateDataSourceAfterEdit = (dataSource: DataSource, edits: Edits) => {
   const { addFeatures = [], updateFeatures = [], deleteFeatures = [] } = edits
   for (const addFeature of addFeatures) {
     const record = dataSource.buildRecord(addFeature)
@@ -358,7 +371,7 @@ export const updateDataSourceAfterEdit = (dataSource: DataSource, edits: __esri.
   const updateRecords: DataRecord[] = []
   for (const updateFeature of updateFeatures) {
     const recordId = updateFeature.getObjectId()
-    const originalFeature = (dataSource.getRecordById(recordId) as FeatureDataRecord)?.feature as __esri.Graphic
+    const originalFeature = (dataSource.getRecordById(recordId) as FeatureDataRecord)?.feature as Graphic
     const originalAttributes = originalFeature?.attributes || {}
     const newAttributes = Object.assign(originalAttributes, updateFeature?.attributes)
     updateFeature.attributes = newAttributes
@@ -378,7 +391,7 @@ export const updateDataSourceAfterEdit = (dataSource: DataSource, edits: __esri.
   dataSource.afterDeleteRecordsByIds(deleteRecordIds)
 }
 
-export const applyAttributeUpdates = async (layerInfo: LayerInfo, params: __esri.FeatureLayerApplyEditsEdits) => {
+export const applyAttributeUpdates = (layerInfo: LayerInfo, params: Edits) => {
   const dataSource = layerInfo.dataSource
   const layer = layerInfo.layer
   const gdbVersion = dataSource.getGDBVersion()
@@ -402,14 +415,61 @@ export const featureFormStyle = css`
   .esri-feature-form__text-element p {
     color: inherit;
   }
-  .esri-widget__content--empty {
-    color: var(--sys-color-surface-paper-hint);
-  }
-  .esri-attachments__add-attachment-button {
-    border-radius: var(--calcite-button-corner-radius);
-    font-size: 0.875rem;
-  }
-  .esri-editor__prompt--danger .esri-editor__prompt__header__heading {
-    color: var(--sys-color-surface-paper-text);
-  }
 `
+
+export const getDefaultSnapSources = (jimuMapView: JimuMapView, defaultSnapLayers?: ImmutableArray<string>) => {
+  if (!jimuMapView?.jimuLayerViews) return []
+  if (!defaultSnapLayers || defaultSnapLayers.length === 0) return []
+
+  const allViewLayerKeys = Object.keys(jimuMapView.jimuLayerViews)
+  const snapLayersSources = allViewLayerKeys
+    .filter(layerViewId => defaultSnapLayers.includes(jimuMapView.jimuLayerViews[layerViewId].layerDataSourceId))
+    .map(lvId => ({
+      layer: jimuMapView.jimuLayerViews[lvId].layer,
+      enabled: true
+    }))
+
+  return snapLayersSources
+}
+
+interface CreationAttributes {
+  [key: string]: any
+}
+
+export const getLayerDefaultAttributes = (fields: Field[]): CreationAttributes => {
+  return (fields || []).reduce<CreationAttributes>((attributes, field) => {
+    if (field?.name && field.defaultValue !== undefined && field.defaultValue !== null) {
+      attributes[field.name] = field.defaultValue
+    }
+    return attributes
+  }, {})
+}
+
+export function getCreationAttributes (template: FeatureTemplate | SharedTemplate): CreationAttributes {
+  const isSharedTemplate = template != null && "templateId" in template && "definition" in template
+  const sharedTemplateType = isSharedTemplate ? template.type : null
+
+  if (sharedTemplateType === "group" || sharedTemplateType === "preset") {
+    // Group and preset templates create multiple features, so there is no
+    // singular attribute object to return.
+    return {}
+  }
+
+  if (template != null && "prototype" in template) {
+    return { ...template.prototype?.attributes }
+  }
+
+  if (sharedTemplateType === "feature") {
+    const sharedTemplate = template as {
+      definition?: {
+        defaultValues?: HashMap<any>;
+      };
+    }
+
+    return {
+      ...sharedTemplate.definition?.defaultValues,
+    }
+  }
+
+  return {}
+}

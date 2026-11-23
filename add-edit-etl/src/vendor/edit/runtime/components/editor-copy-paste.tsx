@@ -6,15 +6,14 @@ import type { JimuMapView } from 'jimu-arcgis'
 import { ConfirmDialog, defaultMessages as jimuUiMessages } from 'jimu-ui'
 import 'arcgis-map-components'
 import type { ArcgisPasteCustomEvent } from '@arcgis/map-components'
-import * as reactiveUtils from 'esri/core/reactiveUtils'
-import type { ClipboardItem, ClipboardSupportedLayer } from 'esri/applications/Components/clipboard'
-import type { ApplySet, ApplySetLayerEditResult, ApplySetServiceEditResult, ApplySetSupportedLayer } from 'esri/applications/Components/applySetUtils'
-import type { FeatureEditResult } from 'esri/layers/graphics/editingSupport'
-import type Graphic from 'esri/Graphic'
-import type { GraphicLayer } from 'esri/Graphic'
-import type FeatureLayer from 'esri/layers/FeatureLayer'
-import type SubtypeGroupLayer from 'esri/layers/SubtypeGroupLayer'
-import type Editor from 'esri/widgets/Editor'
+import * as reactiveUtils from '@arcgis/core/core/reactiveUtils'
+import type { ClipboardItem, ClipboardSupportedLayer } from '@arcgis/core/applications/Components/clipboard'
+import type { ApplySet, ApplySetLayerEditResult, ApplySetServiceEditResult, ApplySetSupportedLayer } from '@arcgis/core/applications/Components/applySetUtils'
+import type { FeatureEditResult } from '@arcgis/core/editing/types'
+import type Graphic from '@arcgis/core/Graphic'
+import type { GraphicLayer } from '@arcgis/core/Graphic'
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import type SubtypeGroupLayer from '@arcgis/core/layers/SubtypeGroupLayer'
 import { updateDataSourceAfterEdit } from './utils'
 import defaultMessages from '../translations/default'
 import { getDataSourceById } from '../../utils'
@@ -22,7 +21,7 @@ import type { PasteStep } from './editor-component'
 
 export interface CopyPastePanelProps {
   jimuMapView: JimuMapView
-  editor: Editor
+  editor: HTMLArcgisEditorElement
   mapWidgetId: string
   widgetId: string
   formChange: boolean
@@ -304,10 +303,9 @@ function CopyPastePanel (props: CopyPastePanelProps) {
     const action = appActions.requestAutoControlMapWidget(mapWidgetId, widgetId)
     getAppStore().dispatch(action)
     jimuMapView.clearSelectedFeatures()
-    const selectionToolbar = (editor as any)._selectionToolbar
-    if (selectionToolbar?.activeOperation) {
-      selectionToolbar.cancel?.()
-    }
+    setTimeout(() => {
+      editor.cancelSelectionTool()
+    }, 50)
     if (pasteComponent) {
       await pasteComponent.showClipboardItems(true)
       await pasteComponent.startMoveClipboard(true)

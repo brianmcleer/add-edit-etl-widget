@@ -1,13 +1,20 @@
 import {
-  React, Immutable, type IMUseDataSource, type DataSourceTypes, type ImmutableArray,
+  React, Immutable, type IMUseDataSource, type ImmutableArray,
   type FeatureDataRecord, dataSourceUtils, hooks, css, type IMThemeVariables, classNames
 } from 'jimu-core'
 import { JimuMapViewComponent, type JimuMapView } from 'jimu-arcgis'
 import { Paper, WidgetPlaceholder } from 'jimu-ui'
 import { useTheme } from 'jimu-theme'
-import * as reactiveUtils from 'esri/core/reactiveUtils'
+import 'arcgis-map-components'
+import * as reactiveUtils from '@arcgis/core/core/reactiveUtils'
+import type { ResourceHandle } from '@arcgis/core/core/Handles'
+import type Graphic from '@arcgis/core/Graphic'
+import type Layer from '@arcgis/core/layers/Layer'
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import type UpdateWorkflowData from '@arcgis/core/widgets/Editor/UpdateWorkflowData'
+import type { ArcgisEditorCustomEvent } from '@arcgis/map-components'
 import editWidgetIcon from '../../../icon.svg'
-import { getDataSourceById, getFlatFormElements, supportedDsTypes } from '../../utils'
+import { getDataSourceById, supportedDsTypes } from '../../utils'
 import {
   type EditFeatures, featureFormStyle, flatMapArrayWithView, idsArrayEquals, queryFullFeatures,
   useCalciteColorMapping
@@ -42,14 +49,6 @@ const getWidgetStyle = (theme: IMThemeVariables) => css`
   --calcite-list-content-text-color: ${theme.sys.color.action.text};
   --calcite-list-label-text-color: ${theme.sys.color.action.text};
   --calcite-list-description-text-color: ${theme.sys.color.action.text};
-  .esri-editor__panel-toolbar {
-    background-color: ${theme.sys.color.surface.paper};
-    color: ${theme.sys.color.surface.paperText};
-  }
-  .esri-sketch-tooltip-controls__block, .esri-snapping-controls__toggle-block, .esri-snapping-controls__layer-list-block {
-    background-color: ${theme.sys.color.surface.paper};
-    color: ${theme.sys.color.surface.paperText};
-  }
 `
 
 export type PasteStep = 'ready' | 'paste' | 'pasteSpecial'
@@ -59,35 +58,39 @@ const EditorComponent = (props: EditorComponentProps) => {
   const { mapViewsConfig, batchEditing = false, advancedEditingTools = true, copyPaste } = config
 
   const [jimuMapView, setJimuMapView] = React.useState<JimuMapView>(null)
-  const [mapUseDataSources, setMapUseDataSources] = React.useState<IMUseDataSource[]>()
   const [editFeatures, setEditFeatures] = React.useState<EditFeatures>({})
   const [pasteStep, setPasteStep] = React.useState<PasteStep>('ready')
 
   const translate = hooks.useTranslation(defaultMessages)
   const theme = useTheme()
 
-  const editContainer = React.useRef<HTMLDivElement>(null)
-  const editor = useEditor({
+  const [editor, setEditor] = React.useState<HTMLArcgisEditorElement>(null)
+  const editorProps = useEditor({
     config,
     jimuMapView,
-    editContainer,
-    canEditFeature
+    canEditFeature,
+    editor
   })
 
-  const updateUseDataSourcesByLayerInfos = React.useCallback(async (layerInfos: __esri.EditorLayerInfo[]) => {
-    if (!jimuMapView || jimuMapView.isDestroyed() || !layerInfos) return
+  const mapUseDataSources = React.useMemo(() => {
+    if (!jimuMapView || jimuMapView.isDestroyed()) return null
+    const layerInfos = editorProps?.layerInfos
+    if (!layerInfos) return null
+
     const viewConfig = mapViewsConfig?.[jimuMapView.id]
     const customizeLayers = viewConfig?.customizeLayers
     const customJimuLayerViewIds = viewConfig?.customJimuLayerViewIds
-    const newMapUseDataSources = []
+
+    const newMapUseDataSources: IMUseDataSource[] = []
     for (const layerInfo of layerInfos) {
       try {
-        if (!layerInfo.enabled || (layerInfo.layer as __esri.FeatureLayer).isTable) continue
+        if (!layerInfo?.enabled || (layerInfo.layer as FeatureLayer).isTable) continue
         const jimuLayerViewId = jimuMapView.getJimuLayerViewIdByAPILayer(layerInfo.layer)
         if (customizeLayers && !customJimuLayerViewIds?.includes(jimuLayerViewId)) continue
-        const jimuLayerView = await jimuMapView.whenJimuLayerViewLoaded(jimuLayerViewId)
-        const layerDs = jimuLayerView.getLayerDataSource()
-        if (!layerDs || !supportedDsTypes.includes(layerDs.type as DataSourceTypes)) continue
+
+        const layerDsId = jimuMapView.getDataSourceIdByAPILayer(layerInfo.layer)
+        const layerDs = layerDsId ? getDataSourceById(layerDsId) : null
+        if (!layerDs || !supportedDsTypes.includes(layerDs.type)) continue
         const mainDs = layerDs.getMainDataSource()
         const rootDs = layerDs.getRootDataSource()
         const usedDs: IMUseDataSource = Immutable({
@@ -101,10 +104,12 @@ const EditorComponent = (props: EditorComponentProps) => {
         continue
       }
     }
-    setMapUseDataSources(newMapUseDataSources)
-  }, [jimuMapView, mapViewsConfig])
+    return newMapUseDataSources
+  }, [editorProps?.layerInfos, jimuMapView, mapViewsConfig])
 
   const handleActiveViewChange = React.useCallback((jimuMapView: JimuMapView) => {
+    // Clear stale editor instance first to avoid writing options during view switch.
+    setEditor(null)
     setJimuMapView(jimuMapView)
   }, [])
 
@@ -120,7 +125,7 @@ const EditorComponent = (props: EditorComponentProps) => {
       selectionManager?.hasSelection && selectionManager.clear()
     } else {
       selectionFromExb.current = true
-      let fullFeatures: __esri.Graphic[] = []
+      let fullFeatures: Graphic[] = []
       try {
         fullFeatures = await queryFullFeatures(jimuMapView, features)
       } catch (err) {
@@ -136,7 +141,7 @@ const EditorComponent = (props: EditorComponentProps) => {
       } else if (fullFeatures.length > 1) {
         if (jimuMapView.view.type === '2d' && batchEditing) {
           selectionManager?.hasSelection && selectionManager.clear()
-          selectionManager && selectionManager.updateSelection({
+          selectionManager && (selectionManager as any).updateSelection({
             current: fullFeatures,
             added: [],
             removed: [],
@@ -146,7 +151,7 @@ const EditorComponent = (props: EditorComponentProps) => {
         }
       }
     }
-  }, [batchEditing, editor, jimuMapView])
+  }, [editor, jimuMapView, batchEditing])
 
   const selectionFromEditor = React.useRef(false)
   const selectionFromExb = React.useRef(false)
@@ -171,10 +176,10 @@ const EditorComponent = (props: EditorComponentProps) => {
   const handleSourceVersionChange = React.useCallback((dataSourceId: string) => {
     const featureRecords = flatMapArrayWithView(editFeatures, jimuMapView)
     const featureCount = featureRecords.length
-    if (!editor?.viewModel.syncing || featureCount === 1) {
+    if (featureCount === 1) {
       handleSelectionChange([dataSourceId])
     }
-  }, [editFeatures, editor, handleSelectionChange, jimuMapView])
+  }, [editFeatures, handleSelectionChange, jimuMapView])
 
   const editFeatureRef = hooks.useLatest(editFeatures)
   React.useEffect(() => {
@@ -187,26 +192,34 @@ const EditorComponent = (props: EditorComponentProps) => {
   }, [editFeatureRef, editor, startWorkflow, visible])
 
   const [formChange, setFormChange] = React.useState(false)
-  const previousRootFeatures = React.useRef<__esri.Graphic[]>([])
-  React.useEffect(() => {
+  const handleSketchUpdate = React.useCallback((event: CustomEvent) => {
+    if (event.detail?.detail?.state !== 'active' || formChange) return
+    setFormChange(true)
+  }, [formChange])
+  const previousRootFeatures = React.useRef<Graphic[]>([])
+  const selectionChangeHandleRef = React.useRef<ResourceHandle>(null)
+  const handleReady = React.useCallback((event: ArcgisEditorCustomEvent<void>) => {
+    const editor = event.currentTarget
+    if (!jimuMapView?.view || editor?.view !== jimuMapView.view) return
+    setEditor(editor)
     if (!editor || !jimuMapView) return
     // #region Sync selection - 2d view with multiple selection
-    // Editor added a new selection mechanism of SelectionToolbar/SelectionManager in 4.33.
     // The SelectionManager only works in 2D view with multiple selection.
+    selectionChangeHandleRef.current?.remove?.()
     const selectionManager = (editor as any).effectiveSelectionManager
-    const selectionChangeHandle = jimuMapView.view.type === '2d' && batchEditing && selectionManager.on('selection-change', async (evt) => {
+    selectionChangeHandleRef.current = jimuMapView.view.type === '2d' && batchEditing && selectionManager && selectionManager.on('selection-change', async (evt) => {
       if (selectionFromExb.current) {
         selectionFromExb.current = false
         return
       }
       const rootDs = jimuMapView.getMapDataSource()
       for (const change of (evt.changes || [])) {
-        const layer = change.layer
+        const layer = change.layer as Layer
         if (!layer) continue
         const dsId = dataSourceUtils.getDataSourceIdByJSAPILayer(rootDs, layer)
         const ds = getDataSourceById(dsId)
         if (!ds) continue
-        const layerSelectedIds = change.selection || []
+        const layerSelectedIds = change.selection ? change.selection.map(item => typeof item === 'object' ? item.getObjectId() : item) : []
         const dsSelectedIds = ds.getSelectedRecordIds()
         if (!idsArrayEquals(layerSelectedIds, dsSelectedIds) && (layerSelectedIds.length !== 0 || dsSelectedIds.length !== 0)) {
           if (layerSelectedIds.length === 0) {
@@ -224,25 +237,32 @@ const EditorComponent = (props: EditorComponentProps) => {
       }
     })
     // #endregion
+  }, [batchEditing, jimuMapView])
+
+  const watchCandidatesRef = React.useRef<ResourceHandle>(null)
+  const watchFeatureFormRef = React.useRef<ResourceHandle>(null)
+  const handlePropertyChange = React.useCallback((event: ArcgisEditorCustomEvent<{ name: 'activeWorkflow' | 'state' }>) => {
+    if (event.detail.name !== 'activeWorkflow') return
+    watchCandidatesRef.current?.remove?.()
+    watchFeatureFormRef.current?.remove?.()
+    const editor = event.currentTarget
+    const wf = editor.activeWorkflow
 
     // #region Sync selection - 3D view and 2d view with single selection
-    // Editor kept the old selection mechanism of candidates and rootFeature in 4.33 for 3d view and 2d view with single selection.
-    const watchCandidates = reactiveUtils.watch(() => (editor.viewModel?.activeWorkflow?.data as __esri.UpdateWorkflowData)?.candidates, (candidates, oldCandidates) => {
-      const data = editor.viewModel?.activeWorkflow?.data as any
+    watchCandidatesRef.current = reactiveUtils.watch(() => (wf?.data as UpdateWorkflowData)?.candidates, (candidates, oldCandidates) => {
+      const data = editor.activeWorkflow?.data as any
       const rootFeatures = data?.rootFeatures?.toArray?.() || []
       const singleSelection = previousRootFeatures.current.length === 0 && rootFeatures.length === 1
       const singleUnselection = previousRootFeatures.current.length === 1 && rootFeatures.length === 0
+      const selectionManager = (editor as any).effectiveSelectionManager
       const singleSelectionInBatchMode = (singleSelection || singleUnselection) && !selectionManager?.hasSelection
       if (jimuMapView.view.type === '2d' && batchEditing && !singleSelectionInBatchMode) return
       previousRootFeatures.current = rootFeatures || []
       // If "Select by point", the selection manager's "selection-change" event won't be triggered
       // So we need to sync the selection here
       // Also we must inactivate the "Select by point" tool, or clicking on the map won't trigger exb's selection change
-      const toolbar = (editor.viewModel as any).selectionToolbarViewModel
-      if (toolbar && toolbar.activeOperation) {
-        toolbar.cancel?.()
-      }
-      if (selectionFromExb.current || editor.viewModel.syncing) {
+      editor.cancelSelectionTool()
+      if (selectionFromExb.current) {
         if (candidates !== undefined) {
           selectionFromExb.current = false
         }
@@ -250,7 +270,7 @@ const EditorComponent = (props: EditorComponentProps) => {
       }
       // In 4.33, the candidates is null on single selections, so we need to use rootFeatures instead.
       const candidateFeatures = candidates?.length > 0 ? candidates : rootFeatures
-      const candidateFeatureMap: {[layerId: string]: __esri.Graphic[]} = {}
+      const candidateFeatureMap: { [layerId: string]: Graphic[] } = {}
       for (const c of (candidateFeatures || [])) {
         if (!candidateFeatureMap[c.layer.id]) {
           candidateFeatureMap[c.layer.id] = []
@@ -264,7 +284,7 @@ const EditorComponent = (props: EditorComponentProps) => {
         const ds = getDataSourceById(dsId)
         if (!ds) continue
         const candidateFeatures = candidateFeatureMap[layer.id] || []
-        const candidateIds: Array<string|number> = []
+        const candidateIds: Array<string | number> = []
         const candidateRecords = []
         for (const feature of candidateFeatures) {
           const record = ds.buildRecord(feature)
@@ -291,58 +311,25 @@ const EditorComponent = (props: EditorComponentProps) => {
           selectionFromEditor.current = true
         }
       }
-    })
+    }, { initial: true })
     // #endregion
 
     // #region Monitor form changes
-    const watchFeatureForm = reactiveUtils.watch(() => editor.viewModel?.formViewModel, (formViewModel) => {
+    watchFeatureFormRef.current = reactiveUtils.watch(() => wf?.data?.viewModel?.formViewModel, (formViewModel) => {
       if (!formViewModel) {
         setFormChange(false)
         return
       }
       if ('features' in formViewModel) {
-        const batchAttributeFormViewModel = formViewModel
-        batchAttributeFormViewModel.on('value-change', (changedValue) => {
-          setFormChange(batchAttributeFormViewModel.userHasChangedValues)
-        })
-      } else if ('feature' in formViewModel) {
-        const featureFormViewModel = formViewModel
-        const originalFormValues = featureFormViewModel.getValues()
-        featureFormViewModel.on('value-change', (changedValue) => {
-          const idField = featureFormViewModel.layer.objectIdField
-          const arcadeFields = getFlatFormElements(featureFormViewModel.formTemplate?.elements || [])
-            .map(e => e.type === 'field' && e.valueExpression && e.fieldName).filter(v => !!v) || []
-          const { fieldName } = changedValue
-          // Exclude cases where the 'value-change' is caused by dataSource select or arcade expression change.
-          // If the changed field has an idField, the change is caused by dataSource select change.
-          if (fieldName === idField || arcadeFields.includes(fieldName)) {
-            return
+        formViewModel.on('values-change', (e) => {
+          if (e.source === 'user') {
+            setFormChange(true)
           }
-          const newFormValues = featureFormViewModel.getValues()
-          let change = false
-          if (newFormValues) {
-            for (const key in newFormValues) {
-              if (arcadeFields.includes(key)) continue
-              if (originalFormValues?.[key] !== newFormValues[key]) {
-                change = true
-                break
-              }
-            }
-          }
-          setFormChange(change)
-        })
-        featureFormViewModel.on('submit',() => {
-          setFormChange(false)
         })
       }
-    })
+    }, { initial: true })
     // #endregion
-    return () => {
-      selectionChangeHandle?.remove?.()
-      watchCandidates?.remove?.()
-      watchFeatureForm.remove()
-    }
-  }, [editor, jimuMapView, batchEditing])
+  }, [batchEditing, jimuMapView])
 
   const previousBatchEditing = hooks.usePrevious(batchEditing)
   React.useEffect(() => {
@@ -361,15 +348,13 @@ const EditorComponent = (props: EditorComponentProps) => {
     }
   }, [batchEditing, editFeatures, editor, previousBatchEditing, startWorkflow])
 
-  React.useEffect(()=> {
-    if (!editor) return
-    const watchLayerInfos = reactiveUtils.watch(() => editor?.layerInfos, (layerInfos) => {
-      updateUseDataSourcesByLayerInfos(layerInfos)
-    }, { initial: true })
+  React.useEffect(() => {
     return () => {
-      watchLayerInfos.remove()
+      selectionChangeHandleRef.current?.remove?.()
+      watchCandidatesRef.current?.remove?.()
+      watchFeatureFormRef.current?.remove?.()
     }
-  }, [editor, updateUseDataSourcesByLayerInfos])
+  }, [])
 
   const mapWidgetId = useMapWidgetIds?.[0]
 
@@ -387,7 +372,16 @@ const EditorComponent = (props: EditorComponentProps) => {
           onStepChange={setPasteStep}
         />
       }
-      {mapWidgetId && <div className={classNames('edit-con h-100', {'d-none': pasteStep === 'pasteSpecial'})} ref={editContainer}></div>}
+      {mapWidgetId && jimuMapView && <div className={classNames('edit-con h-100', { 'd-none': pasteStep === 'pasteSpecial' })}>
+        <arcgis-editor
+          key={jimuMapView.id}
+          referenceElement={jimuMapView.mapComponent}
+          {...editorProps}
+          onarcgisReady={handleReady}
+          onarcgisPropertyChange={handlePropertyChange}
+          onarcgisSketchUpdate={handleSketchUpdate}
+        ></arcgis-editor>
+      </div>}
       {!mapWidgetId && <WidgetPlaceholder
         autoFlip
         icon={editWidgetIcon}
@@ -399,9 +393,9 @@ const EditorComponent = (props: EditorComponentProps) => {
         onActiveViewChange={handleActiveViewChange}
       />
       {mapWidgetId && !jimuMapView && <div className='jimu-secondary-loading' />}
-      {editor &&<EditListDataSource
+      {editor && <EditListDataSource
         useDataSources={mapUseDataSources}
-        unsavedChange={formChange && !!editor.viewModel?.formViewModel}
+        unsavedChange={formChange && !!editor?.activeWorkflow?.data?.viewModel?.formViewModel}
         onSelectionChange={handleSelectionChange}
         onSourceVersionChange={handleSourceVersionChange}
       />}

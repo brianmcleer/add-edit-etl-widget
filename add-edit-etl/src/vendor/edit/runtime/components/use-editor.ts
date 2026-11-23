@@ -1,34 +1,36 @@
-import { Immutable, React, hooks, type JSAPILayerTypes } from 'jimu-core'
-import { type JimuLayerView, type JimuMapView, SnappingUtils } from 'jimu-arcgis'
-import Editor from 'esri/widgets/Editor'
+import { Immutable, React, hooks, JSAPILayerTypes } from 'jimu-core'
+import type { JimuLayerView, JimuMapView } from 'jimu-arcgis'
+import SketchTooltipOptions from '@arcgis/core/views/interactive/sketch/SketchTooltipOptions'
+import SketchLabelOptions from '@arcgis/core/views/interactive/sketch/SketchLabelOptions'
+import SnappingOptions from '@arcgis/core/views/interactive/snapping/SnappingOptions'
+import FeatureSnappingLayerSource from '@arcgis/core/views/interactive/snapping/FeatureSnappingLayerSource'
+import type { ResourceHandle } from '@arcgis/core/core/Handles'
+import type SubtypeGroupLayer from '@arcgis/core/layers/SubtypeGroupLayer'
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import type SubtypeSublayer from '@arcgis/core/layers/support/SubtypeSublayer'
+import type SceneLayer from '@arcgis/core/layers/SceneLayer'
+import type { EditsResultEvent } from '@arcgis/core/editing/types'
+import type { LayerInfo as EditorLayerInfo, SupportingWidgetDefaults } from '@arcgis/core/widgets/Editor/types'
+import type VisibleElements from '@arcgis/core/widgets/FeatureTemplates/VisibleElements'
+import type { CollectionAfterItemEvent } from '@arcgis/core/core/Collection'
+import type Layer from '@arcgis/core/layers/Layer'
 import { type IMConfig, type LayersConfig, SnapSettingMode } from '../../config'
-import { getDataSourceById, getEditDataSource, SUPPORTED_JIMU_LAYER_TYPES, type SupportedDataSource, type SupportedLayer } from '../../utils'
-import { constructUneditableInfo, getEditorLayerInfo, isEditableLayerView, updateDataSourceAfterEdit } from './utils'
+import { getDataSourceById, getEditDataSource, getFlatFormElements, SUPPORTED_JIMU_LAYER_TYPES, type SupportedDataSource, type SupportedLayer } from '../../utils'
+import { constructUneditableInfo, getDefaultSnapSources, getEditorLayerInfo, isEditableLayerView, updateDataSourceAfterEdit } from './utils'
+import Graphic from 'esri/Graphic'
 
 interface UseEditorOptions {
   config: IMConfig
   jimuMapView: JimuMapView
-  editContainer: React.RefObject<HTMLDivElement>
   canEditFeature: boolean
+  editor: HTMLArcgisEditorElement
 }
 
 const useEditor = (options: UseEditorOptions) => {
-  const { config, jimuMapView, editContainer, canEditFeature } = options
+  const { config, jimuMapView, canEditFeature, editor } = options
   const { mapViewsConfig, relatedRecords, liveDataEditing } = config
-  const editorRef = React.useRef<Editor>(null)
-  const [editor, setEditor] = React.useState<Editor>(null)
-  const destroyEditor = React.useCallback(() => {
-    if (editorRef.current && !editorRef.current.destroyed) {
-      editorRef.current.destroy()
-    }
-  }, [])
-  React.useEffect(() => {
-    return () => {
-      destroyEditor()
-    }
-  }, [destroyEditor])
 
-  const [editorLayerInfos, setEditorLayerInfos] = React.useState<__esri.EditorLayerInfo[]>([])
+  const [editorLayerInfos, setEditorLayerInfos] = React.useState<EditorLayerInfo[]>([])
   const [showUpdateBtn, setShowUpdateBtn] = React.useState(false)
   const updateEditorLayerInfos = React.useCallback(() => {
     if (!jimuMapView || typeof canEditFeature !== 'boolean') return
@@ -46,8 +48,13 @@ const useEditor = (options: UseEditorOptions) => {
     }
     const allLayers = jimuMapView.view?.map?.allLayers?.toArray?.() || []
     const uneditableLayers = allLayers.filter(layer => {
-      const isSupported = SUPPORTED_JIMU_LAYER_TYPES.includes(layer.type as JSAPILayerTypes)
+      const layerType = layer.type as JSAPILayerTypes
+      const isSupported = SUPPORTED_JIMU_LAYER_TYPES.includes(layerType)
       const notInJimuLayerView = !allLayerViews.find(layerView => layerView.layer === layer)
+      const isKnowledgeGraphSublayer = layerType === JSAPILayerTypes.KnowledgeGraphSublayer
+      if (isKnowledgeGraphSublayer) {
+        return true
+      }
       return isSupported && notInJimuLayerView
     }) as SupportedLayer[]
     const supportedLayerViews = allLayerViews.filter(layerView => {
@@ -77,12 +84,12 @@ const useEditor = (options: UseEditorOptions) => {
       setShowUpdateBtn(validResults.some(r => r.showUpdateBtn))
       const layerInfos = validResults.map(r => r.editorLayerInfo).concat(uneditableLayerInfos)
       const relatedTableInfos = []
-      const allTables = (jimuMapView.view.map.allTables.toArray() || []) as __esri.FeatureLayer[]
+      const allTables = (jimuMapView.view.map.allTables.toArray() || []) as FeatureLayer[]
       for (const layerInfo of layerInfos) {
-        const elements = layerInfo.formTemplate?.elements || []
+        const elements = getFlatFormElements(layerInfo.formTemplate?.elements || [])
         const hasRelationships = elements.some(e => e.type === 'relationship')
         if (!hasRelationships) continue
-        const relationships = (layerInfo.layer as __esri.FeatureLayer | __esri.SubtypeSublayer | __esri.SceneLayer).relationships
+        const relationships = (layerInfo.layer as FeatureLayer | SubtypeSublayer | SceneLayer).relationships
         for (const relationship of relationships) {
           const relatedTableId = relationship.relatedTableId
           const relatedTable = allTables.find(t => t.layerId === relatedTableId)
@@ -132,7 +139,7 @@ const useEditor = (options: UseEditorOptions) => {
         lastLayerCount = currentLayerCount
       }, 5000)
     }
-    const nonEditLayerAddListener = (event: __esri.CollectionAfterItemEvent<__esri.Layer>) => {
+    const nonEditLayerAddListener = (event: CollectionAfterItemEvent<Layer>) => {
       if (event?.item?.declaredClass === 'esri.layers.GraphicsLayer' || event?.item?.listMode === 'hide') {
         updateEditorLayerInfosRef.current()
       }
@@ -149,45 +156,40 @@ const useEditor = (options: UseEditorOptions) => {
     }
   }, [jimuMapView, updateEditorLayerInfosRef])
 
-  const updateEditorByConfig = React.useCallback(async () => {
-    const editorWidget = editorRef.current
-    const {
-      selfSnapping, featureSnapping, gridSnapping = false, defaultSelfEnabled, defaultFeatureEnabled, defaultGridEnabled = false,
-      snapSettingMode, defaultSnapLayers, tooltip, defaultTooltipEnabled = false, segmentLabel = true, defaultSegmentLabelEnabled = false,
-      templateFilter, initialReshapeMode, batchEditing = false, advancedEditingTools = true, splitButton = true, mergeButton = true
-    } = config
-    editorWidget.tooltipOptions.enabled = defaultTooltipEnabled
-    editorWidget.labelOptions.enabled = defaultSegmentLabelEnabled
-    editorWidget.snappingOptions.enabled = defaultSelfEnabled || defaultFeatureEnabled || defaultGridEnabled
-    editorWidget.snappingOptions.selfEnabled = defaultSelfEnabled
-    editorWidget.snappingOptions.featureEnabled = defaultFeatureEnabled
-    editorWidget.snappingOptions.gridEnabled = defaultGridEnabled && gridSnapping
-    editorWidget.snappingOptions.featureSources = await SnappingUtils.getSnappingFeatureSourcesCollection(jimuMapView, defaultSnapLayers)
+  const { selfSnapping, featureSnapping, gridSnapping = false, defaultSelfEnabled, defaultFeatureEnabled, defaultGridEnabled = false, snapSettingMode, defaultSnapLayers, tooltip, defaultTooltipEnabled = false, segmentLabel = true, defaultSegmentLabelEnabled = false, templateFilter, initialReshapeMode, advancedEditingTools = true, splitButton = true, mergeButton = true, batchEditing = false } = config
+
+  React.useEffect(() => {
+    if (!editor || !jimuMapView?.view || editor.view !== jimuMapView.view) return
+    editor.tooltipOptions = new SketchTooltipOptions({ enabled: defaultTooltipEnabled })
+  }, [defaultTooltipEnabled, editor, jimuMapView])
+
+  React.useEffect(() => {
+    if (!editor || !jimuMapView?.view || editor.view !== jimuMapView.view) return
+    editor.labelOptions = new SketchLabelOptions({ enabled: defaultSegmentLabelEnabled })
+  }, [defaultSegmentLabelEnabled, editor, jimuMapView])
+
+  React.useEffect(() => {
+    if (!editor || !jimuMapView?.view || editor.view !== jimuMapView.view) return
+    const defaultSnappingSources = getDefaultSnapSources(jimuMapView, defaultSnapLayers)
+    const featureSources = defaultSnappingSources.map(option => new FeatureSnappingLayerSource(option))
+    editor.snappingOptions = new SnappingOptions({
+      enabled: defaultSelfEnabled || defaultFeatureEnabled || defaultGridEnabled,
+      selfEnabled: defaultSelfEnabled,
+      featureEnabled: defaultFeatureEnabled,
+      gridEnabled: defaultGridEnabled && gridSnapping,
+      featureSources: featureSources
+    })
+  }, [defaultFeatureEnabled, defaultGridEnabled, defaultSelfEnabled, defaultSnapLayers, editor, gridSnapping, jimuMapView])
+
+  const editorProps = React.useMemo(() => {
     const flexibleMode = snapSettingMode === SnapSettingMode.Flexible
     const snapOn = selfSnapping || featureSnapping || gridSnapping
-    const snappingControlsOpen = flexibleMode && snapOn;
-    (editorWidget.visibleElements as any).selectionToolbar = batchEditing
-    editorWidget.visibleElements.snappingControls = snappingControlsOpen
-    editorWidget.visibleElements.snappingControlsElements = {
-      enabledToggle: selfSnapping || featureSnapping || gridSnapping,
-      selfEnabledToggle: selfSnapping,
-      featureEnabledToggle: featureSnapping,
-      layerList: featureSnapping,
-      layerListToggleLayersButton: featureSnapping,
-      gridEnabledToggle: gridSnapping,
-      gridControls: gridSnapping
-    }
-    editorWidget.visibleElements.tooltipsToggle = tooltip
-    editorWidget.visibleElements.labelsToggle = segmentLabel
-    const settingsOpen = snappingControlsOpen || tooltip || (segmentLabel && jimuMapView.view?.type === '3d')
-    editorWidget.visibleElements.settingsMenu = settingsOpen
-    editorWidget.visibleElements.splitButton = advancedEditingTools && splitButton
-    editorWidget.visibleElements.mergeButton = advancedEditingTools && batchEditing && mergeButton
-    editorWidget.supportingWidgetDefaults = {
+    const snappingControlsOpen = flexibleMode && snapOn
+    const supportingWidgetDefaults: SupportingWidgetDefaults = {
       featureTemplates: {
         visibleElements: {
           filter: templateFilter
-        } as __esri.FeatureTemplates['visibleElements']
+        } as VisibleElements
       },
       sketch: {
         defaultUpdateOptions: {
@@ -195,16 +197,31 @@ const useEditor = (options: UseEditorOptions) => {
         }
       }
     }
-  }, [config, jimuMapView])
+    const props = {
+      hideSelectionToolbar: !batchEditing,
+      hideSnappingControlsElementsEnabledToggle: !snappingControlsOpen || (!selfSnapping && !featureSnapping && !gridSnapping),
+      hideSnappingControlsElementsSelfEnabledToggle: !snappingControlsOpen || !selfSnapping,
+      hideSnappingControlsElementsFeatureEnabledToggle: !snappingControlsOpen || !featureSnapping,
+      hideSnappingControlsElementsGridControls: !snappingControlsOpen || !gridSnapping,
+      hideSnappingControlsElementsGridEnabledToggle: !snappingControlsOpen || !gridSnapping,
+      hideSnappingControlsElementsLayerList: !snappingControlsOpen || !featureSnapping,
+      hideTooltipsToggle: !tooltip,
+      hideLabelsToggle: !segmentLabel,
+      hideSettingsMenu: !snappingControlsOpen && !tooltip && !segmentLabel,
+      hideSplitButton: !advancedEditingTools || !splitButton,
+      hideMergeButton: !advancedEditingTools || !batchEditing || !mergeButton,
+      supportingWidgetDefaults,
+      hideEditFeaturesSection: !showUpdateBtn,
+      layerInfos: editorLayerInfos
+    }
+    return props
+  }, [advancedEditingTools, batchEditing, editorLayerInfos, featureSnapping, gridSnapping, initialReshapeMode, mergeButton, segmentLabel, selfSnapping, showUpdateBtn, snapSettingMode, splitButton, templateFilter, tooltip])
 
-  const previousJimuMapView = hooks.usePrevious(jimuMapView)
-  const previousConfig = hooks.usePrevious(config)
   const updateDataSource = React.useCallback(async (
-    layer: __esri.SubtypeGroupLayer | __esri.FeatureLayer,
-    event: __esri.SubtypeGroupLayerEditsEvent
+    layer: SubtypeGroupLayer | FeatureLayer,
+    event: EditsResultEvent
   ) => {
     // Only update data source when editing or adding
-    if (!editorRef.current?.viewModel.syncing) return
     const dsId = jimuMapView.getDataSourceIdByAPILayer(layer)
     const ds = getDataSourceById(dsId)
     if (!ds) return
@@ -220,6 +237,10 @@ const useEditor = (options: UseEditorOptions) => {
     }
 
     const updateIds = event.updatedFeatures.map(f => f.objectId)
+    // For a single update, optimistically trigger one update first to reduce source version change lag.
+    if (updateIds.length === 1) {
+      updateDataSourceAfterEdit(ds, { updateFeatures: [new Graphic({attributes: {objectId: updateIds[0]}})] })
+    }
     let updateFeatures = []
     if (updateIds.length > 0) {
       const updateFeatureSet = await layer.queryFeatures({
@@ -233,27 +254,7 @@ const useEditor = (options: UseEditorOptions) => {
     updateDataSourceAfterEdit(ds, { addFeatures, updateFeatures, deleteFeatures})
   }, [jimuMapView])
   React.useEffect(() => {
-    if (!jimuMapView || !editContainer.current) return
-
-    if (!editorRef.current || jimuMapView !== previousJimuMapView) {
-      destroyEditor()
-      const container = document.createElement('div')
-      container.className = 'h-100'
-      editContainer.current.appendChild(container)
-      editorRef.current = new Editor({
-        container,
-        view: jimuMapView.view
-      })
-      setEditor(editorRef.current)
-      updateEditorByConfig()
-    } else if (config !== previousConfig) {
-      updateEditorByConfig()
-    }
-  }, [config, destroyEditor, editContainer, jimuMapView, previousConfig, previousJimuMapView, updateEditorByConfig])
-  React.useEffect(() => {
-    const editorWidget = editorRef.current
-    if (!editorWidget) return
-    const handles: __esri.Handle[] = []
+    const handles: ResourceHandle[] = []
     for (const layerInfo of editorLayerInfos) {
       if (!layerInfo.enabled) continue
       const editorLayer = layerInfo.layer
@@ -264,24 +265,21 @@ const useEditor = (options: UseEditorOptions) => {
         })
         handles.push(handle)
       } else {
-        const featureLayer = editorLayer as unknown as __esri.FeatureLayer
+        const featureLayer = editorLayer as FeatureLayer
         const handle = featureLayer.on('edits', (event) => {
           updateDataSource(featureLayer, event)
         })
         handles.push(handle)
       }
-
     }
-    editorWidget.layerInfos = editorLayerInfos
-    editorWidget.visibleElements.editFeaturesSection = showUpdateBtn
     return () => {
       for (const handle of handles) {
         handle.remove()
       }
     }
-  }, [editorLayerInfos, showUpdateBtn, updateDataSource])
+  }, [editorLayerInfos, updateDataSource])
 
-  return editor
+  return editorProps
 }
 
 export default useEditor

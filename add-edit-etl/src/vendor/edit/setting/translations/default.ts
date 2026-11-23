@@ -33,10 +33,9 @@ export default {
   editGeometryGuides: 'Show visual aids to help identify perpendicular and parallel lines when creating or updating a feature.',
   editFeatureToFeature: 'Snap vertices of a feature that is currently being drawn or reshaped to that of an existing feature\'s vertex, edge, or end point.',
   batchEditingSetting: 'Batch editing',
-  layerLabel: 'Layer label',
-  fieldGroupLabel: 'Group label',
-  fieldDescription: 'Field description',
-  groupDescription: 'Group description',
+  fieldGroupLabel: 'Label for group "{value}"',
+  fieldDescription: 'Description for field "{value}"',
+  groupDescription: 'Description for group "{value}"',
   advancedEditingTools: 'Advanced editing tools',
   splitButton: 'Split',
   mergeButton: 'Merge'

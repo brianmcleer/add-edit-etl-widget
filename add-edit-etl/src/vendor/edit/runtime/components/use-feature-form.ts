@@ -1,9 +1,12 @@
 import { React, dataSourceUtils, type FeatureDataRecord } from 'jimu-core'
-import FeatureForm from 'esri/widgets/FeatureForm'
-import BatchAttributeForm from 'esri/widgets/BatchAttributeForm'
-import Graphic from 'esri/Graphic'
-import Collection from 'esri/core/Collection'
-import { applyAttributeUpdates, getTimezone, updateDataSourceAfterEdit } from './utils'
+import FeatureForm from '@arcgis/core/widgets/FeatureForm'
+import BatchAttributeForm from '@arcgis/core/widgets/BatchAttributeForm'
+import Graphic from '@arcgis/core/Graphic'
+import Collection from '@arcgis/core/core/Collection'
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer'
+import type SubtypeSublayer from '@arcgis/core/layers/support/SubtypeSublayer'
+import type { Edits } from '@arcgis/core/editing/types'
+import { applyAttributeUpdates, getCreationAttributes, getLayerDefaultAttributes, getTimezone, updateDataSourceAfterEdit } from './utils'
 import { getDataSourceById, getEditDataSource, getFlatFormElements } from '../../utils'
 import { FormChangeType, type LayerInfo } from './feature-form-component'
 
@@ -40,9 +43,18 @@ const useFeatureForm = (options: UseFeatureFormOptions) => {
       destroyEditForm()
       const ds = getDataSourceById(activeId)
       const dataSource = getEditDataSource(ds)
-      let features: __esri.Graphic[]
+      let features: Graphic[]
       if (!activeRecords || activeRecords.length === 0) {
         features = [new Graphic({ layer: activeLayer })]
+        const template = activeLayer?.templates?.[0]
+        const attributes = {
+          ...getLayerDefaultAttributes(activeLayer?.fields),
+          ...getCreationAttributes(template)
+        }
+        const hasCreationAttributes = attributes && Object.keys(attributes).length > 0
+        if (hasCreationAttributes) {
+          features[0].attributes = attributes
+        }
       } else {
         const ids = activeRecords.map((f) => f.getId())
         const result = await dataSource.query({
@@ -70,7 +82,7 @@ const useFeatureForm = (options: UseFeatureFormOptions) => {
       editContainer.current.appendChild(container)
       if (features.length > 1) {
         const featureCollection = new Collection(features)
-        const layer = features[0].layer as __esri.FeatureLayer | __esri.SubtypeSublayer
+        const layer = features[0].layer as FeatureLayer | SubtypeSublayer
         const batchForm = new BatchAttributeForm({
           container: container,
           features: featureCollection,
@@ -136,7 +148,7 @@ const useFeatureForm = (options: UseFeatureFormOptions) => {
   const saveForm = React.useCallback(async () => {
     const form = editForm.current
     if (!form) return
-    let edits: __esri.FeatureLayerApplyEditsEdits = {}
+    let edits: Edits = {}
     if (form instanceof BatchAttributeForm) {
       if (!form.viewModel.valid) return
       const allFieldInputs = form.viewModel.activeForm.allFieldInputs
@@ -184,13 +196,13 @@ const useFeatureForm = (options: UseFeatureFormOptions) => {
         try {
           const ds = activeLayerInfo.dataSource
           const features = Array.isArray(edits.updateFeatures) ? edits.updateFeatures : edits.updateFeatures.toArray()
-          const updateIds = features.map((f: __esri.Graphic) => f.getObjectId())
+          const updateIds = features.map((f: Graphic) => f.getObjectId())
           const result = await ds.query({
             objectIds: updateIds,
             outFields: ['*'],
             returnGeometry: false
           })
-          const updateFeatures = (result?.records || []).map((r: FeatureDataRecord) => r.feature as __esri.Graphic)
+          const updateFeatures = (result?.records || []).map((r: FeatureDataRecord) => r.feature as Graphic)
           updateEdits = { updateFeatures }
         } catch (e) {
           console.error(e)
@@ -231,7 +243,7 @@ const useFeatureForm = (options: UseFeatureFormOptions) => {
   const deleteForm = React.useCallback(async () => {
     const form = editForm.current
     if (!form) return
-    let edits: __esri.FeatureLayerApplyEditsEdits = {}
+    let edits: Edits = {}
     if (form instanceof FeatureForm) {
       const objectId = form.feature.getObjectId()
       edits = {

@@ -81,8 +81,8 @@ export interface Config {
   batchEditing?: boolean
   /**
    * Enables advanced editing tools in the widget interface.
-   * When set to true, additional editing functionalities such as split and merge operations become available.
-   * This property is related to `splitButton` and `mergeButton`, which control the visibility of the respective buttons for splitting and merging features.
+   * When set to true, additional editing functionalities such as split, merge and copy&paste operations become available.
+   * This property is related to `splitButton`, `mergeButton` and `copyPaste`, which control the visibility of the respective buttons.
    */
   advancedEditingTools?: boolean
   splitButton?: boolean

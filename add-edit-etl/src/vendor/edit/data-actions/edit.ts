@@ -8,6 +8,7 @@ import {
   Immutable
 } from 'jimu-core'
 import { EditModeType, type IMConfig } from '../config'
+import { supportedDsTypes } from '../utils'
 import { MapViewManager } from 'jimu-arcgis'
 
 export default class Edit extends AbstractDataAction {
@@ -16,6 +17,9 @@ export default class Edit extends AbstractDataAction {
     let editHaveThisDs = false
     const dataSet = dataSets[0]
     const { dataSource, records } = dataSet
+    if (!supportedDsTypes.includes(dataSource.type as any)) {
+      return Promise.resolve(false)
+    }
     const appState = getAppStore().getState()
     const appConfig = appState?.appConfig
     const isWidgetInController = appState?.widgetsRuntimeInfo[this.widgetId]?.controllerWidgetId
